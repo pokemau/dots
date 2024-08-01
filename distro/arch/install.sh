@@ -7,7 +7,7 @@ cd ~/Apps/git
 git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 
-cd ~/arch
+cd ~/dots/distro/arch
 	
 yay -S dunst rofi-wayland neovim swappy swww waybar \
 brightnessctl grimblast-git cliphist pamixer pavucontrol \
@@ -18,11 +18,11 @@ qt6ct kvantum kvantum-qt5 qt5-wayland qt6-wayland thunar \
 thunar-archive-plugin ark discord pipewire pipewire-alsa pipewire-audio \
 pipewire-jack pipewire-pulse gst-plugin-pipewire wireplumber pavucontrol \
 tmux zsh vlc qbittorrent unzip flatpak wlsunset rust xdg-desktop-portal \
-hyprpicker-git noto-fonts bear ripgrep baobab gnome-calculator
+hyprpicker-git noto-fonts bear ripgrep baobab gnome-calculator stow
+
+stow Scripts
 
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme
 ./Tela-circle-icon-theme/install.sh
 
-# install ohmyzsh
-# copy .config to ~/.config
-# copy Scripts, .zshrc, .tmux.conf to ~
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
