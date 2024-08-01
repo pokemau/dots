@@ -18,7 +18,8 @@ qt6ct kvantum kvantum-qt5 qt5-wayland qt6-wayland thunar \
 thunar-archive-plugin ark discord pipewire pipewire-alsa pipewire-audio \
 pipewire-jack pipewire-pulse gst-plugin-pipewire wireplumber pavucontrol \
 tmux zsh vlc qbittorrent unzip flatpak wlsunset rust xdg-desktop-portal \
-hyprpicker-git noto-fonts bear ripgrep baobab gnome-calculator stow
+hyprpicker-git noto-fonts bear ripgrep baobab gnome-calculator stow \
+github-cli
 
 stow Scripts
 
