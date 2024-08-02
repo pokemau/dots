@@ -14,14 +14,17 @@ brightnessctl grimblast-git cliphist pamixer pavucontrol \
 network-manager-applet blueman udiskie ttf-jetbrains-mono-nerd \
 ttf-hack-nerd ttf-meslo-nerd yarn npm qt5-quickcontrols qt5-quickcontrols2 \
 qt5-graphiacaleffects slurp xdg-desktop-portal-hyprland nwg-look qt5ct \
-qt6ct kvantum kvantum-qt5 qt5-wayland qt6-wayland thunar \
+qt6ct kvantum kvantum-qt5 qt5-wayland qt6-wayland thunar github-cli\
 thunar-archive-plugin ark discord pipewire pipewire-alsa pipewire-audio \
 pipewire-jack pipewire-pulse gst-plugin-pipewire wireplumber pavucontrol \
 tmux zsh vlc qbittorrent unzip flatpak wlsunset rust xdg-desktop-portal \
 hyprpicker-git noto-fonts bear ripgrep baobab gnome-calculator stow \
-github-cli
+glfw ttf-ms-win11-auto xdg-desktop-portal-gtk ttf-cascadia-code-nerd \
+ttf-cascadia-code
 
-stow Scripts
+# uncomment multilib in pacman.conf
+
+cp -R Scripts/ ~
 
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme
 ./Tela-circle-icon-theme/install.sh
