@@ -29,7 +29,6 @@
     ],
 
     "hyprland/workspaces": {
-        "disable-scroll": true,
         "all-outputs": true,
         "active-only": false,
         "on-click": "activate",
@@ -37,7 +36,7 @@
         "on-scroll-up": "hyprctl dispatch workspace -1",
         "on-scroll-down": "hyprctl dispatch workspace +1",
         "persistent-workspaces": {
-        }
+        },
     },
 
     "hyprland/window": {
@@ -45,13 +44,13 @@
         "separate-outputs": true,
         "rewrite": {
             "${USER}@${set_sysname}:(.*)": "$1  ",
-            "(.*) — Mozilla Firefox": "$1 󰈹 ",
-            "(.*)Mozilla Firefox": "Firefox 󰈹 ",
-            "(.*) - Visual Studio Code": "$1 󰨞 ",
-            "(.*)Visual Studio Code": "Code 󰨞 ",
-            "(.*) — Dolphin": "$1 󰉋 ",
-            "(.*)Spotify": "Spotify 󰓇 ",
-            "(.*)Steam": "Steam 󰓓 "
+//            "(.*) — Mozilla Firefox": "$1 󰈹 ",
+//            "(.*)Mozilla Firefox": "Firefox 󰈹 ",
+            "(.*) - Visual Studio Code": "$1󰨞 ",
+            "(.*)Visual Studio Code": "$1Code 󰨞 ",
+            "(.*) — Dolphin": "$1󰉋 ",
+            "(.*)Spotify": "$1Spotify 󰓇 ",
+            "(.*)Steam": "$1Steam 󰓓 ",
         },
         "max-length": 1000
     },

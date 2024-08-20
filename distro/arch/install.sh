@@ -20,11 +20,10 @@ pipewire-jack pipewire-pulse gst-plugin-pipewire wireplumber pavucontrol \
 tmux zsh vlc qbittorrent unzip flatpak wlsunset rust xdg-desktop-portal \
 hyprpicker-git noto-fonts bear ripgrep baobab gnome-calculator stow \
 glfw ttf-ms-win11-auto xdg-desktop-portal-gtk ttf-cascadia-code-nerd \
-ttf-cascadia-code
+ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
+brave-bin
 
 # uncomment multilib in pacman.conf
-
-cp -R Scripts/ ~
 
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme
 ./Tela-circle-icon-theme/install.sh

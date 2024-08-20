@@ -1,5 +1,3 @@
-local opts = { noremap = true, silent = true }
-
 return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -8,7 +6,6 @@ return {
         "nvim-tree/nvim-web-devicons",
         "MunifTanjim/nui.nvim",
     },
-
     config = function()
         require("neo-tree").setup({
             filesystem = {
@@ -19,6 +16,7 @@ return {
                 },
             },
         })
-        vim.keymap.set("n", "<leader>e", ":Neotree source=last toggle<CR>", opts)
+        vim.keymap.set("n", "<leader>e", ":Neotree source=last toggle<CR>",
+            { noremap = true, silent = true })
     end,
 }

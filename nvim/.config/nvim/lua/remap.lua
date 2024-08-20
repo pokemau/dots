@@ -22,6 +22,8 @@ keymap.set("n", "<C-j>", "<C-w>j", opts)
 keymap.set("n", "<C-k>", "<C-w>k", opts)
 keymap.set("n", "<C-l>", "<C-w>l", opts)
 
+keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
 -- Save with Ctrl + S
 keymap.set("n", "<C-s>", ":w <CR>", opts)
 
@@ -71,7 +73,7 @@ keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<C-a>", "ggVG")
 
 -- New tab
 keymap.set("n", "te", ":tabedit<Return>", term_opts)

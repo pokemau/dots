@@ -21,8 +21,9 @@ alias gcm='git commit -m'
 # DEV
 alias t='tmux'
 alias v='nvim'
-alias z='zed'
+alias z='zeditor'
 alias bm='bear -- make'
 alias m='make'
+alias p='python'
 
 export PATH
