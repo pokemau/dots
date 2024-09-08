@@ -3,7 +3,7 @@
     "layer": "top",
     "position": "top",
     "mod": "dock",
-    //"height": 10, // Waybar height (to be removed for auto height)
+    // "height": 20, // Waybar height (to be removed for auto height)
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
@@ -16,7 +16,7 @@
     ],
 
     "modules-center": [
-        "clock"
+        "clock",
     ],
 
     "modules-right": [
@@ -60,6 +60,7 @@
     },
 
     "clock": {
+        "timezone": "Asia/Manila",
         "format": "<span color='#bf616a'> </span>{:%I:%M %p %a %b %d }",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
@@ -72,7 +73,7 @@
                 "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
                 "today": "<span color='#ff6699'><b>{}</b></span>"
             }
-        }
+        },
     },
 
     "memory": {

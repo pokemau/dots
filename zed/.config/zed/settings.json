@@ -1,14 +1,21 @@
 {
+  "assistant": {
+    "dock": "bottom",
+    "version": "2"
+  },
+  "features": {
+    "inline_completion_provider": "none"
+  },
   "vim_mode": true,
   "ui_font_size": 16,
   "buffer_font_size": 14,
 
   // "buffer_font_family": "Cascadia Code",
   // "buffer_font_family": "MesloLGS Nerd Font Mono",
-  // "buffer_font_family": "SFMono Nerd Font Mono",
-  "buffer_font_family": "RobotoMono Nerd Font",
+  "buffer_font_family": "SFMono Nerd Font Mono",
+  // "buffer_font_family": "RobotoMono Nerd Font",
 
-  "buffer_font_weight": 400,
+  "buffer_font_weight": 500,
   "buffer_line_height": {
     "custom": 1.2
   },

@@ -20,7 +20,7 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-  padding: 0 5px;
+  padding: 0 4px;
   color: #7984A4;
   background-color: transparent;
   border: none;
