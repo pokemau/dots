@@ -21,9 +21,8 @@ tmux zsh vlc qbittorrent unzip flatpak wlsunset rust xdg-desktop-portal \
 hyprpicker-git noto-fonts bear ripgrep baobab gnome-calculator stow \
 glfw ttf-ms-win11-auto xdg-desktop-portal-gtk ttf-cascadia-code-nerd \
 ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
-visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs
-
-yay -S gnome-themes-extra
+visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs \
+downgrade gnome-themes-extra
 
 # uncomment multilib in pacman.conf
 
@@ -31,8 +30,8 @@ yay -S gnome-themes-extra
 # plasma-desktop plasma-nm plasma-pa
 #
 # Gnome
-# gnome gnome-browser-connector
-# nautilus-open-any-terminal
+# yay -S gnome gnome-browser-connector \
+# nautilus-open-any-terminal gnome-tweaks \
 
 flatpak install flathub com.github.IsmaelMartinez.teams_for_linux && \
 flatpak install flathub com.spotify.Client
