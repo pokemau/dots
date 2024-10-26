@@ -3,7 +3,6 @@
     "layer": "top",
     "position": "top",
     "mod": "dock",
-    // "height": 20, // Waybar height (to be removed for auto height)
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
@@ -11,12 +10,13 @@
     "spacing": 5,
 
     "modules-left": [
+        "sway/workspaces",
         "hyprland/workspaces",
         "hyprland/window",
     ],
 
     "modules-center": [
-        "clock",
+        "clock"
     ],
 
     "modules-right": [
@@ -44,8 +44,6 @@
         "separate-outputs": true,
         "rewrite": {
             "${USER}@${set_sysname}:(.*)": "$1  ",
-//            "(.*) — Mozilla Firefox": "$1 󰈹 ",
-//            "(.*)Mozilla Firefox": "Firefox 󰈹 ",
             "(.*) - Visual Studio Code": "$1󰨞 ",
             "(.*)Visual Studio Code": "$1Code 󰨞 ",
             "(.*) — Dolphin": "$1󰉋 ",
@@ -79,9 +77,9 @@
     "memory": {
         "interval": 5,
         "format":" {used:0.1f}G",
-        //"format": " {}%",
+        // "format": " {}%",
         //"format-alt":" {used:0.1f}G",
-        "max-length": 10,
+        "max-length": 10
     },
 
     "network": {
@@ -94,7 +92,7 @@
         "format-disconnected": "󰖪 ",
         "tooltip-format-disconnected": "Disconnected",
         "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
-        "interval": 2,
+        "interval": 2
     },
 
     "pulseaudio": {

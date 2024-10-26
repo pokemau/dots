@@ -22,6 +22,9 @@ keymap.set("n", "<C-j>", "<C-w>j", opts)
 keymap.set("n", "<C-k>", "<C-w>k", opts)
 keymap.set("n", "<C-l>", "<C-w>l", opts)
 
+-- LEETCODE
+keymap.set({'n','i'}, "<C-'>", ":Leet test<CR>", opts)
+
 keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Save with Ctrl + S

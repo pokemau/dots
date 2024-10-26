@@ -34,6 +34,9 @@ return {
 					"--offset-encoding=utf-16",
 				},
 			})
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
 			vim.keymap.set({ "n", "i" }, "<F2>", vim.lsp.buf.rename, {})
 			vim.keymap.set({ "n", "i" }, "<C-p>", vim.lsp.buf.signature_help, {})
