@@ -23,6 +23,7 @@ require('lazy').setup({
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
 
+  -- require 'kickstart/plugins/neo-tree',
   require 'kickstart/plugins/gitsigns',
   require 'kickstart/plugins/telescope',
   require 'kickstart/plugins/lspconfig',
@@ -31,9 +32,8 @@ require('lazy').setup({
   require 'kickstart/plugins/bufferline',
   require 'kickstart/plugins/gruvbox',
   require 'kickstart/plugins/todo-comments',
-  require 'kickstart/plugins/mini',
+  -- require 'kickstart/plugins/mini',
   require 'kickstart/plugins/treesitter',
-  require 'kickstart/plugins/neo-tree',
   require 'kickstart/plugins/autopairs',
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
@@ -49,7 +49,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.

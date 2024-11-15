@@ -3,6 +3,7 @@ vim.cmd("autocmd!")
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
+vim.opt.clipboard = "unnamedplus"
 
 vim.wo.number = true
 
@@ -10,7 +11,6 @@ vim.opt.colorcolumn = "80"
 -- vim.opt.relativenumber = true
 vim.opt.updatetime = 50
 vim.opt.swapfile = false
-vim.opt.clipboard = "unnamedplus"
 vim.opt.title = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true

@@ -1,9 +1,15 @@
 vim.opt.number = true
 vim.opt.mouse = 'a'
 vim.opt.showmode = false
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+
+vim.scriptencoding = "utf-8"
+vim.opt.encoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
+vim.opt.clipboard = "unnamedplus"
+
+-- vim.schedule(function()
+--   vim.opt.clipboard = 'unnamedplus'
+-- end)
 vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true

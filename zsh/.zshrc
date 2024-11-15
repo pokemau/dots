@@ -1,7 +1,9 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 #ZSH_THEME="refined"
-ZSH_THEME="af-magic"
+#ZSH_THEME="af-magic"
+#ZSH_THEME="random"
+ZSH_THEME="murilasso"
 
 #plugins=(git)
 

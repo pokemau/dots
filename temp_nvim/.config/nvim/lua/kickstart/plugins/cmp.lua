@@ -19,12 +19,12 @@ return {
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -40,6 +40,11 @@ return {
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+
+      local check_backspace = function()
+        local col = vim.fn.col('.') - 1
+        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+      end
 
       cmp.setup {
         snippet = {
@@ -78,6 +83,32 @@ return {
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
           ['<C-Space>'] = cmp.mapping.complete {},
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expandable() then
+              luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif check_backspace() then
+              fallback()
+            else
+              fallback()
+            end
+
+          end, {'i', 's'}),
+--          ['<Tab>'] = cmp.mapping(function(fallback)
+--            if cmp.visible() then
+--              cmp.select_next_item()
+--            elseif luasnip.expandable() then
+--              luasnip.expand()
+--            elseif luasnip.expand_or_jumpable() then
+--              luasnip.expand_or_jump()
+--            elseif check_backspace() then
+--              fallback()
+--            else
+--              fallback()
+--            end, {'i', 's'}),
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:

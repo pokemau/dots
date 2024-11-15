@@ -22,7 +22,9 @@ hyprpicker noto-fonts bear ripgrep baobab gnome-calculator stow \
 glfw ttf-ms-win11-auto xdg-desktop-portal-gtk ttf-cascadia-code-nerd \
 ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
 visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs \
-downgrade gnome-themes-extra clipse ttf-firacode-nerd spotify-adblock
+downgrade gnome-themes-extra clipse ttf-firacode-nerd spotify-adblock cmake \
+libreoffice-still
+
 
 # uncomment multilib in pacman.conf
 
@@ -32,11 +34,18 @@ downgrade gnome-themes-extra clipse ttf-firacode-nerd spotify-adblock
 # Gnome
 # yay -S gnome gnome-browser-connector \
 # nautilus-open-any-terminal gnome-tweaks \
+# power-profiles-daemon \
+#
+# systemctl enable power-profiles-daemon.service
+# systemctl start power-profiles-daemon.service
 
 flatpak install flathub com.github.IsmaelMartinez.teams_for_linux && \
 flatpak install flathub com.spotify.Client
 
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme
 ./Tela-circle-icon-theme/install.sh
+
+git clone https://github.com/vinceliuice/Colloid-gtk-theme
+./Colloid-gtk-theme/install.sh -s compact -l --tweaks normal
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
