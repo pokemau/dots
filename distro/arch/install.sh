@@ -13,7 +13,7 @@ yay -S dunst rofi-wayland neovim swappy swww waybar \
 brightnessctl grimblast-git cliphist pamixer pavucontrol \
 network-manager-applet blueman udiskie ttf-jetbrains-mono-nerd \
 ttf-hack-nerd ttf-meslo-nerd yarn npm qt5-quickcontrols qt5-quickcontrols2 \
-qt5-graphiacaleffects slurp xdg-desktop-portal-hyprland nwg-look qt5ct \
+qt5-graphicaleffects slurp xdg-desktop-portal-hyprland nwg-look qt5ct \
 qt6ct kvantum kvantum-qt5 qt5-wayland qt6-wayland thunar github-cli \
 thunar-archive-plugin ark discord pipewire pipewire-alsa pipewire-audio \
 pipewire-jack pipewire-pulse gst-plugin-pipewire wireplumber pavucontrol \
@@ -24,7 +24,6 @@ ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
 visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs \
 downgrade gnome-themes-extra clipse ttf-firacode-nerd spotify-adblock cmake \
 libreoffice-still
-
 
 # uncomment multilib in pacman.conf
 
@@ -42,10 +41,9 @@ libreoffice-still
 flatpak install flathub com.github.IsmaelMartinez.teams_for_linux && \
 flatpak install flathub com.spotify.Client
 
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme
-./Tela-circle-icon-theme/install.sh
-
-git clone https://github.com/vinceliuice/Colloid-gtk-theme
-./Colloid-gtk-theme/install.sh -s compact -l --tweaks normal
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme && ./Tela-circle-icon-theme/install.sh \
+&& \\
+git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
+./Colloid-gtk-theme/install.sh -s compact -l --tweaks normal &&\
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

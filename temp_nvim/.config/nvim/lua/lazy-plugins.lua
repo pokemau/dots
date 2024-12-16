@@ -27,7 +27,7 @@ require('lazy').setup({
   require 'kickstart/plugins/gitsigns',
   require 'kickstart/plugins/telescope',
   require 'kickstart/plugins/lspconfig',
-  -- require 'kickstart/plugins/conform',
+  require 'kickstart/plugins/conform',
   require 'kickstart/plugins/cmp',
   require 'kickstart/plugins/bufferline',
   require 'kickstart/plugins/gruvbox',

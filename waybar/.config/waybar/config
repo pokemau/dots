@@ -44,9 +44,10 @@
         "separate-outputs": true,
         "rewrite": {
             "${USER}@${set_sysname}:(.*)": "$1  ",
-            "(.*) - Visual Studio Code": "$1󰨞 ",
+            "(.*) - Visual Studio Code": "$1 󰨞 ",
             "(.*)Visual Studio Code": "$1Code 󰨞 ",
             "(.*) — Dolphin": "$1󰉋 ",
+            "(.*)Spotify Free": "$1Spotify 󰓇 ",
             "(.*)Spotify": "$1Spotify 󰓇 ",
             "(.*)Steam": "$1Steam 󰓓 ",
         },

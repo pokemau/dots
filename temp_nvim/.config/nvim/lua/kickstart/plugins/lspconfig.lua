@@ -174,6 +174,12 @@ return {
         clangd = {
           capabilities = capabilities
         },
+        jedi_language_server = {
+          capabilities = capabilities
+        },
+        ts_ls = {
+          capabilities = capabilities
+        },
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -214,7 +220,12 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', 'clangd', 'prettier'
+        'stylua',
+        'clangd',
+        'prettier',
+        'black',
+        'jedi_language_server',
+        'lua_ls'
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
