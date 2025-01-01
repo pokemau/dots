@@ -14,6 +14,10 @@ path+=('~/.local/bin')
 
 # Helpful aliases
 
+
+# Fedora
+alias inst='sudo dnf install'
+
 # GIT
 alias gp='git push'
 alias gs='git status'
