@@ -10,8 +10,8 @@ if [ "$distro" = "hyprland" ]; then
     echo "ARCH"
     rm -rf ~/.config/hypr
     stow hypr swappy scripts
-elif [ "$distro" = "sway" ]; then
-    echo "SWAY"
+elif [ "$distro" = "fedorasway" ]; then
+    stow rofi_fedora_sway sway_fedora waybar_fedora_sway
 else
     echo "OPTIONS: [ hyprland, sway ]"
 fi

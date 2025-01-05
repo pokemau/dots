@@ -3,17 +3,18 @@
 flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 
 sudo dnf install git vim gnome-tweaks zsh neovim alacritty kitty tmux stow \
-    fastfetch fira-code-fonts gcc gcc-c++ rust cargo
+    fastfetch fira-code-fonts gcc gcc-c++ rust cargo qbittorrent golang
 
 
 flatpak install flathub io.github.vikdevelop.SaveDesktop
 flatpak install flathub com.discordapp.Discord
 flatpak install flathub-beta com.discordapp.DiscordCanary 
+flatpak install flathub com.spotify.Client
 
-git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git --depth=1
-cd WhiteSur-gtk-theme
-./install.sh -s standard -s nord -l --shell -h smaller -sf
 
+git clone https://github.com/vinceliuice/Colloid-gtk-theme
+cd Colloid-gtk-theme 
+./install.sh -c dark -s compact -l --tweaks all
 
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null

@@ -4,11 +4,12 @@ file_path="$HOME/.local/share/applications/spotify[].desktop"
 
 mkdir -p "$(dirname "$file_path")"
 
-flatpak install flathub com.spotify.Client
+#flatpak install flathub com.spotify.Client
 
 git clone https://github.com/abba23/spotify-adblock.git
 cd spotify-adblock
 make
+sudo make install
 
 mkdir -p ~/.spotify-adblock && cp target/release/libspotifyadblock.so ~/.spotify-adblock/spotify-adblock.so
 mkdir -p ~/.config/spotify-adblock && cp config.toml ~/.config/spotify-adblock
