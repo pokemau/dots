@@ -33,7 +33,7 @@ set $menu rofi -show drun
 output eDP-1 position 0 0 res 1366x768
 
 exec wlsunset -S 0:00 -s 0:00 -t 4500
-exec blueman-applet
+exec nm-applet --indicator
 
 ### KEYBINDS
 # Screenshots
@@ -144,6 +144,8 @@ input type:keyboard {
     bindsym $mod+Shift+6 move container to workspace number 6
     bindsym $mod+Shift+7 move container to workspace number 7
     bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
 
     # Switch the current container between different layout styles
     bindsym $mod+z layout tabbed

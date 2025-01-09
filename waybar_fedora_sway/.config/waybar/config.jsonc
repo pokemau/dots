@@ -52,7 +52,7 @@
   },
 
   "sway/window": {
-    "format": "||    {}",
+    "format": "|     {}",
     "rotate": 0,
     "separate-outputs": true,
     "max-length": 1000
@@ -72,16 +72,16 @@
     "rotate": 0,
     "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
-      "mode": "month",
-      "mode-mon-col": 3,
-      "on-scroll": 1,
-      "on-click-right": "mode",
-      "format": {
-        "months": "<span color='#ffead3'><b>{}</b></span>",
-        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b>{}</b></span>"
-      }
-    }
+        "mode": "year",
+        "mode-mon-col": 3,
+        "on-scroll": 1,
+        "on-click-right": "mode",
+        "format": {
+            "months": "<span color='#ffead3'><b>{}</b></span>",
+            "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+            "today": "<span color='#ff6699'><b>{}</b></span>"
+        }
+    },
   },
 
   "cpu": {
