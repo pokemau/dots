@@ -1,16 +1,19 @@
 #!/bin/bash
 
+mkdir Code Apps
+
 flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 
 sudo dnf install git vim gnome-tweaks zsh neovim alacritty kitty tmux stow \
-    fastfetch fira-code-fonts gcc gcc-c++ rust cargo qbittorrent golang
+    fastfetch fira-code-fonts gcc gcc-c++ rust cargo qbittorrent golang \
+    cmake bear
 
-
+flatpak install flathub org.videolan.VLC
 flatpak install flathub io.github.vikdevelop.SaveDesktop
 flatpak install flathub com.discordapp.Discord
 flatpak install flathub-beta com.discordapp.DiscordCanary 
 flatpak install flathub com.spotify.Client
-
+flatpak install flathub com.obsproject.Studio
 
 git clone https://github.com/vinceliuice/Colloid-gtk-theme
 cd Colloid-gtk-theme 
@@ -31,3 +34,7 @@ sudo dnf install gh --repo gh-cli
 
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+# NOISETORCH
+# https://github.com/noisetorch/NoiseTorch

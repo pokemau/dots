@@ -3,7 +3,8 @@ export ZSH="$HOME/.oh-my-zsh"
 #ZSH_THEME="refined"
 #ZSH_THEME="af-magic"
 #ZSH_THEME="random"
-ZSH_THEME="candy-kingdom"
+#ZSH_THEME="candy-kingdom"
+ZSH_THEME="jispwoso"
 
 #plugins=(git)
 
@@ -11,8 +12,6 @@ source $ZSH/oh-my-zsh.sh
 
 path+=('~/.local/bin')
 
-
-# Helpful aliases
 
 
 # Fedora
@@ -36,14 +35,10 @@ alias m='make'
 alias p='python'
 alias lc='v leetcode.nvim'
 
-alias dm='cd suckless/dwm && sudo vim config.h'
-
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$HOME/Apps/flutter/flutter/bin:$PATH
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
-export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 
 
 export PATH
