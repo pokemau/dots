@@ -225,7 +225,8 @@ return {
         'prettier',
         'black',
         'jedi_language_server',
-        'lua_ls'
+        'lua_ls',
+        'ols',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

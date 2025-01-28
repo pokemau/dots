@@ -18,6 +18,7 @@ return {
         'vim',
         'vimdoc',
         'css',
+        'odin',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,

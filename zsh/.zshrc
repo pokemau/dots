@@ -10,8 +10,6 @@ ZSH_THEME="jispwoso"
 
 source $ZSH/oh-my-zsh.sh
 
-path+=('~/.local/bin')
-
 
 
 # Fedora
@@ -38,6 +36,8 @@ alias lc='v leetcode.nvim'
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/Dev/Odin/
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
 
 
