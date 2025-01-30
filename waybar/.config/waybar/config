@@ -1,5 +1,4 @@
 {
-
     "layer": "top",
     "position": "top",
     "mod": "dock",
@@ -7,12 +6,10 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "reload_style_on_change": true,
-    "spacing": 5,
 
     "modules-left": [
-        "sway/workspaces",
         "hyprland/workspaces",
-        "hyprland/window",
+        "hyprland/window"
     ],
 
     "modules-center": [
@@ -20,11 +17,11 @@
     ],
 
     "modules-right": [
-        "tray", 
-        "memory", 
-        "pulseaudio", 
-        "network", 
-        "battery", 
+        "tray",
+        "memory",
+        "pulseaudio",
+        "network",
+        "battery",
         "custom/power-menu"
     ],
 
@@ -36,7 +33,7 @@
         "on-scroll-up": "hyprctl dispatch workspace -1",
         "on-scroll-down": "hyprctl dispatch workspace +1",
         "persistent-workspaces": {
-        },
+        }
     },
 
     "hyprland/window": {
@@ -49,7 +46,7 @@
             "(.*) — Dolphin": "$1󰉋 ",
             "(.*)Spotify Free": "$1Spotify 󰓇 ",
             "(.*)Spotify": "$1Spotify 󰓇 ",
-            "(.*)Steam": "$1Steam 󰓓 ",
+            "(.*)Steam": "$1Steam 󰓓 "
         },
         "max-length": 1000
     },
@@ -72,14 +69,12 @@
                 "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
                 "today": "<span color='#ff6699'><b>{}</b></span>"
             }
-        },
+        }
     },
 
     "memory": {
         "interval": 5,
         "format":" {used:0.1f}G",
-        // "format": " {}%",
-        //"format-alt":" {used:0.1f}G",
         "max-length": 10
     },
 
@@ -129,11 +124,11 @@
       "format-plugged": "  {capacity}%",
       "format-alt": "{icon} {time}",
       "format-full": "  {capacity}%",
-      "format-icons": [" ", " ", " ", " ", " "],
+      "format-icons": [" ", " ", " ", " ", " "]
     },
 
     "custom/power-menu": {
         "format": " <span color='#6a92d7'>⏻ </span>",
-        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh",
+        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh"
     }
 }

@@ -1,5 +1,4 @@
 * {
-	/* font-family: JetBrainsMono Nerd Font; */
 	font-family: FiraCode Nerd Font;
 	font-size: 12px;
 	font-weight: 500;
@@ -14,16 +13,18 @@ window#waybar {
 	transition-duration: 0.5s;
 }
 
-window#waybar.hidden {
-	opacity: 0.2;
-}
-
 #workspaces button {
 	padding: 0;
+	margin: 0;
 	color: #7984a4;
 	background-color: transparent;
 	border: none;
 	border-radius: 0;
+	min-width: 20px;
+}
+
+window#waybar.hidden {
+	opacity: 0.2;
 }
 
 #workspaces button.focused {

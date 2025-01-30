@@ -22,8 +22,10 @@ hyprpicker noto-fonts bear ripgrep baobab gnome-calculator stow \
 glfw ttf-ms-win11-auto xdg-desktop-portal-gtk ttf-cascadia-code-nerd \
 ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
 visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs \
-downgrade gnome-themes-extra clipse ttf-firacode-nerd spotify-adblock cmake \
-libreoffice-still
+downgrade gnome-themes-extra clipse ttf-firacode-nerd cmake \
+libreoffice-still wget
+
+# yay -S spotify-adblock
 
 # uncomment multilib in pacman.conf
 
@@ -45,5 +47,7 @@ git clone https://github.com/vinceliuice/Tela-circle-icon-theme && ./Tela-circle
 && \\
 git clone https://github.com/vinceliuice/Colloid-gtk-theme && \
 ./Colloid-gtk-theme/install.sh -s compact -l --tweaks normal &&\
+
+rm -rf Colloid-gtk-theme
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
