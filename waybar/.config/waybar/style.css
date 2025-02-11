@@ -45,6 +45,7 @@ window#waybar.hidden {
 	color: #e5e5e5;
 }
 
+#power-profiles-daemon,
 #clock,
 #battery,
 #cpu,

@@ -22,8 +22,22 @@
         "pulseaudio",
         "network",
         "battery",
+        "power-profiles-daemon",
         "custom/power-menu"
     ],
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+
+        }
+    },
 
     "hyprland/workspaces": {
         "all-outputs": true,
