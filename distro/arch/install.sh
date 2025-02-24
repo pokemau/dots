@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # install yay
 mkdir -p ~/Apps/git
 cd ~/Apps/git
@@ -8,7 +7,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 
 cd ~/dots/distro/arch
-	
+
 yay -S dunst rofi-wayland neovim swappy swww waybar \
 brightnessctl grimblast-git cliphist pamixer pavucontrol \
 network-manager-applet blueman udiskie ttf-jetbrains-mono-nerd \
@@ -23,9 +22,8 @@ glfw ttf-ms-win11-auto xdg-desktop-portal-gtk ttf-cascadia-code-nerd \
 ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
 visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs \
 downgrade gnome-themes-extra clipse ttf-firacode-nerd cmake \
-libreoffice-still wget obsidian gdb
+libreoffice-still wget obsidian gdb discord
 
-# discord [broken]
 
 # yay -S spotify-adblock
 
@@ -42,9 +40,14 @@ libreoffice-still wget obsidian gdb
 # systemctl enable power-profiles-daemon.service
 # systemctl start power-profiles-daemon.service
 
-flatpak install flathub com.discordapp.Discord && \
-flatpak install flathub com.github.IsmaelMartinez.teams_for_linux && \
+flatpak install flathub com.discordapp.Discord
+flatpak install flathub com.github.IsmaelMartinez.teams_for_linux
 flatpak install flathub com.spotify.Client
+flatpak install flathub app.zen_browser.zen
+
+
+# SET ZEN AS DEFAULT BROWSER
+#xdg-settings set default-web-browser /var/lib/flatpak/exports/share/applications/app.zen_browser.zen.desktop
 
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme && ./Tela-circle-icon-theme/install.sh \
 && \\

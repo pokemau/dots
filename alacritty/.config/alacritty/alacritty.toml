@@ -16,7 +16,6 @@ size = 10.5
 #family = "JetBrainsMono Nerd Font Mono"
 #family = "FiraCode Nerd Font"
 family = "Hack Nerd Font"
-
 style = "Bold"
 
 [window]
