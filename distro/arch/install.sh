@@ -22,7 +22,8 @@ yay -S dunst rofi-wayland neovim swappy swww waybar \
   ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
   visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs \
   downgrade gnome-themes-extra clipse ttf-firacode-nerd cmake \
-  libreoffice-still wget obsidian gdb discord fd
+  libreoffice-still wget obsidian gdb discord fd zen-browser-bin \
+  ttf-ibmplex-mono-nerd
 
 # yay -S spotify-adblock
 

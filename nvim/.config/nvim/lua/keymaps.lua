@@ -12,7 +12,7 @@ local keymap = vim.keymap
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- close tab
-vim.keymap.set('n', '<leader>q', ':bd<CR>', {})
+vim.keymap.set('n', '<leader>q', ':bd<CR>', opts)
 
 -- Diagnostic keymaps
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })

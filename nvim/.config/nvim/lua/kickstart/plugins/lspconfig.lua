@@ -98,8 +98,8 @@ return {
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
           vim.keymap.set({ 'n', 'i' }, '<C-p>', vim.lsp.buf.signature_help, {})
-          vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
-          vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
+          vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
+          vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
@@ -172,13 +172,22 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {
-          capabilities = capabilities
+          capabilities = capabilities,
         },
         jedi_language_server = {
-          capabilities = capabilities
+          capabilities = capabilities,
         },
         ts_ls = {
-          capabilities = capabilities
+          capabilities = capabilities,
+        },
+        ols = {
+          capabilities = capabilities,
+          init_options = {
+            checker_args = '-strict-style',
+            collections = {
+              { name = 'shared', path = vim.fn.expand '$HOME/Dev/Odin/' },
+            },
+          },
         },
         -- gopls = {},
         -- pyright = {},

@@ -5,7 +5,7 @@ live_config_reload = true
 #size = 10.5
 size = 10.5
 #offset.x = -1
-#offset.y = -1
+#offset.y = -3
 
 [font.normal]
 #family = "Comic Mono"
@@ -15,8 +15,10 @@ size = 10.5
 #family = "ComicShannsMono Nerd Font"
 #family = "JetBrainsMono Nerd Font Mono"
 #family = "FiraCode Nerd Font"
-family = "Hack Nerd Font"
-style = "Bold"
+#family = "Hack Nerd Font"
+family = "BlexMono Nerd Font"
+style = "Medium"
+#style = "Bold"
 
 [window]
 opacity = 0.95

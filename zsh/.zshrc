@@ -19,6 +19,7 @@ alias inst='sudo dnf install'
 alias gp='git push'
 alias gs='git status'
 alias ga='git add'
+alias gd='git diff'
 alias gc='git clone'
 alias gcm='git commit -m'
 alias gsw='git switch'
@@ -40,5 +41,9 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Dev/Odin/
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
 
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
 export PATH
