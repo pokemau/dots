@@ -14,7 +14,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
-vim.opt.updatetime = 250
+-- vim.opt.updatetime = 250
 -- vim.opt.timeoutlen = 300
 
 -- Sets how neovim will display certain whitespace characters in the editor.

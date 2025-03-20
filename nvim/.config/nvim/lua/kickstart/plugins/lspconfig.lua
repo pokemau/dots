@@ -177,6 +177,12 @@ return {
         jedi_language_server = {
           capabilities = capabilities,
         },
+        zls = {
+          capabilities = capabilities,
+        },
+        svelte = {
+          capabilities = capabilities,
+        },
         ts_ls = {
           capabilities = capabilities,
         },
@@ -236,6 +242,8 @@ return {
         'jedi_language_server',
         'lua_ls',
         'ols',
+        'zls',
+        'codelldb'
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

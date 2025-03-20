@@ -11,12 +11,12 @@
     "context": "VimControl && !menu",
     "bindings": {
       "ctrl-j": "workspace::ToggleBottomDock",
-      "shift-h": "pane::ActivatePrevItem",
+      "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
       "ctrl-w": "pane::CloseActiveItem",
       "ctrl-e": "workspace::ToggleLeftDock",
       "] g": "editor::GoToDiagnostic",
-      "[ g": "editor::GoToPrevDiagnostic",
+      "[ g": "editor::GoToPreviousDiagnostic",
       "ctrl-shift-space": "editor::ShowSignatureHelp"
     }
   },
@@ -32,6 +32,13 @@
     "context": "vim_mode == insert",
     "bindings": {
       "j k": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePreviousPane",
+      "ctrl-l": "workspace::ActivateNextPane"
     }
   }
 ]

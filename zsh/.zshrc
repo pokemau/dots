@@ -32,7 +32,6 @@ alias z='zeditor'
 alias bm='rm -f compile_commands.json && bear -- make'
 alias m='make'
 alias p='python'
-alias lc='v leetcode.nvim'
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -47,3 +46,11 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - zsh)"
 
 export PATH
+
+# pnpm
+export PNPM_HOME="/home/mau/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

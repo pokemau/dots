@@ -42,8 +42,8 @@ return {
       luasnip.config.setup {}
 
       local check_backspace = function()
-        local col = vim.fn.col('.') - 1
-        return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+        local col = vim.fn.col '.' - 1
+        return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s'
       end
 
       cmp.setup {
@@ -83,32 +83,32 @@ return {
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
           ['<C-Space>'] = cmp.mapping.complete {},
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif check_backspace() then
-              fallback()
-            else
-              fallback()
-            end
-
-          end, {'i', 's'}),
---          ['<Tab>'] = cmp.mapping(function(fallback)
---            if cmp.visible() then
---              cmp.select_next_item()
---            elseif luasnip.expandable() then
---              luasnip.expand()
---            elseif luasnip.expand_or_jumpable() then
---              luasnip.expand_or_jump()
---            elseif check_backspace() then
---              fallback()
---            else
---              fallback()
---            end, {'i', 's'}),
+          --          ['<Tab>'] = cmp.mapping(function(fallback)
+          --            if cmp.visible() then
+          --              cmp.select_next_item()
+          --            elseif luasnip.expandable() then
+          --              luasnip.expand()
+          --            elseif luasnip.expand_or_jumpable() then
+          --              luasnip.expand_or_jump()
+          --            elseif check_backspace() then
+          --              fallback()
+          --            else
+          --              fallback()
+          --            end
+          --
+          --          end, {'i', 's'}),
+          --          ['<Tab>'] = cmp.mapping(function(fallback)
+          --            if cmp.visible() then
+          --              cmp.select_next_item()
+          --            elseif luasnip.expandable() then
+          --              luasnip.expand()
+          --            elseif luasnip.expand_or_jumpable() then
+          --              luasnip.expand_or_jump()
+          --            elseif check_backspace() then
+          --              fallback()
+          --            else
+          --              fallback()
+          --            end, {'i', 's'}),
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
@@ -118,12 +118,12 @@ return {
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          ['<A-e>'] = cmp.mapping(function()
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<A-q>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end

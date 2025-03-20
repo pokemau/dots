@@ -2,35 +2,34 @@
 live_config_reload = true
 
 [font]
-#size = 10.5
 size = 10.5
-#offset.x = -1
-#offset.y = -3
+offset.x = -1
+offset.y = 0
 
 [font.normal]
 #family = "Comic Mono"
-#family = "MesloLGS Nerd Font"
+#family = "MesloLGS Nerd Font Mono"
 #family = "RobotoMono Nerd Font Mono"
 #family = "MesloLGMDZ Nerd Font Mono"
 #family = "ComicShannsMono Nerd Font"
 #family = "JetBrainsMono Nerd Font Mono"
-#family = "FiraCode Nerd Font"
-#family = "Hack Nerd Font"
-family = "BlexMono Nerd Font"
-style = "Medium"
-#style = "Bold"
+family = "FiraCode Nerd Font"
+#family = "Hack Nerd Font Mono"
+#family = "BlexMono Nerd Font"
+style = "semibold"
+#style = "bold"
 
 [window]
 opacity = 0.95
 title = "Terminal"
 startup_mode = "Windowed"
 dimensions = { columns = 88, lines = 33 }
-padding = { x = 3, y = 3 }
+padding = { x = 2, y = 2 }
 dynamic_title = true
 
 [cursor]
 style = { blinking = "Always" }
-blink_interval = 500
+blink_interval = 300
 
 [colors]
 draw_bold_text_with_bright_colors = false
