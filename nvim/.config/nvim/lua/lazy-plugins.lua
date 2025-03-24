@@ -14,6 +14,7 @@ require('lazy').setup({
   require 'kickstart/plugins/treesitter',
   require 'kickstart/plugins/autopairs',
 
+  require 'kickstart/plugins/lsp_signature',
   require 'kickstart.plugins.neo-tree',
 
 }, {
