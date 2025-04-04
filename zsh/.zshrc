@@ -39,6 +39,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Dev/Odin/
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
+export EDITOR='neovim'
+export GEMINI_API_KEY='AIzaSyBzlUJxVXojh3-QmCJXCshCK0s3g82I87I'
 
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -54,3 +56,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
