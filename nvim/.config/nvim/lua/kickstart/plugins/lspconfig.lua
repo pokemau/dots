@@ -73,11 +73,11 @@ return {
           end
 
 
-          map('gd', "<cmd>lua vim.lsp.buf.definition()<CR>", '[G]oto [D]efinition')
-          map('gr', "<cmd>lua vim.lsp.buf.references()<CR>", '[G]oto [D]efinition')
+          -- map('gd', "<cmd>lua vim.lsp.buf.definition()<CR>", '[G]oto [D]efinition')
+          -- map('gr', "<cmd>lua vim.lsp.buf.references()<CR>", '[G]oto [D]efinition')
 
-          -- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           -- vim.keymap.set('n', ']g', vim.diagnostic.goto_next)
           -- vim.keymap.set('n', '[g', vim.diagnostic.goto_prev)
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
@@ -174,6 +174,8 @@ return {
             },
           },
         },
+
+
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
