@@ -44,6 +44,9 @@ export EDITOR='neovim'
 export GEMINI_API_KEY='AIzaSyBzlUJxVXojh3-QmCJXCshCK0s3g82I87I'
 
 
+export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
+
+
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"

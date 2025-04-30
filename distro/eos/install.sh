@@ -21,7 +21,8 @@ yay -S neovim flatpak zsh tmux qbittorrent visual-studio-code-bin wget obsidian 
 	github-cli gnome-tweaks ttf-meslo-nerd alacritty kitty stow npm \
 	postgresql pnpm gnome-browser-connector blueman bluez bluez-utils \
 	nautilus-open-any-terminal cmake nerd-fonts-sf-mono zed bear ripgrep \
-	ttf-hack-nerd roboto-mono-nerd ttf-jetbrains-mono-nerd
+	ttf-hack-nerd roboto-mono-nerd ttf-jetbrains-mono-nerd obs-studio \
+	spotify-client xclip
 
 systemctl enable bluetooth
 

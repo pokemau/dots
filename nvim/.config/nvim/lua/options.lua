@@ -1,21 +1,27 @@
 vim.opt.number = true
+vim.wo.number = true
 vim.opt.mouse = 'a'
 vim.opt.showmode = false
-
-vim.scriptencoding = 'utf-8'
-vim.opt.encoding = 'utf-8'
-vim.opt.fileencoding = 'utf-8'
-
--- vim.schedule(function()
---   vim.opt.clipboard = 'unnamedplus'
--- end)
 vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
--- vim.opt.updatetime = 250
--- vim.opt.timeoutlen = 300
+vim.opt.expandtab = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.list = true
+vim.opt.cursorline = true
+
+vim.scriptencoding = 'utf-8'
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
+
+vim.opt.clipboard = 'unnamedplus'
+
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -26,24 +32,15 @@ vim.opt.signcolumn = 'yes'
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
--- Show which line your cursor is on
-
--- Minimal number of screen lines to keep above and below the cursor.
-
--- vim: ts=2 sts=2 sw=2 et
-
 vim.cmd 'autocmd!'
 
 vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-7'
 
-vim.wo.number = true
-
 vim.opt.colorcolumn = '80'
 -- vim.opt.relativenumber = true
 vim.opt.swapfile = false
-vim.opt.clipboard = 'unnamedplus'
 vim.opt.title = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -52,26 +49,20 @@ vim.opt.backup = false
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
-vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.opt.inccommand = 'split'
 vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
 vim.opt.smarttab = true
-vim.opt.breakindent = true
 
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
-
--- vim.opt.shiftwidth = 2
--- vim.opt.tabstop = 2
 
 vim.opt.wrap = true
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
 vim.opt.wildignore:append { '*/node_modules/*' }
 
-vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.winblend = 0
 vim.opt.wildoptions = 'pum'

@@ -1,4 +1,5 @@
 {
+  "icon_theme": "Material Icon Theme",
   "edit_predictions": {
     "mode": "subtle",
     "copilot": {
@@ -25,15 +26,20 @@
   },
   "wrap_guides": [80],
   "tab_size": 2,
+  "languages": {
+    "Python": {
+      "tab_size": 4
+    }
+  },
   // "buffer_font_features": {
   //   "calt": false
   // },
   "terminal": {
-    "font_size": 12.5
+    "font_size": 13
   },
   "theme": {
     "mode": "system",
     "light": "Ayu Dark",
-    "dark": "Ayu Dark"
+    "dark": "macOS Classic Dark2"
   }
 }
