@@ -1,78 +1,42 @@
 {
     "layer": "top",
     "position": "top",
-    "mod": "dock",
-    "exclusive": true,
-    "passthrough": false,
-    "gtk-layer-shell": true,
+    // "height": 26,
+    "spacing": 5,
     "reload_style_on_change": true,
 
-    "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/window"
-    ],
-
-    "modules-center": [
-        "clock"
-    ],
-
+    "modules-left": ["hyprland/workspaces", "custom/r_end", "hyprland/window"],
+    "modules-center": [ "custom/l_end", "custom/l_end", "clock"],
     "modules-right": [
+        "custom/l_bracket",
         "tray",
+        "custom/r_bracket",
+        "custom/r_end",
+        "pulseaudio",
         "cpu",
         "memory",
-        "pulseaudio",
-        "network",
         "battery",
         "power-profiles-daemon",
-        "custom/power-menu"
+        "custom/notification",
     ],
 
-    "power-profiles-daemon": {
-        "format": "{icon}",
-        "tooltip-format": "Power profile: {profile}nDriver: {driver}",
-        "tooltip": true,
-        "format-icons": {
-        "default": "",
-        "performance": "",
-        "balanced": "",
-        "power-saver": ""
-
-        }
-    },
-
     "hyprland/workspaces": {
-        "all-outputs": true,
         "active-only": false,
         "on-click": "activate",
         "disable-scroll": false,
         "on-scroll-up": "hyprctl dispatch workspace -1",
         "on-scroll-down": "hyprctl dispatch workspace +1",
         "persistent-workspaces": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": [],
         }
     },
 
-    "hyprland/window": {
-        "format": "  {}",
-        "separate-outputs": true,
-        "rewrite": {
-            "${USER}@${set_sysname}:(.*)": "$1  ",
-            "(.*) - Visual Studio Code": "$1 󰨞 ",
-            "(.*)Visual Studio Code": "$1Code 󰨞 ",
-            "(.*) — Dolphin": "$1󰉋 ",
-            "(.*)Spotify Free": "$1Spotify 󰓇 ",
-            "(.*)Spotify": "$1Spotify 󰓇 ",
-            "(.*)Steam": "$1Steam 󰓓 "
-        },
-        "max-length": 1000
-    },
-
-    "tray": {
-        "spacing": 10
-    },
-
     "clock": {
-        "timezone": "Asia/Manila",
-        "format": "<span color='#bf616a'> </span>{:%I:%M %p %a %b %d }",
+        "format": "{:%I:%M %p | %a %b %d }",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
             "mode": "year",
@@ -87,18 +51,32 @@
         }
     },
 
-    "cpu": {
-      "interval": 10,
-      "format": "󰍛 {usage}%",
-      "rotate": 0,
-     // "format-alt": "{icon0}{icon1}{icon2}{icon3}",
-     // "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    "battery": {
+        "bat": "BAT0",
+        "interval": 60,
+        "format": "{icon}  {capacity}%",
+        "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
+    },
+
+    "backlight": {
+        "format": "\udb80\udcdf  {percent}%"
     },
 
     "memory": {
         "interval": 10,
         "format":" {used:0.1f}G",
         "max-length": 10
+    },
+
+    "cpu": {
+      "interval": 10,
+      "format": "󰍛 {usage}%",
+      "rotate": 0,
+    },
+
+
+    "temperature": {
+        "format": "  {temperatureC}°C"
     },
 
     "network": {
@@ -112,6 +90,23 @@
         "tooltip-format-disconnected": "Disconnected",
         "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
         "interval": 2
+    },
+
+    "bluetooth": {
+        "format": "\udb80\udcaf",
+        "format-disabled": "\udb80\udcb2",
+        "format-connected": "\udb80\udcb1",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+    },
+
+    "hyprland/language": {
+        "format": "{short}"
+    },
+
+    "tray": {
+        "spacing": 10
     },
 
     "pulseaudio": {
@@ -131,27 +126,66 @@
         "on-click": "pavucontrol"
     },
 
-    "battery": {
-      "bat": "BAT0",
-      "adapter": "ADP0",
-      "interval": 60,
-      "states": {
-          "warning": 30,
-          "critical": 15
-      },
-      "max-length": 20,
-      "format": "{icon} {capacity}%",
-      "format-warning": "{icon} {capacity}%",
-      "format-critical": "{icon} {capacity}%",
-      "format-charging": "<span font-family='Font Awesome 6 Free'></span> {capacity}%",
-      "format-plugged": "  {capacity}%",
-      "format-alt": "{icon} {time}",
-      "format-full": "  {capacity}%",
-      "format-icons": [" ", " ", " ", " ", " "]
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Power profile: {profile}nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+          "default": "",
+          "performance": "",
+          "balanced": "",
+          "power-saver": ""
+        }
     },
 
-    "custom/power-menu": {
-        "format": " <span color='#6a92d7'>⏻ </span>",
-        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh"
-    }
+    "custom/l_bracket": {
+      "format": "[",
+      "interval": "once",
+      "tooltip": false
+    },
+    "custom/r_bracket": {
+      "format": "]",
+      "interval": "once",
+      "tooltip": false
+    },
+
+
+    "custom/l_end": {
+      "format": " ",
+      "interval": "once",
+      "tooltip": false
+    },
+
+    "custom/r_end": {
+      "format": " ",
+      "interval": "once",
+      "tooltip": false
+    },
+
+    "custom/padd": {
+      "format": " ",
+      "interval": "once",
+      "tooltip": false
+    },
+
+    "custom/notification": {
+      "tooltip": false,
+      "format": "{icon}",
+      "format-icons": {
+        "notification": "󰂟",
+        "none": "",
+        "dnd-notification": "󰺁",
+        "dnd-none": "",
+        "inhibited-notification": "󰂟",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "󰺁",
+        "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
 }

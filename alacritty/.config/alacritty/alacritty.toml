@@ -19,7 +19,7 @@ family = "RobotoMono Nerd Font Mono"
 # family = "Hack Nerd Font Mono"
 # family = "BlexMono Nerd Font"
 style = "semibold"
-# style = "bold"
+#style = "bold"
 
 [window]
 opacity = 0.95

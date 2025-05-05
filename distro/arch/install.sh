@@ -20,7 +20,7 @@ yay -S dunst rofi-wayland neovim swappy swww waybar brightnessctl \
     hyprpicker noto-fonts bear ripgrep baobab gnome-calculator stow \
     glfw ttf-ms-win11-auto xdg-desktop-portal-gtk ttf-cascadia-code-nerd \
     ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
-    visual-studio-code-bin gvfs noto-fonts-cjk noto-fonts-emoji gvfs \
+    visual-studio-code-bin noto-fonts-cjk noto-fonts-emoji gvfs \
     downgrade gnome-themes-extra clipse ttf-firacode-nerd cmake \
     libreoffice-still wget obsidian gdb discord fd zen-browser-bin \
     ttf-ibmplex-mono-nerd pyenv syncthing brave-bin kwallet kwalletmanager \
