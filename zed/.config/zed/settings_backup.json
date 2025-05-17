@@ -10,9 +10,9 @@
       "proxy": null,
       "proxy_no_verify": null
     },
-    "enabled_in_text_threads": false
+    "enabled_in_assistant": false
   },
-  "agent": {
+  "assistant": {
     "dock": "bottom",
     "version": "2"
   },
@@ -20,11 +20,11 @@
   "ui_font_size": 16,
   "buffer_font_size": 14,
 
-  // "buffer_font_family": "SFMono Nerd Font Mono",
-  "buffer_font_family": "RobotoMono Nerd Font Mono",
+  "buffer_font_family": "SFMono Nerd Font Mono",
+  // "buffer_font_family": "RobotoMono Nerd Font",
   // "buffer_font_family": "FiraCode Nerd Font",
   // "buffer_font_family": "monospace",
-  "buffer_font_weight": 400,
+  "buffer_font_weight": 500,
   "buffer_line_height": {
     "custom": 1.3
   },
@@ -32,12 +32,6 @@
   "tab_size": 2,
   "languages": {
     "Python": {
-      "tab_size": 4
-    },
-    "C": {
-      "tab_size": 4
-    },
-    "C++": {
       "tab_size": 4
     }
   },

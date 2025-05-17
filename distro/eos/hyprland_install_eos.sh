@@ -4,18 +4,30 @@ yay
 
 yay -S sddm hyprland kitty firefox neovim swaync qt5-wayland qt6-wayland  \
 hyprpolkitagent nwg-look qt5ct qt6ct rofi-wayland waybar gs lazygit \
-wlsunset alacritty flatpak ttf-jetbrains-mono-nerd npm hyprlock hypridle \
-swappy swww brightnessctl grimblast-git cliphist pamixer pavucontrol \
-network-manager-applet udiskie stow power-profiles-daemon blueman \
-bluez bluez-utils ripgrep yarn slurp xdg-desktop-portal-hyprland \
-github-cli ark tmux qbittorrent unzip visual-studio-code-bin \
-selectdefaultapplication-git xdg-utils xdg-desktop-portal \
-xdg-desktop-portal-gtk zsh pyenv ttf-roboto-mono-nerd postgresql ruby-erb \
-rubygems pnpm dbeaver ttf-droid ttf-space-mono-nerd chromium cmake \
+wlsunset alacritty flatpak npm hyprlock hypridle swappy swww brightnessctl \
+grimblast-git cliphist pamixer pavucontrol network-manager-applet udiskie \
+stow power-profiles-daemon blueman bluez bluez-utils ripgrep yarn slurp \
+xdg-desktop-portal-hyprland github-cli ark tmux  unzip xdg-utils \
+xdg-desktop-portal xdg-desktop-portal-gtk zsh pyenv postgresql ruby-erb \
+rubygems pnpm cmake gvfs clipse wget fd  fastfetch adw-gtk-theme zed \
+wl-clipboard
+
+# APPS
+yay -S qbittorrent visual-studio-code-bin selectdefaultapplication-git \
+dbeaver chromium obsidian syncthing baobab gnome-system-monitor anki-bin \
+brave-bin gnome-calculator
+
+# FONTS
+yay -S ttf-jetbrains-mono-nerd ttf-roboto-mono-nerd ttf-space-mono-nerd \
 inter-font ttf-hack-nerd ttf-meslo-nerd noto-fonts ttf-ms-win11-auto \
-nerd-fonts-sf-mono noto-fonts-cjk noto-fonts-emoji gvfs ttf-firacode-nerd \
-clipse wget obsidian fd ttf-ibmplex-mono-nerd syncthing apple-fonts fastfetch \
-adw-gtk-theme baobab gnome-system-monitor anki-bin
+ttf-droid ttf-space-mono-nerd nerd-fonts-sf-mono noto-fonts-cjk \
+noto-fonts-emoji ttf-firacode-nerd ttf-ibmplex-mono-nerd apple-fonts
+
+
+
+# SET BRAVE AS DEFAULT
+xdg-mime default brave.desktop x-scheme-handler/http
+xdg-mime default brave.desktop x-scheme-handler/https
 
 gem install tmuxinator
 
