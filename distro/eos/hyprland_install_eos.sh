@@ -9,13 +9,13 @@ grimblast-git cliphist pamixer pavucontrol network-manager-applet udiskie \
 stow power-profiles-daemon blueman bluez bluez-utils ripgrep yarn slurp \
 xdg-desktop-portal-hyprland github-cli ark tmux  unzip xdg-utils \
 xdg-desktop-portal xdg-desktop-portal-gtk zsh pyenv postgresql ruby-erb \
-rubygems pnpm cmake gvfs clipse wget fd  fastfetch adw-gtk-theme zed \
-wl-clipboard
+rubygems pnpm cmake gvfs clipse wget fd  fastfetch adw-gtk-theme \
+wl-clipboard adw-gtk3
 
 # APPS
 yay -S qbittorrent visual-studio-code-bin selectdefaultapplication-git \
 dbeaver chromium obsidian syncthing baobab gnome-system-monitor anki-bin \
-brave-bin gnome-calculator
+brave-bin gnome-calculator zed
 
 # FONTS
 yay -S ttf-jetbrains-mono-nerd ttf-roboto-mono-nerd ttf-space-mono-nerd \
@@ -26,8 +26,8 @@ noto-fonts-emoji ttf-firacode-nerd ttf-ibmplex-mono-nerd apple-fonts
 
 
 # SET BRAVE AS DEFAULT
-xdg-mime default brave.desktop x-scheme-handler/http
-xdg-mime default brave.desktop x-scheme-handler/https
+# xdg-mime default brave.desktop x-scheme-handler/http
+# xdg-mime default brave.desktop x-scheme-handler/https
 
 gem install tmuxinator
 

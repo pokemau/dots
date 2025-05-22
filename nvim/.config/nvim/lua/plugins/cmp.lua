@@ -77,7 +77,7 @@ return { -- Autocompletion
           columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind' } },
         },
       },
-      documentation = { auto_show = true, auto_show_delay_ms = 100 },
+      documentation = { auto_show = true, auto_show_delay_ms = 200 },
     },
 
     sources = {

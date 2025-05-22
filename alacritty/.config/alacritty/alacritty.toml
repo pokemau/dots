@@ -4,22 +4,22 @@ live_config_reload = true
 [font]
 size = 10
 #offset.x = -1
-#offset.y = -1
+offset.y = -1
 
 [font.normal]
 #family = "Comic Mono"
 #family = "MesloLGS Nerd Font Mono"
-#family = "RobotoMono Nerd Font Mono"
+family = "RobotoMono Nerd Font Mono"
 #family = "MesloLGMDZ Nerd Font Mono"
 # family = "ComicShannsMono Nerd Font"
 #family = "JetBrainsMono Nerd Font Mono"
 #family = "FiraCode Nerd Font"
-family = "SF Mono Nerd Font Mono"
+# family = "SF Mono Nerd Font Mono"
 #family = "Commit Mono Nerd Font"
 # family = "Hack Nerd Font Mono"
 # family = "BlexMono Nerd Font"
-#style = "semibold"
 style = "bold"
+# style = "bold"
 
 [window]
 opacity = 0.95
