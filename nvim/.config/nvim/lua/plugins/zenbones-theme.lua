@@ -1,0 +1,17 @@
+return {}
+-- return {
+--   'zenbones-theme/zenbones.nvim',
+--   dependencies = 'rktjmp/lush.nvim',
+--   lazy = false,
+--   priority = 1000,
+--   -- you can set set configuration options here
+--   config = function()
+--     vim.g.kanagawabones = {
+--       italic_comments = false, -- Disable italic comments
+--       darken_comments = 45, -- Keep your existing setting
+--     }
+--
+--     vim.g.zenbones_darken_comments = 45
+--     vim.cmd.colorscheme 'kanagawabones'
+--   end,
+-- }

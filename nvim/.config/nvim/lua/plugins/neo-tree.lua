@@ -15,6 +15,11 @@ return {
           hide_gitignored = true,
         },
       },
+      window = {
+        mappings = {
+          ['s'] = 'set_root'
+        }
+      }
     }
     vim.keymap.set('n', '<leader>e', ':Neotree toggle reveal<CR>', { noremap = true, silent = true })
   end,

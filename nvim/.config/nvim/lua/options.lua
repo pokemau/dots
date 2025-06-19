@@ -20,7 +20,9 @@ vim.opt.expandtab = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
+
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
@@ -39,3 +41,5 @@ vim.opt.formatoptions:append { 'r' }
 vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
+
+vim.g.copilot_enabled = false

@@ -15,7 +15,7 @@ wl-clipboard adw-gtk3
 # APPS
 yay -S qbittorrent visual-studio-code-bin selectdefaultapplication-git \
 dbeaver chromium obsidian syncthing baobab gnome-system-monitor anki-bin \
-brave-bin gnome-calculator zed
+brave-bin gnome-calculator zed gnome-clocks
 
 # FONTS
 yay -S ttf-jetbrains-mono-nerd ttf-roboto-mono-nerd ttf-space-mono-nerd \
@@ -23,6 +23,10 @@ inter-font ttf-hack-nerd ttf-meslo-nerd noto-fonts ttf-ms-win11-auto \
 ttf-droid ttf-space-mono-nerd nerd-fonts-sf-mono noto-fonts-cjk \
 noto-fonts-emoji ttf-firacode-nerd ttf-ibmplex-mono-nerd apple-fonts
 
+
+# KDE
+yay -S plasma plasma-desktop plasma-nm plasma-pa plasma-workspace \
+	kdeplasma-addons
 
 
 # SET BRAVE AS DEFAULT

@@ -152,6 +152,16 @@ return {
       svelte = {
         capabilities = capabilities,
       },
+      ols = {
+        capabilities = capabilities,
+      },
+      emmet_language_server = {
+        capabilities = capabilities,
+      },
+      tailwindcss = {
+        capabilities = capabilities,
+      },
+
       glsl_analyzer = {},
       prismals = {},
 
@@ -201,6 +211,7 @@ return {
       'svelte',
       'prettier',
       'prettierd',
+      'emmet-language-server',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
