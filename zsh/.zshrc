@@ -44,9 +44,8 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/Dev/Odin/
 # export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
 export JAVA_HOME=$HOME/.jdks/corretto-21.0.6
-export EDITOR='neovim'
-export GEMINI_API_KEY='AIzaSyBzlUJxVXojh3-QmCJXCshCK0s3g82I87I'
-
+export EDITOR='nvim'
+export GEMINI_API_KEY='AIzaSyBAC04V5ahW9iwEosomIRog8sstkJ8Xmn4'
 
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
@@ -64,9 +63,3 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

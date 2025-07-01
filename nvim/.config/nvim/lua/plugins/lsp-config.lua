@@ -158,6 +158,12 @@ return {
       emmet_language_server = {
         capabilities = capabilities,
       },
+      eslint = {
+        capabilities = capabilities,
+      },
+      -- eslint_d = {
+      --   capabilities = capabilities,
+      -- },
       tailwindcss = {
         capabilities = capabilities,
       },
