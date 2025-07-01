@@ -5,7 +5,7 @@
     "spacing": 5,
     "reload_style_on_change": true,
 
-    "modules-left": ["hyprland/workspaces", "custom/r_end", "hyprland/window"],
+    "modules-left": ["sway/workspaces","hyprland/workspaces", "custom/r_end", "hyprland/window"],
     "modules-center": [ "custom/l_end", "custom/l_end", "clock"],
     "modules-right": [
         "custom/l_bracket",
@@ -19,6 +19,21 @@
         "power-profiles-daemon",
         "custom/notification",
     ],
+
+    "sway/workspaces": {
+        "active-only": false,
+        "on-click": "activate",
+        "disable-scroll": false,
+        "on-scroll-up": "hyprctl dispatch workspace -1",
+        "on-scroll-down": "hyprctl dispatch workspace +1",
+        "persistent-workspaces": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": [],
+        }
+    },
 
     "hyprland/workspaces": {
         "active-only": false,

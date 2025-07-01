@@ -18,6 +18,9 @@ DISABLE_AUTO_TITLE="true"
 # Fedora
 alias inst='sudo dnf install'
 
+# TOGGLE MONITOR ON SWAY
+alias tm='~/Scripts/sway_toggle_monitor.sh'
+
 # GIT
 alias gp='git push'
 alias gs='git status'
@@ -45,7 +48,6 @@ export PATH=$PATH:$HOME/Dev/Odin/
 # export JAVA_HOME=/usr/lib/jvm/java-17-openjdk/
 export JAVA_HOME=$HOME/.jdks/corretto-21.0.6
 export EDITOR='nvim'
-export GEMINI_API_KEY='AIzaSyBAC04V5ahW9iwEosomIRog8sstkJ8Xmn4'
 
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 

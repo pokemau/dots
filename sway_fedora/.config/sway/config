@@ -222,7 +222,7 @@ for_window [class="Google-chrome" window_role="pop-up"] floating enable
 
 # pop-up windows
 for_window [window_role="pop-up"] floating enable
-for_window [window_role="About"] floating enabl
+for_window [window_role="About"] floating enable
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
