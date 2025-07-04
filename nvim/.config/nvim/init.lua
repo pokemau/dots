@@ -2,6 +2,16 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    if vim.bo.eol then
+      vim.opt_local.eol = false
+      vim.opt_local.fixeol = false
+      vim.api.nvim_buf_set_lines(0, -1, -1, false, {""})
+    end
+  end,
+})
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

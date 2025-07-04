@@ -4,7 +4,8 @@
 @define-color background-active #665c54;
 @define-color background-urgent #fb4934;
 
-@define-color bg-hover #000000;
+@define-color bg-hover #bdae93;
+@define-color bg-active #bdae93;
 
 @define-color bg-yellow #d79921;
 @define-color fg-yellow #d79921;
@@ -36,11 +37,24 @@
 }
 
 #workspaces button.active {
-  background: @background-active;
+  /* background: @background-active; */
+  /* background: @bg-hover; */
+
+  /* border: none; */
+  /* box-shadow: inherit; */
+  /* text-shadow: inherit; */
+  /* background: #bdae93; */
+  /* color: #ffffff; */
 }
 
 #workspaces button.focused {
-  background: @bg-hover;
+  background: @bg-active;
+
+  border: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  background: #bdae93;
+  color: #000000;
 }
 
 #workspaces button.urgent {

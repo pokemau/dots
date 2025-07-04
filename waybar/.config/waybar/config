@@ -4,8 +4,9 @@
     // "height": 26,
     "spacing": 5,
     "reload_style_on_change": true,
+    "gtk-layer-shell": false,
 
-    "modules-left": ["sway/workspaces","hyprland/workspaces", "custom/r_end", "hyprland/window"],
+    "modules-left": ["sway/workspaces", "custom/r_end", "sway/window"],
     "modules-center": [ "custom/l_end", "custom/l_end", "clock"],
     "modules-right": [
         "custom/l_bracket",
