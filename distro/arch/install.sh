@@ -5,10 +5,11 @@ mkdir -p ~/Apps/git
 cd ~/Apps/git
 git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
-
 cd ~/dots/distro/arch
 
-yay -S dunst rofi-wayland neovim swappy swww waybar brightnessctl \
+cp -r ~/dots/wallpapers ~/wallpapers
+
+yay -S nvm dunst rofi-wayland neovim swappy swww waybar brightnessctl \
     grimblast-git cliphist pamixer pavucontrol network-manager-applet \
     blueman udiskie ttf-jetbrains-mono-nerd ttf-hack-nerd ttf-meslo-nerd \
     yarn npm qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects \
@@ -22,9 +23,10 @@ yay -S dunst rofi-wayland neovim swappy swww waybar brightnessctl \
     ttf-cascadia-code ttf-roboto-mono-nerd nerd-fonts-sf-mono nwg-displays \
     visual-studio-code-bin noto-fonts-cjk noto-fonts-emoji gvfs \
     downgrade gnome-themes-extra clipse ttf-firacode-nerd cmake \
-    libreoffice-still wget obsidian gdb discord fd zen-browser-bin \
+    libreoffice-still wget obsidian gdb discord fd kwallet-pam \
     ttf-ibmplex-mono-nerd pyenv syncthing brave-bin kwallet kwalletmanager \
-    kwallet-pam power-profiles-daemon tmuxinator inter-font apple-fonts
+    kwallet-pam power-profiles-daemon tmuxinator inter-font apple-fonts \
+    ttf-ubuntu-mono-nerd imagemagick swaync clipboard-sync
 
 systemctl enable power-profiles-daemon.service
 systemctl start power-profiles-daemon.service
@@ -47,15 +49,14 @@ systemctl start power-profiles-daemon.service
 flatpak install flathub com.discordapp.Discord
 flatpak install flathub com.github.IsmaelMartinez.teams_for_linux
 flatpak install flathub com.spotify.Client
-flatpak install flathub app.zen_browser.zen
+# flatpak install flathub app.zen_browser.zen
 
 # SET ZEN AS DEFAULT BROWSER
 #xdg-settings set default-web-browser /var/lib/flatpak/exports/share/applications/app.zen_browser.zen.desktop
 
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme && ./Tela-circle-icon-theme/install.sh &&
-    \\
-git clone https://github.com/vinceliuice/Colloid-gtk-theme &&
-    ./Colloid-gtk-theme/install.sh -s compact -l --tweaks normal &&
-    rm -rf Colloid-gtk-theme
+# git clone https://github.com/vinceliuice/Tela-circle-icon-theme && ./Tela-circle-icon-theme/install.sh &&
+# git clone https://github.com/vinceliuice/Colloid-gtk-theme &&
+    # ./Colloid-gtk-theme/install.sh -s compact -l --tweaks normal &&
+    # rm -rf Colloid-gtk-theme
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

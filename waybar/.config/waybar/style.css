@@ -12,9 +12,11 @@
 @define-color fg #ebdbb2;
 
 * {
-  font-family: Roboto Mono Nerd Font;
-  font-weight: 500;
-  font-size: 13px;
+  /* font-family: Roboto Mono Nerd Font; */
+  font-family: Jetbrains Mono Nerd Font;
+  /* font-family: UbuntuMono Nerd Font MOno; */
+  font-weight: 700;
+  font-size: 12px;
   padding: 0;
   margin: 0;
   border: none;
@@ -37,14 +39,14 @@
 }
 
 #workspaces button.active {
-  /* background: @background-active; */
+  background: @bg-active;
   /* background: @bg-hover; */
 
-  /* border: none; */
-  /* box-shadow: inherit; */
-  /* text-shadow: inherit; */
-  /* background: #bdae93; */
-  /* color: #ffffff; */
+  border: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  background: #bdae93;
+  color: #000000;
 }
 
 #workspaces button.focused {
@@ -97,4 +99,25 @@
 
 #custom-l_end {
   padding-left: 2px;
+}
+
+#custom-mic_status {
+    padding: 0 5px;
+    margin: 0 5px;
+    /* border-radius: 5px; */
+  font-size: 14px;
+}
+
+#custom-mic_status.muted {
+    color: #ff6b6b;
+    /* background-color: rgba(255, 107, 107, 0.2); */
+}
+
+#custom-mic_status.unmuted {
+    color: #51cf66;
+    /* background-color: rgba(81, 207, 102, 0.2); */
+}
+
+#custom-mic_status:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }

@@ -24,6 +24,10 @@ keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window'
 -- Navigate buffers
 keymap.set('n', '<S-l>', ':bnext<CR>', opts)
 keymap.set('n', '<S-h>', ':bprevious<CR>', opts)
+-- keymap.set('n', '<S-h>', '<Cmd>BufferPrevious<CR>', opts)
+-- keymap.set('n', '<S-l>', '<Cmd>BufferNext<CR>', opts)
+-- keymap.set('n', '<M-S-h>', '<Cmd>BufferMovePrevious<CR>', opts)
+-- keymap.set('n', '<M-S-l>', '<Cmd>BufferMoveNext<CR>', opts)
 -- Stay in indent mode
 keymap.set('v', '<', '<gv', opts)
 keymap.set('v', '>', '>gv', opts)

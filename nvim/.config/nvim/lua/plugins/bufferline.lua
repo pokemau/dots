@@ -1,3 +1,4 @@
+-- return {}
 return {
   {
     'akinsho/bufferline.nvim',
@@ -30,3 +31,4 @@ return {
     end,
   },
 }
+

@@ -6,7 +6,13 @@
     "reload_style_on_change": true,
     "gtk-layer-shell": false,
 
-    "modules-left": ["sway/workspaces", "custom/r_end", "sway/window"],
+    "modules-left": [
+        "hyprland/workspaces", 
+  //      "sway/workspaces", 
+        "custom/r_end", 
+       "hyprland/window"
+  //      "sway/window"
+    ],
     "modules-center": [ "custom/l_end", "custom/l_end", "clock"],
     "modules-right": [
         "custom/l_bracket",
@@ -14,6 +20,7 @@
         "custom/r_bracket",
         "custom/r_end",
         "pulseaudio",
+        "custom/mic_status",
         "cpu",
         "memory",
         "battery",
@@ -182,6 +189,14 @@
       "format": " ",
       "interval": "once",
       "tooltip": false
+    },
+
+    "custom/mic_status": {
+        "exec": "~/.config/waybar/scripts/mic-status.sh",
+        "return-type": "json",
+        "interval": 1,
+        "tooltip": true,
+        "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
     },
 
     "custom/notification": {

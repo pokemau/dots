@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wall_dir=~/.config/hypr/wallpapers/
+wall_dir=~/wallpapers/
 
 list_wallpapers() {
     for e in "$wall_dir"/*

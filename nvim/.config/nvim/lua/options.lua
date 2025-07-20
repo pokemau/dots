@@ -4,7 +4,7 @@ end)
 
 vim.opt.clipboard = 'unnamedplus'
 
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 vim.opt.updatetime = 200
 
 vim.opt.number = true

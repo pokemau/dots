@@ -1,15 +1,15 @@
 return {
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
+    'CopilotC-Nvim/CopilotChat.nvim',
     dependencies = {
-      { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+      { 'github/copilot.vim' },
+      { 'nvim-lua/plenary.nvim', branch = 'master' },
     },
     opts = {
-
+      model = 'claude-sonnet-4',
     },
     config = function(_, opts)
-      require("CopilotChat").setup(opts)
+      require('CopilotChat').setup(opts)
 
       vim.keymap.set('n', '<leader>c', ':CopilotChat<CR>', { noremap = true, silent = true })
     end,
