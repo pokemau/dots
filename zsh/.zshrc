@@ -38,7 +38,6 @@ alias p='python'
 export EDITOR='nvim'
 export PASSWORD_STORE=basic
 
-export GEMINI_API_KEY='AIzaSyBD1OMHIT6gZJqYAm_cPrXVr2jcoa2I7Eo'
 
 # export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
