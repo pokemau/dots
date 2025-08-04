@@ -28,7 +28,11 @@ return {
           },
         },
       }
+
+      vim.keymap.set('n', '<A-S-l>', ':BufferLineMoveNext<CR>', { silent = true })
+      vim.keymap.set('n', '<A-S-h>', ':BufferLineMovePrev<CR>', { silent = true })
+      vim.keymap.set('n', '<S-l>', ':BufferLineCycleNext<CR>', { silent = true })
+      vim.keymap.set('n', '<S-h>', ':BufferLineCyclePrev<CR>', { silent = true })
     end,
   },
 }
-

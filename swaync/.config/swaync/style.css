@@ -35,7 +35,7 @@
 
 .notification-row {
   outline: none;
-  margin: 0px;
+  margin: 8px;
   padding: 0px;
 }
 
@@ -43,7 +43,9 @@
   background: @bg-main;
   border: 1px solid @notif-border;
   border-radius: 5px;
-  margin: 1px -2px 1px 0px;
+  /* margin: 1px -2px 1px 0px; */
+
+  margin: 8px;
 }
 
 .notification-content {
@@ -191,6 +193,7 @@
   padding: 4px 8px;
   font-size: 13px;
   border-radius: 5px;
+  margin: 8px 8px 0 8px;
 }
 
 .widget-title>button {

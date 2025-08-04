@@ -12,14 +12,14 @@ return {
         filtered_items = {
           visible = true,
           hide_dotfiles = false,
-          hide_gitignored = true,
+          hide_gitignored = false,
         },
       },
       window = {
         mappings = {
-          ['s'] = 'set_root'
-        }
-      }
+          ['s'] = 'set_root',
+        },
+      },
     }
     vim.keymap.set('n', '<leader>e', ':Neotree toggle reveal<CR>', { noremap = true, silent = true })
   end,

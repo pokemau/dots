@@ -20,7 +20,7 @@ size = 11.5
 # family = "Ubuntu Mono"
 family = "Ubuntu Mono Nerd Font"
 # family = "BlexMono Nerd Font"
-# style = "semibold"
+# style = "medium"
 style = "bold"
 
 [window]

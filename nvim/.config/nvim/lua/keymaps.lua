@@ -22,8 +22,9 @@ keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window'
 keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Navigate buffers
-keymap.set('n', '<S-l>', ':bnext<CR>', opts)
-keymap.set('n', '<S-h>', ':bprevious<CR>', opts)
+-- keymap.set('n', '<S-l>', ':bnext<CR>', opts)
+-- keymap.set('n', '<S-h>', ':bprevious<CR>', opts)
+
 -- keymap.set('n', '<S-h>', '<Cmd>BufferPrevious<CR>', opts)
 -- keymap.set('n', '<S-l>', '<Cmd>BufferNext<CR>', opts)
 -- keymap.set('n', '<M-S-h>', '<Cmd>BufferMovePrevious<CR>', opts)
@@ -60,8 +61,8 @@ keymap.set('n', 'te', ':tabedit<Return>', term_opts)
 keymap.set('n', 'ss', ':split<Return><C-w>w', term_opts)
 keymap.set('n', 'sv', ':vsplit<Return><C-w>w', term_opts)
 -- Resize window
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
+keymap.set('n', '<C-left>', '<C-w><')
+keymap.set('n', '<C-right>', '<C-w>>')
 keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
 

@@ -39,12 +39,12 @@ return {
     vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>pd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 
-    vim.keymap.set('n', ']g', function()
-      vim.diagnostic.jump { count = 1, float = true }
-    end)
-    vim.keymap.set('n', '[g', function()
-      vim.diagnostic.jump { count = -1, float = true }
-    end)
+    -- vim.keymap.set('n', ']g', function()
+    --   vim.diagnostic.jump { count = 1, float = true }
+    -- end)
+    -- vim.keymap.set('n', '[g', function()
+    --   vim.diagnostic.jump { count = -1, float = true }
+    -- end)
 
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
