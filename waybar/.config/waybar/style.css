@@ -1,20 +1,20 @@
-@define-color background #282828;
-@define-color foreground #ebdbb2;
-@define-color foreground-inactive #404040;
-@define-color background-active #665c54;
+/* Color definitions */
+@define-color background #1d2021;
+@define-color foreground #fbf1c7;
+@define-color foreground-inactive #7c6f64;
+@define-color background-active #3c3836;
 @define-color background-urgent #fb4934;
 
-@define-color bg-hover #bdae93;
-@define-color bg-active #bdae93;
+@define-color bg-hover #b8bb26;
+@define-color bg-active #b8bb26;
 
-@define-color bg-yellow #d79921;
-@define-color fg-yellow #d79921;
-@define-color fg #ebdbb2;
+@define-color bg-yellow #fabd2f;
+@define-color fg-yellow #fabd2f;
+@define-color fg #fbf1c7;
 
+/* Global styles */
 * {
-  /* font-family: Roboto Mono Nerd Font; */
-  font-family: Jetbrains Mono Nerd Font;
-  /* font-family: UbuntuMono Nerd Font MOno; */
+  font-family: "Jetbrains Mono Nerd Font";
   font-weight: 700;
   font-size: 12px;
   padding: 0;
@@ -22,11 +22,13 @@
   border: none;
 }
 
+/* Main waybar */
 #waybar {
   color: @fg;
-  background-color: @background;
+  background-color: rgba(29, 32, 33, 0.8);
 }
 
+/* Workspaces */
 #workspaces button {
   color: @fg;
   padding-left: 0.2em;
@@ -38,61 +40,68 @@
   color: @foreground-inactive;
 }
 
-#workspaces button.active {
-  background: @bg-active;
-  /* background: @bg-hover; */
-
-  border: none;
-  box-shadow: inherit;
-  text-shadow: inherit;
-  background: #bdae93;
-  color: #000000;
-}
-
+#workspaces button.active,
 #workspaces button.focused {
   background: @bg-active;
-
   border: none;
   box-shadow: inherit;
   text-shadow: inherit;
-  background: #bdae93;
-  color: #000000;
+  color: @background;
 }
 
 #workspaces button.urgent {
   background: @background-urgent;
+  color: @foreground;
 }
 
 #workspaces button:hover {
   border: none;
   box-shadow: inherit;
   text-shadow: inherit;
-  background: #bdae93;
-  color: #000000;
+  background: @bg-hover;
+  color: @background;
 }
 
-
-
-/* #tray { */
-/*   margin-right: 1em; */
-/* } */
-
+/* Module containers */
 #power-profiles-daemon,
 #battery,
 #pulseaudio,
 #cpu,
+#clock,
+#custom-mic_status,
 #memory {
   border-radius: 2px;
-  /* background-color: @bg-yellow; */
   padding: 0 0.5em;
+  color: @fg;
 }
 
-#custom-notification {
-  /* #power-profiles-daemon { */
-  padding: 0 10px;
-  margin-right: 5px;
+/* Audio slider */
+#pulseaudio-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
 }
 
+#pulseaudio-slider trough {
+  min-height: 8px;
+  min-width: 100px;
+  border-radius: 4px;
+  background-color: rgba(60, 56, 54, 0.6);
+  border: 1px solid rgba(124, 111, 100, 0.3);
+}
+
+#pulseaudio-slider highlight {
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 4px;
+  background-color: @bg-active;
+  background-image: linear-gradient(90deg, @bg-active, rgba(184, 187, 38, 0.8));
+}
+
+/* Custom modules layout */
 #custom-r_end {
   padding-right: 1px;
 }
@@ -101,23 +110,71 @@
   padding-left: 2px;
 }
 
+/* Mic status */
 #custom-mic_status {
-    padding: 0 5px;
-    margin: 0 5px;
-    /* border-radius: 5px; */
+  padding: 0 5px;
+  margin: 0 5px;
   font-size: 14px;
 }
 
 #custom-mic_status.muted {
-    color: #ff6b6b;
-    /* background-color: rgba(255, 107, 107, 0.2); */
+  color: #fb4934; /* gruvbox bright red */
 }
 
 #custom-mic_status.unmuted {
-    color: #51cf66;
-    /* background-color: rgba(81, 207, 102, 0.2); */
+  color: #b8bb26; /* gruvbox bright green */
 }
 
 #custom-mic_status:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(251, 241, 199, 0.1);
 }
+
+/* Notification */
+#custom-notification {
+  padding: 0 10px;
+  margin-right: 5px;
+  color: #d79921; /* gruvbox neutral yellow */
+}
+
+#custom-notification:hover {
+  background-color: rgba(251, 241, 199, 0.1);
+}
+
+/* Clock separator */
+#custom-clock_separator {
+  color: @foreground-inactive;
+  padding: 0 8px;
+  font-weight: 400;
+}
+
+/* Module-specific colors */
+#battery {
+  color: #fabd2f; /* gruvbox bright yellow */
+}
+
+#cpu {
+  color: #83a598; /* gruvbox bright blue */
+}
+
+#memory {
+  color: #d3869b; /* gruvbox bright purple */
+}
+
+#clock {
+  color: #8ec07c; /* gruvbox bright aqua */
+  font-weight: 600;
+  padding: 0 8px;
+}
+
+#power-profiles-daemon {
+  color: #fe8019; /* gruvbox bright orange */
+}
+
+#pulseaudio {
+  color: #b8bb26; /* gruvbox bright green */
+}
+
+#tray {
+  color: #fbf1c7; /* gruvbox light0 */
+}
+
