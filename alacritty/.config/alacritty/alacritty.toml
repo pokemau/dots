@@ -13,14 +13,14 @@ size = 11.5
 # family = "MesloLGMDZ Nerd Font Mono"
 # family = "ComicShannsMono Nerd Font"
 # family = "JetBrainsMono Nerd Font Mono"
-# family = "FiraCode Nerd Font"
+# family = "Fira Code"
 # family = "SF Mono Nerd Font Mono"
 # family = "Commit Mono Nerd Font"
 # family = "Hack Nerd Font Mono"
 # family = "Ubuntu Mono"
 family = "Ubuntu Mono Nerd Font"
 # family = "BlexMono Nerd Font"
-# style = "medium"
+# style = "semibold"
 style = "bold"
 
 [window]
@@ -30,6 +30,7 @@ opacity = 0.95
 dimensions = { columns = 88, lines = 33 }
 padding = { x = 2, y = 2 }
 dynamic_title = true
+# decorations = "none"
 
 [cursor]
 style = { blinking = "Always" }
@@ -67,3 +68,5 @@ TERM = "alacritty"
 
 [scrolling]
 history = 100000
+multiplier = 100
+

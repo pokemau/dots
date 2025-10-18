@@ -15,15 +15,12 @@ return {
   },
   config = function()
     require('telescope').setup {
-      -- You can put your default mappings / updates / etc. in here
-      --  All the info you're looking for is in `:help telescope.setup()`
-      --
-      -- defaults = {
-      --   mappings = {
-      --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-      --   },
-      -- },
-      -- pickers = {}
+      defaults = {
+        layout_config = {
+          width = 0.95,
+          height = 0.95,
+        },
+      },
       extensions = {
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
@@ -39,12 +36,12 @@ return {
     vim.keymap.set('n', '<leader>pg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>pd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 
-    -- vim.keymap.set('n', ']g', function()
-    --   vim.diagnostic.jump { count = 1, float = true }
-    -- end)
-    -- vim.keymap.set('n', '[g', function()
-    --   vim.diagnostic.jump { count = -1, float = true }
-    -- end)
+    vim.keymap.set('n', ']g', function()
+      vim.diagnostic.jump { count = 1, float = true }
+    end)
+    vim.keymap.set('n', '[g', function()
+      vim.diagnostic.jump { count = -1, float = true }
+    end)
 
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })

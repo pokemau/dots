@@ -1,3 +1,9 @@
+output "eDP-1" {
+    off
+}
+output "HDMI-A-1" {
+    mode "1920x1080@100"
+}
 workspace "1" {
 }
 workspace "2" {
@@ -75,19 +81,6 @@ input {
     // focus-follows-mouse max-scroll-amount="0%"
 }
 
-// You can configure outputs by their name, which you can find
-// by running `niri msg outputs` while inside a niri instance.
-// The built-in laptop monitor is usually called "eDP-1".
-// Find more information on the wiki:
-// https://yalter.github.io/niri/Configuration:-Outputs
-// Remember to uncomment the node by removing "/-"!
-
-output "HDMI-A-1" {
-    mode "1920x1080@100"
-}
-// output "eDP-1" {
-//     off
-// }
 
 /-output "eDP-1" {
     // Uncomment this line to disable this output.
@@ -276,20 +269,26 @@ layout {
     }
 }
 
-// Add lines like this to spawn processes at startup.
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
-// See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
+spawn-at-startup "swaync"
 spawn-at-startup "waybar"
-spawn-at-startup "clipse" "-listen"
-// spawn-at-startup "clipboard-sync" "&"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "wlsunset" "-s" "0:00" "-s" "0:00" "-t" "4500"
-spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent"
 spawn-at-startup "~/Scripts/swww_init.sh"
+
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
+spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+
+spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+
+// dms
+// spawn-at-startup "dms" "run"
+// config-notification {
+//     disable-failed
+// }
 
 
 hotkey-overlay {
@@ -315,7 +314,7 @@ animations {
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    slowdown 1
+    slowdown 0.8
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -375,10 +374,19 @@ binds {
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
 
+    // Mod+D hotkey-overlay-title="Application Launcher" {
+    //    spawn "dms" "ipc" "call" "spotlight" "toggle";
+    // }
+
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+
     Mod+D { spawn "rofi" "-show" "drun"; }
-    Mod+E { spawn "thunar"; }
+    Mod+S { spawn "nautilus"; }
     Mod+Shift+W { spawn "~/Scripts/wallpaper_switcher.sh"; }
+
+    Mod+Grave { spawn "~/Scripts/toggle_mute.sh"; }
+
+// bind = $mainMod, grave, exec, $srcDir/toggle_mute.sh
 
     Mod+C { spawn "firefox"; }
     Mod+Shift+D { spawn "discord" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }
@@ -419,8 +427,9 @@ binds {
     Mod+J     { focus-window-down; }
     Mod+K     { focus-window-up; }
     Mod+L     { focus-column-right; }
-    Mod+S     { focus-column-right; }
-    Mod+A     { focus-column-left; }
+
+    Mod+E     { focus-column-right; }
+    Mod+Q     { focus-column-left; }
 
     Mod+Ctrl+Left  { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
@@ -536,15 +545,15 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-column-to-workspace 1 focus=false; }
+    Mod+Shift+2 { move-column-to-workspace 2 focus=false; }
+    Mod+Shift+3 { move-column-to-workspace 3 focus=false; }
+    Mod+Shift+4 { move-column-to-workspace 4 focus=false; }
+    Mod+Shift+5 { move-column-to-workspace 5 focus=false; }
+    Mod+Shift+6 { move-column-to-workspace 6 focus=false; }
+    Mod+Shift+7 { move-column-to-workspace 7 focus=false; }
+    Mod+Shift+8 { move-column-to-workspace 8 focus=false; }
+    Mod+Shift+9 { move-column-to-workspace 9 focus=false; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }

@@ -1,61 +1,57 @@
 @define-color close-bg #fb4934;
 @define-color close-bg-hover #cc241d;
-
 @define-color bg-selected rgb(0, 128, 255);
-
 @define-color clear-all-bg #1d2021;
 @define-color clear-all-border-color #ffffff;
 @define-color clear-all-bg-hover #b8bb26;
 @define-color clear-all-bg-focus rgba(27, 27, 27, 0.6);
-
 @define-color fg-main #ebdbb2;
 @define-color bg-main #282828;
 @define-color bg-secondary #3c3836;
-
-
 @define-color hover-bg-main #b8bb26;
-
 @define-color dnd-bg #282828;
 @define-color dnd-active #b8bb26;
-
 @define-color notif-border #a89984;
 @define-color notif-border #7c6f64;
 
-
 * {
-  font-family: 'Roboto Mono Nerd Font Mono';
+  font-family: 'Jetbrains Mono Nerd Font';
   font-weight: bold;
 }
 
-.control-center .notification-row:focus,
-.control-center .notification-row:hover {
-  opacity: 1;
-  background: @bg-secondary;
+.control-center {
+  background-color: @bg-main;
+  border-radius: 5px;
+  padding: 8px;
+  border: 2px solid @notif-border;
 }
 
-.notification-row {
-  outline: none;
-  margin: 8px;
-  padding: 0px;
+.widget-dnd,
+.widget-title,
+.widget-volume,
+.widget-mpris,
+.widget-buttons-grid>flowbox>flowboxchild>button,
+.widget-buttons-grid {
+  background-color: @bg-secondary;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 4px 0;
 }
 
 .notification {
   background: @bg-main;
   border: 1px solid @notif-border;
-  border-radius: 5px;
-  /* margin: 1px -2px 1px 0px; */
+  border-radius: 4px;
+  padding: 7px;
+}
 
-  margin: 8px;
+.notification-group {
+  background-color: transparent;
+  outline: none;
 }
 
 .notification-content {
   background: @bg-main;
-}
-
-.notification-default-action {
-  margin: 0;
-  padding: 0;
-  border-radius: 5px;
 }
 
 .close-button {
@@ -63,22 +59,9 @@
   color: @bg-main;
   text-shadow: none;
   padding: 0px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   margin-top: 6px;
   margin-right: 0px;
-}
-
-.close-button:hover {
-  box-shadow: none;
-  background: @close-bg-hover;
-  transition: all 0.15s ease-in-out;
-  border: none;
-}
-
-.notification-action {
-  border: 1px solid #34548a;
-  border-top: none;
-  border-radius: 4px;
 }
 
 .notification-default-action:hover,
@@ -87,213 +70,15 @@
   background: @bg-main;
 }
 
-.notification-default-action {
-  border-radius: 5px;
-  margin: 0px;
-}
-
-.notification-default-action:not(:only-child) {
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
-}
-
-.notification-action:first-child {
-  border-bottom-left-radius: 10px;
-  background: #1b1b2b;
-}
-
-.notification-action:last-child {
-  border-bottom-right-radius: 10px;
-  background: #1b1b2b;
-}
-
-.inline-reply {
-  margin-top: 4px;
-}
-
-.inline-reply-entry {
-  background: @bg-secondary;
-  color: @fg-main;
-  caret-color: @fg-main;
-  border-radius: 5px;
-}
-
-.inline-reply-button {
-  margin-left: 4px;
-  background: @clear-all-bg;
-  border-radius: 5px;
-  color: @fg-main;
-}
-
-.inline-reply-button:disabled {
-  background: initial;
-  color: @text-color-disabled;
-  border: 1px solid transparent;
-}
-
-.inline-reply-button:hover {
-  background: @hover-bg-main;
-}
-
-.image {
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.summary {
+.widget-title>label,
+.widget-dnd>label {
   font-size: 14px;
-  font-weight: 700;
-  background: transparent;
-  color: rgba(158, 206, 106, 1);
-  text-shadow: none;
-}
-
-.time {
-  font-size: 12px;
-  font-weight: 700;
-  background: transparent;
-  color: @fg-main;
-  text-shadow: none;
-  margin-right: 18px;
-}
-
-.body {
-  font-size: 12px;
-  font-weight: 400;
-  background: transparent;
-  color: @text-color;
-  text-shadow: none;
-}
-
-.control-center {
-  background: @bg-main;
-  border: 2px solid @notif-border;
-  border-radius: 5px;
-}
-
-.control-center-list {
-  background: transparent;
-}
-
-.control-center-list-placeholder {
-  opacity: 0.5;
-}
-
-.floating-notifications {
-  background: transparent;
-}
-
-.blank-window {
-  background: alpha(black, 0.1);
-}
-
-.widget-title {
-  color: @fg-main;
-  background: @bg-secondary;
-  padding: 4px 8px;
-  font-size: 13px;
-  border-radius: 5px;
-  margin: 8px 8px 0 8px;
-}
-
-.widget-title>button {
-  font-size: 12px;
-  color: @fg-main;
-  text-shadow: none;
-  background: @clear-all-bg;
-  box-shadow: none;
-  border-radius: 5px;
-}
-
-.widget-title>button:hover {
-  background: @hover-bg-main;
-  color: @bg-main;
-}
-
-.widget-dnd {
-  background: @bg-secondary;
-  padding: 4px 8px;
-  margin: 8px 8px 4px 8px;
-  border-radius: 5px;
-  font-size: 13px;
-  color: @fg-main;
-}
-
-.widget-dnd>switch {
-  border-radius: 5px;
-  background: @clear-all-bg;
-}
-
-.widget-dnd>switch:checked {
-  background: @dnd-active;
-  /* border: 1px solid #f7768e; */
-}
-
-.widget-dnd>switch slider {
-  background: @bg-main;
-  border-radius: 5px;
-}
-
-.widget-dnd>switch:checked slider {
-  background: @bg-main;
-  border-radius: 5px;
-}
-
-.widget-label {
-  margin: 8px 8px 4px 8px;
-}
-
-.widget-label>label {
-  font-size: 1rem;
-  color: @text-color;
-}
-
-.widget-mpris {
-  color: @text-color;
-  background: @bg-secondary;
-  padding: 4px;
-  margin: 4px 8px 4px 8px;
-  border-radius: 4px;
-}
-
-.widget-mpris>box>button {
-  padding: 4px;
-  margin: 2px;
-  min-width: 10px;
-  min-height: 10px;
-  border-radius: 4px;
-}
-
-.widget-mpris-player {
-  padding: 5px;
-  margin: 2px;
-}
-
-.widget-mpris-title {
-  font-weight: 700;
-  font-size: 13px;
-}
-
-.widget-mpris-subtitle {
-  font-size: 10px;
-}
-
-.widget-buttons-grid {
-  font-size: 15px;
-  padding: 4px;
-  margin: 4px 8px;
-  border-radius: 5px;
-  background: @bg-secondary;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button {
-  min-width: 65px;
-  min-height: 10px;
-  background: @bg-main;
-  border-radius: 5px;
-  color: @text-color;
-  /* padding: 0; */
-  margin: 0;
+  min-width: 54px;
+  min-height: 15px;
+  background-color: @bg-main;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
@@ -301,25 +86,15 @@
   color: @bg-main;
 }
 
-.widget-menubar>box>.menu-button-bar>button {
-  border: none;
-  background: transparent;
-}
-
-.topbar-buttons>button {
-  border: none;
-  background: transparent;
-}
-
 .widget-volume {
   background: @bg-secondary;
-  padding: 4px 8px;
-  margin: 4px 8px 0px 8px;
-  border-radius: 4px;
-  font-size: 2rem;
+  /* padding: 4px 8px; */
+  /* margin: 4px 8px 0px 8px; */
+  /* border-radius: 4px; */
+  font-size: 1.4rem;
   color: @fg-main;
 }
 
 .widget-volume scale trough highlight {
-  background: #458588;
+  background-color: @hover-bg-main;
 }

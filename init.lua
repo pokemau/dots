@@ -16,6 +16,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 vim.opt.colorcolumn = '80'
 vim.opt.expandtab = true
+vim.opt.scrolloff = 10
 --
 --
 vim.opt.autoindent = true

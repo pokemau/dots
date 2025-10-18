@@ -1,4 +1,29 @@
 {
+  "context_servers": {
+    "ayahay-client-db": {
+      "source": "custom",
+      "enabled": true,
+      "command": "postgres-mcp",
+      "args": [
+        "--access-mode=unrestricted"
+      ],
+      "env": {
+        "DATABASE_URI": "postgresql://ayahay-v2:AyahayV2%40123@ayahay-qa.cq711qm8cdfx.ap-southeast-2.rds.amazonaws.com/ayahay-v2-client?sslmode=require"
+      }
+    },
+    "mcp-server-context7": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "context7_api_key": "ctx7sk-1f5f607f-b5bf-4756-9cb8-b0d7d92a5d8d"
+      }
+    }
+  },
+  "theme": "Ayu Mirage",
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false
+  },
   "vim_mode": true,
   "icon_theme": "Material Icon Theme",
   "telemetry": {
@@ -14,9 +39,19 @@
     "enabled_in_text_threads": false
   },
   "agent": {
+    "profiles": {
+      "agent": {
+        "name": "Agent",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4.5"
     },
     "dock": "right"
     // "version": "2"
@@ -24,9 +59,9 @@
   "ui_font_size": 16,
   "buffer_font_size": 14,
   // "buffer_font_family": "SFMono Nerd Font Mono",
-  // "buffer_font_family": "RobotoMono Nerd Font Mono",
+  "buffer_font_family": "RobotoMono Nerd Font Mono",
   // "buffer_font_family": "Ubuntu Mono",
-  "buffer_font_family": "FiraCode Nerd Font",
+  // "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   // "buffer_font_family": "monospace",
   "buffer_font_weight": 400,
   "buffer_line_height": {
@@ -53,9 +88,12 @@
   "terminal": {
     "font_size": 15
   },
-  "theme": {
-    "mode": "system",
-    "light": "Ayu Dark",
-    "dark": "macOS Classic Dark"
+  "completions": {
+    "lsp_fetch_timeout_ms": 5000
   }
+  // "theme": {
+  //   "mode": "system",
+  //   "light": "Ayu Dark",
+  //   "dark": "macOS Classic Dark"
+  // }
 }

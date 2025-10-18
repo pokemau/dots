@@ -1,6 +1,9 @@
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 local keymap = vim.keymap
+local vim = vim
+local api = vim.api
+local M = {}
 
 keymap.set('n', 'j', 'gj', { silent = true })
 keymap.set('n', 'k', 'gk', { silent = true })
@@ -54,7 +57,8 @@ keymap.set('t', '<C-l>', '<C-\\><C-N><C-w>l', term_opts)
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
 -- Select all
-keymap.set('n', '<C-a>', 'ggVG')
+-- keymap.set('n', '<C-a>', 'ggVG')
+keymap.set('n', '<leader>a', 'ggVG')
 -- New tab
 keymap.set('n', 'te', ':tabedit<Return>', term_opts)
 -- Split window
@@ -73,3 +77,25 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- keymap.set('n', '<leader>w', 'za', opts)
+--
+-- function M.nvim_create_augroups(definitions)
+--   for group_name, definition in pairs(definitions) do
+--     api.nvim_command('augroup ' .. group_name)
+--     api.nvim_command 'autocmd!'
+--     for _, def in ipairs(definition) do
+--       local command = table.concat(vim.tbl_flatten { 'autocmd', def }, ' ')
+--       api.nvim_command(command)
+--     end
+--     api.nvim_command 'augroup END'
+--   end
+-- end
+--
+-- local autoCommands = {
+--   open_folds = {
+--     { 'BufReadPost,FileReadPost', '*', 'normal zR' },
+--   },
+-- }
+--
+-- M.nvim_create_augroups(autoCommands)
