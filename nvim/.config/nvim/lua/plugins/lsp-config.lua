@@ -152,10 +152,13 @@ return {
       svelte = {
         capabilities = capabilities,
       },
-      eslint = {
+      qmlls = {
         capabilities = capabilities,
-        filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
       },
+      -- eslint = {
+      --   capabilities = capabilities,
+      --   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+      -- },
     }
 
     local ensure_installed = vim.tbl_keys(servers or {})

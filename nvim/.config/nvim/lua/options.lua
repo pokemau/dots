@@ -1,6 +1,6 @@
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+-- vim.schedule(function()
+--   vim.opt.clipboard = 'unnamedplus'
+-- end)
 
 vim.opt.clipboard = 'unnamedplus'
 
@@ -46,5 +46,4 @@ vim.g.copilot_enabled = false
 --
 -- vim.opt.foldmethod = "expr"
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
 

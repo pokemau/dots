@@ -2,25 +2,26 @@
 live_config_reload = true
 
 [font]
-size = 11.5
-# offset.x = -1
+size = 11
+offset.x = -1
 # offset.y = -1
+offset.y = -2
 
 [font.normal]
 # family = "Comic Mono"
 # family = "MesloLGS Nerd Font Mono"
-# family = "RobotoMono Nerd Font"
-# family = "MesloLGMDZ Nerd Font Mono"
+family = "RobotoMono Nerd Font Mono"
 # family = "ComicShannsMono Nerd Font"
 # family = "JetBrainsMono Nerd Font Mono"
 # family = "Fira Code"
-# family = "SF Mono Nerd Font Mono"
+# family = "SF Mono"
 # family = "Commit Mono Nerd Font"
-# family = "Hack Nerd Font Mono"
-# family = "Ubuntu Mono"
-family = "Ubuntu Mono Nerd Font"
-# family = "BlexMono Nerd Font"
-# style = "semibold"
+# family = "Hack Nerd Font"
+# family = "ComicShanns Mono Nerd Font"
+# family = "Ubuntu Mono Nerd Font"
+# family = "Hack"
+# family = "Menlo Nerd Font"
+# style = "medium"
 style = "bold"
 
 [window]
@@ -68,5 +69,5 @@ TERM = "alacritty"
 
 [scrolling]
 history = 100000
-multiplier = 100
+multiplier = 10
 

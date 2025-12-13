@@ -7,12 +7,12 @@
   "gtk-layer-shell": false,
 
   "modules-left": [
-    // "hyprland/workspaces",
-    "niri/workspaces",
+    "hyprland/workspaces",
+    // "niri/workspaces",
     // "sway/workspaces",
     "custom/r_end",
-    // "hyprland/window"
-    "niri/window"
+    "hyprland/window"
+    // "niri/window"
     // "sway/window"
   ],
 

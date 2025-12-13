@@ -4,17 +4,15 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="jispwoso"
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 
 DISABLE_AUTO_TITLE="true"
-
-
 
 # Fedora
 alias inst='sudo dnf install'
 
 # TOGGLE MONITOR ON SWAY
-alias tm='~/Scripts/sway_toggle_monitor.sh'
+# alias tm='~/Scripts/sway_toggle_monitor.sh'
 
 # GIT
 alias gp='git push'
@@ -39,11 +37,12 @@ export EDITOR='nvim'
 export PASSWORD_STORE=basic
 
 
-# export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# export PYENV_ROOT="$HOME/.pyenv"
-# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init - zsh)"
-#
-# export PATH
+# Ruby gems
+export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
+# Created by `pipx` on 2025-12-05 02:02:24
+export PATH="$PATH:/home/mau/.local/bin"

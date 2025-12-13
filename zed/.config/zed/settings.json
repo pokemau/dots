@@ -1,31 +1,46 @@
 {
-  "context_servers": {
-    "ayahay-client-db": {
-      "source": "custom",
-      "enabled": true,
-      "command": "postgres-mcp",
-      "args": [
-        "--access-mode=unrestricted"
-      ],
-      "env": {
-        "DATABASE_URI": "postgresql://ayahay-v2:AyahayV2%40123@ayahay-qa.cq711qm8cdfx.ap-southeast-2.rds.amazonaws.com/ayahay-v2-client?sslmode=require"
-      }
+  "vertical_scroll_margin": 10.0,
+  "ui_font_weight": 500.0,
+  "agent_ui_font_size": 16.0,
+  "ui_font_family": "Source Sans Pro",
+  "gutter": {
+    "breakpoints": true
+  },
+  "toolbar": {
+    "breadcrumbs": true
+  },
+  "status_bar": {
+    "active_language_button": true
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "git": {
+    "blame": {
+      "show_avatar": true
     },
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "icon_theme": "Material Icon Theme",
+  "buffer_font_weight": 500.0,
+  "context_servers": {
     "mcp-server-context7": {
-      "source": "extension",
       "enabled": true,
       "settings": {
         "context7_api_key": "ctx7sk-1f5f607f-b5bf-4756-9cb8-b0d7d92a5d8d"
       }
     }
   },
-  "theme": "Ayu Mirage",
+  "theme": "Fleet Dark",
   "tab_bar": {
     "show": true,
     "show_nav_history_buttons": false
   },
   "vim_mode": true,
-  "icon_theme": "Material Icon Theme",
   "telemetry": {
     "metrics": false,
     "diagnostics": false
@@ -56,16 +71,15 @@
     "dock": "right"
     // "version": "2"
   },
-  "ui_font_size": 16,
+  "ui_font_size": 15.0,
   "buffer_font_size": 14,
   // "buffer_font_family": "SFMono Nerd Font Mono",
   "buffer_font_family": "RobotoMono Nerd Font Mono",
   // "buffer_font_family": "Ubuntu Mono",
   // "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   // "buffer_font_family": "monospace",
-  "buffer_font_weight": 400,
   "buffer_line_height": {
-    "custom": 1.4
+    "custom": 1.2999999523162842
   },
   "collaboration_panel": {
     "button": false
@@ -86,6 +100,7 @@
     }
   },
   "terminal": {
+    "dock": "bottom",
     "font_size": 15
   },
   "completions": {
