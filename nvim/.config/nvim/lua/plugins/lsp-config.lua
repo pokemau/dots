@@ -155,6 +155,9 @@ return {
       qmlls = {
         capabilities = capabilities,
       },
+      zls = {
+        capabilities = capabilities,
+      },
       -- eslint = {
       --   capabilities = capabilities,
       --   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },

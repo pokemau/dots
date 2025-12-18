@@ -33,6 +33,9 @@ alias bm='rm -f compile_commands.json && bear -- make'
 alias m='make'
 alias p='python'
 
+# BATTERY 
+alias btr='sudo ~/.cargo/bin/batty --value 80'
+
 export EDITOR='nvim'
 export PASSWORD_STORE=basic
 
@@ -46,3 +49,5 @@ export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 
 # Created by `pipx` on 2025-12-05 02:02:24
 export PATH="$PATH:/home/mau/.local/bin"
+
+export PATH="$HOME/.cargo/bin:$PATH"
