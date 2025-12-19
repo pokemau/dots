@@ -143,6 +143,8 @@
   # List services that you want to enable:
 
   services.flatpak.enable = true;
+  services.gnome.enable = true;
+  services.gdm.enable = true;
 
 
   # Enable the OpenSSH daemon.
