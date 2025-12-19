@@ -9,4 +9,4 @@ if [ "$distro" = "hypr-eos" ]; then
         scripts
 fi
 
-# stow alacritty dunst kitty nvim rofi tmux xfce4 zsh zed waybar clang-format
+# stow [folder] -t ~

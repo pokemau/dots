@@ -1,0 +1,6 @@
+window {
+    location: north;
+    anchor: north;
+    y-offset: 40px; /* Adjust based on your waybar height */
+    width: 300px;
+}
