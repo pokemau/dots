@@ -2,11 +2,11 @@
 
 distro=$1
 
-rm -rf ~/.zshrc
+rm -rf ~/.zshrc ~/.tmux.conf ~/.clang-format
 
-if [ "$distro" = "hypr-eos" ]; then
-    stow alacritty kickstart tmux zsh zed waybar clang-format swappy \
-        scripts
+if [ "$distro" = "gnome" ]; then
+    cd configs && stow alacritty clang-format ghostty kitty nvim scripts \
+        tmux xfce4 zed zsh -t ~
 fi
 
 # stow [folder] -t ~
