@@ -7,7 +7,7 @@ git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 cd ~/dots/distro/arch
 
-cp -r ~/dots/wallpapers ~/wallpapers
+# cp -r ~/dots/wallpapers ~/wallpapers
 
 # yay -S nvm dunst rofi-wayland neovim swappy swww waybar brightnessctl \
 #     grimblast-git cliphist pamixer pavucontrol network-manager-applet \
@@ -28,24 +28,24 @@ cp -r ~/dots/wallpapers ~/wallpapers
 #     kwallet-pam power-profiles-daemon tmuxinator inter-font apple-fonts \
 #     ttf-ubuntu-mono-nerd imagemagick swaync clipboard-sync
 
-yay -S nvm rofi-wayland neovim waybar brightnessctl cliphist pamixer \
-    pavucontrol network-manager-applet blueman udiskie \
-    yarn npm qt5-quickcontrols qt5-quickcontrols2 qt5-graphicaleffects \
-    xdg-desktop-portal-gnome nwg-look qt5ct qt6ct kvantum \
-    kvantum-qt5 qt5-wayland qt6-wayland thunar github-cli \
-    ark pipewire pipewire-alsa pipewire-audio \
-    pipewire-jack pipewire-pulse gst-plugin-pipewire wireplumber pavucontrol \
-    tmux zsh vlc qbittorrent unzip flatpak wlsunset rust \
-    bear ripgrep stow glfw nwg-displays \
-    visual-studio-code-bin noto-fonts-cjk noto-fonts-emoji gvfs \
-    downgrade clipse cmake \
-    libreoffice-still wget obsidian gdb discord fd \
-    pyenv syncthing brave-bin \
-    power-profiles-daemon tmuxinator inter-font\
-    ttf-ubuntu-mono-nerd 
+yay -S wl-clipboard lazygit github-cli
+
+# FONTS
+yay -S ttf-roboto-mono-nerd
+
+# GNOME INSTALLATION SETUP
+yay -S nvm neovim yarn npm tmux zsh qbittorrent unzip flatpak bear ripgrep stow \
+	visual-studio-code-bin downgrade cmake libreoffice-still wget obsidian gdb discord fd \
+	pyenv syncthing brave-bin power-profiles-daemon tmuxinator gnome-tweaks extension-manager \
+
+# OPENCODE
+curl -fsSL https://opencode.ai/install | bash
 
 systemctl enable power-profiles-daemon.service
 systemctl start power-profiles-daemon.service
+
+git config --global user.name "pokemau"
+git config --global user.email "rentillosa90@gmail.com"
 
 # uncomment multilib in pacman.conf
 
@@ -53,13 +53,11 @@ systemctl start power-profiles-daemon.service
 # yay -S gnome gnome-browser-connector \
 # nautilus-open-any-terminal gnome-tweaks \
 # power-profiles-daemon \
-#
-# systemctl enable power-profiles-daemon.service
-# systemctl start power-profiles-daemon.service
 
 # flatpak install flathub com.discordapp.Discord
 flatpak install flathub com.github.IsmaelMartinez.teams_for_linux
-# flatpak install flathub com.spotify.Client
+flatpak install flathub com.spotify.Client
+flatpak install flathub org.videolan.VLC
 # flatpak install flathub app.zen_browser.zen
 
 # SET ZEN AS DEFAULT BROWSER

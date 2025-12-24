@@ -51,3 +51,6 @@ export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
 export PATH="$PATH:/home/mau/.local/bin"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# opencode
+export PATH=/home/mau/.opencode/bin:$PATH

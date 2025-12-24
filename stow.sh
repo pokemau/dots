@@ -2,7 +2,7 @@
 
 distro=$1
 
-rm -rf ~/.zshrc ~/.tmux.conf ~/.clang-format
+rm -rf ~/.zshrc ~/.tmux.conf ~/.clang-format ~/.config/ghostty
 
 if [ "$distro" = "gnome" ]; then
     cd configs && stow alacritty clang-format ghostty kitty nvim scripts \
