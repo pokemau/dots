@@ -28,7 +28,8 @@ cd ~/dots/distro/arch
 #     kwallet-pam power-profiles-daemon tmuxinator inter-font apple-fonts \
 #     ttf-ubuntu-mono-nerd imagemagick swaync clipboard-sync
 
-yay -S wl-clipboard lazygit github-cli
+yay -S wl-clipboard lazygit github-cli android-studio dbeaver xorg-xlsclients \
+	kvantum qt5ct qt6ct
 
 # FONTS
 yay -S ttf-roboto-mono-nerd
@@ -63,9 +64,5 @@ flatpak install flathub org.videolan.VLC
 # SET ZEN AS DEFAULT BROWSER
 #xdg-settings set default-web-browser /var/lib/flatpak/exports/share/applications/app.zen_browser.zen.desktop
 
-# git clone https://github.com/vinceliuice/Tela-circle-icon-theme && ./Tela-circle-icon-theme/install.sh &&
-# git clone https://github.com/vinceliuice/Colloid-gtk-theme &&
-    # ./Colloid-gtk-theme/install.sh -s compact -l --tweaks normal &&
-    # rm -rf Colloid-gtk-theme
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

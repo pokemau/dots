@@ -52,5 +52,7 @@ export PATH="$PATH:/home/mau/.local/bin"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
+export QT_QPA_PLATFORMTHEME=qt6ct
+
 # opencode
 export PATH=/home/mau/.opencode/bin:$PATH
