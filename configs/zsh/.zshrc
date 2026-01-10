@@ -32,6 +32,9 @@ alias z='zeditor'
 alias bm='rm -f compile_commands.json && bear -- make'
 alias m='make'
 alias p='python'
+alias op='opencode'
+alias gm='gemini'
+
 
 # BATTERY 
 alias btr='sudo ~/.cargo/bin/batty --value 80'

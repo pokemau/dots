@@ -1,8 +1,11 @@
 font-family = Roboto Mono Nerd Font Mono
-#font-family = Hack Nerd Font
+# font-family = MesloLGSDZ Nerd Font
+# font-family = Hack Nerd Font
+# font-family = JetBrainsMono Nerd Font Mono
 # font-thicken = true
 font-style = semibold
-adjust-cell-height = -17%
+# font-style = bold
+adjust-cell-height = -10%
 font-size = 11
 
 theme = Gruvbox Dark Hard
@@ -32,6 +35,16 @@ palette = 15=#ebdbb2
 
 gtk-single-instance = false
 
+gtk-titlebar-hide-when-maximized = true
+
+# gtk-titlebar-style = tabs
+gtk-toolbar-style = raised
+
+# gtk-custom-css = style.css
+app-notifications = no-clipboard-copy
+shell-integration-features = no-cursor
+cursor-click-to-move = true
+window-decoration = server
 
 # keybind = ctrl+a>h=goto_split:left
 # keybind = ctrl+a>j=goto_split:bottom

@@ -6,7 +6,7 @@ rm -rf ~/.zshrc ~/.tmux.conf ~/.clang-format ~/.config/ghostty
 
 if [ "$distro" = "gnome" ]; then
     cd configs && stow alacritty clang-format ghostty kitty nvim scripts \
-        tmux xfce4 zed zsh -t ~
+        tmux xfce4 zed zsh qt -t ~
 fi
 
 # stow [folder] -t ~

@@ -28,16 +28,19 @@ cd ~/dots/distro/arch
 #     kwallet-pam power-profiles-daemon tmuxinator inter-font apple-fonts \
 #     ttf-ubuntu-mono-nerd imagemagick swaync clipboard-sync
 
-yay -S wl-clipboard lazygit github-cli android-studio dbeaver xorg-xlsclients \
-	kvantum qt5ct qt6ct
+yay -S wl-clipboard xclip lazygit github-cli android-studio dbeaver xorg-xlsclients \
+	kvantum qt5ct qt6ct fastfetch gcc pnpm obs-studio
 
 # FONTS
-yay -S ttf-roboto-mono-nerd
+yay -S ttf-meslo-nerd ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk \
+  noto-fonts-emoji ttf-jetbrains-mono-nerd ttf-ms-win11-auto \
+  ttf-ms-win10-auto
 
 # GNOME INSTALLATION SETUP
 yay -S nvm neovim yarn npm tmux zsh qbittorrent unzip flatpak bear ripgrep stow \
 	visual-studio-code-bin downgrade cmake libreoffice-still wget obsidian gdb discord fd \
 	pyenv syncthing brave-bin power-profiles-daemon tmuxinator gnome-tweaks extension-manager \
+  fprintd
 
 # OPENCODE
 curl -fsSL https://opencode.ai/install | bash
@@ -45,8 +48,6 @@ curl -fsSL https://opencode.ai/install | bash
 systemctl enable power-profiles-daemon.service
 systemctl start power-profiles-daemon.service
 
-git config --global user.name "pokemau"
-git config --global user.email "rentillosa90@gmail.com"
 
 # uncomment multilib in pacman.conf
 

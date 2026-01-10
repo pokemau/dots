@@ -1,0 +1,37 @@
+headerbar {
+  /* margin: -6px; */
+  /* margin-left: -6px; */
+  /* margin-right: -6px; */
+}
+
+headerbar button {
+  min-height: 8px;
+  min-width: 8px;
+}
+
+tabbar {
+  margin-top: -16px;
+  margin-bottom: -16px;
+}
+
+tabbar tabbox {
+  transform: translateY(-8px);
+  background-color: #1a1a1a;
+  font-family: monospace;
+}
+
+tabbar tabbox button {
+  min-height: 20px;
+  min-width: 20px;
+}
+
+windowcontrols button {
+    min-width: 24px;       /* Width of the circle/button */
+    min-height: 24px;      /* Height of the circle/button */
+    margin: 4px;           /* Space between buttons */
+    padding: 0;            /* Reset internal padding */
+    border-radius: 9999px; /* Ensures they stay perfect circles */
+}
+windowcontrols button > image {
+    -gtk-icon-size: 14px; /* Make the symbol smaller or larger */
+}

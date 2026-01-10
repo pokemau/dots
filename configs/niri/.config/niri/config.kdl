@@ -1,9 +1,9 @@
-output "eDP-1" {
-    off
-}
-output "HDMI-A-1" {
-    mode "1920x1080@100"
-}
+// output "eDP-1" {
+//     off
+// }
+// output "HDMI-A-1" {
+//     mode "1920x1080@100"
+// }
 workspace "1" {
 }
 workspace "2" {
