@@ -35,6 +35,10 @@ return {
 			-- typescriptreact = { "prettier", "biome", stop_after_first = true },
 			-- svelte = { "prettier", stop_after_first = true },
 			-- odin = { "odinfmt" },
+			javascript = { "prettier" },
+			typescript = { "prettier" },
+			javascriptreact = { "prettier" },
+			typescriptreact = { "prettier" },
 		},
 	},
 }

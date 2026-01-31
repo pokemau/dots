@@ -57,5 +57,10 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 export QT_QPA_PLATFORMTHEME=qt6ct
 
+
+# NOVA ACT
+export NOVA_ACT_API_KEY="69e44f20-fa88-4e2b-946f-e3054bf0330d"
+export NOVA_ACT_SKIP_PLAYWRIGHT_INSTALL=1
+
 # opencode
 export PATH=/home/mau/.opencode/bin:$PATH

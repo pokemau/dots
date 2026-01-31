@@ -133,6 +133,9 @@ return {
 			ols = {},
 			svelte = {},
 			qmlls = {},
+			pylsp = {
+				capabilities = capabilities,
+			},
 			zls = {
 				capabilities = capabilities,
 			},

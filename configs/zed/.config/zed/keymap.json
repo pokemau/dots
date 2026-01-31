@@ -3,8 +3,8 @@
     "context": "Workspace",
     "bindings": {
       "ctrl-e": "workspace::ToggleLeftDock",
-      "ctrl-p": "file_finder::Toggle"
-    }
+      // "ctrl-p": "file_finder::Toggle",
+    },
   },
 
   {
@@ -13,51 +13,59 @@
       "ctrl-j": "workspace::ToggleBottomDock",
       "shift-h": "pane::ActivatePreviousItem",
       "shift-l": "pane::ActivateNextItem",
+
+      "alt-shift-h": "pane::SwapItemLeft",
+      "alt-shift-l": "pane::SwapItemRight",
+
       "ctrl-w": "pane::CloseActiveItem",
       "ctrl-e": "workspace::ToggleLeftDock",
       "] g": "editor::GoToDiagnostic",
       "[ g": "editor::GoToPreviousDiagnostic",
-      "ctrl-shift-space": "editor::ShowSignatureHelp"
-    }
+      "ctrl-shift-space": "editor::ShowSignatureHelp",
+      "ctrl-k": "editor::ShowSignatureHelp",
+    },
   },
   {
     "context": "ProjectPanel",
     "bindings": {
       "ctrl-e": "workspace::ToggleLeftDock",
-      "space p f": "file_finder::Toggle"
-    }
+      "space p f": "file_finder::Toggle",
+    },
   },
 
   {
     "context": "vim_mode == insert",
     "bindings": {
-      "j k": "vim::NormalBefore"
-    }
+      "j k": "vim::NormalBefore",
+    },
   },
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
       "ctrl-h": "workspace::ActivatePreviousPane",
-      "ctrl-l": "workspace::ActivateNextPane"
-    }
+      "ctrl-l": "workspace::ActivateNextPane",
+    },
+  },
+  {
+    "context": "Editor && !showing_signature_help && !showing_completions",
+    "bindings": {
+      "ctrl-k": "editor::ShowSignatureHelp",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space p g": "pane::DeploySearch",
+      // "space p f": "file_finder::Toggle",
+      "space w": "editor::ToggleFold",
+      "s v": "pane::SplitRight",
+      "s s": "pane::SplitDown",
+    },
   },
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
-      "alt-1": ["terminal::SendKeystroke", "ctrl-b 1"]
-    }
+      "ctrl-t": "workspace::NewTerminal",
+    },
   },
-  {
-    "context": "Terminal",
-    "bindings": {
-      "ctrl-m": ["terminal::SendKeystroke", "alt+enter"]
-      // "alt-1": ["terminal::SendKeystroke", "alt-1"],
-      // "alt-2": ["terminal::SendKeystroke", "alt-2"],
-      // "alt-3": ["terminal::SendKeystroke", "alt-3"],
-      // "alt-4": ["terminal::SendKeystroke", "alt-4"],
-      // "alt-5": ["terminal::SendKeystroke", "alt-5"],
-      // "ctrl-t": ["terminal::SendKeystroke", "ctrl-w"]
-    }
-  }
 ]

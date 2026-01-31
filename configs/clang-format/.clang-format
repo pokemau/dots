@@ -1,3 +1,27 @@
+# Indentation
 IndentWidth: 4
-SortIncludes: true
+AccessModifierOffset: -4
+NamespaceIndentation: All
+
+# Pointers
 PointerAlignment: Left
+SortIncludes: false
+
+# Bracing (This forces new lines for brackets)
+BreakBeforeBraces: Allman
+
+# Constructor Initializers
+ConstructorInitializerIndentWidth: 4
+BreakConstructorInitializers: BeforeComma
+PackConstructorInitializers: Never
+AllowAllConstructorInitializersOnNextLine: false
+
+# Alignment & Spacing
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignArrayOfStructures: Left
+
+# Prevention (Stop one-liners)
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never

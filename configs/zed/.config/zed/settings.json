@@ -1,114 +1,116 @@
 {
-  "vertical_scroll_margin": 10.0,
-  "ui_font_weight": 500.0,
-  "agent_ui_font_size": 16.0,
-  "ui_font_family": "Source Sans Pro",
-  "gutter": {
-    "breakpoints": true
+  "lsp_highlight_debounce": 100,
+  "prettier": {
+    
+  },
+  "preferred_line_length": 80,
+  "show_wrap_guides": true,
+  "vim": {
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": false
   },
   "toolbar": {
-    "breadcrumbs": true
+    "agent_review": false,
+    "selections_menu": false,
+    "quick_actions": false,
+    "breadcrumbs": false
   },
-  "status_bar": {
-    "active_language_button": true
+  "gutter": {
+    "line_numbers": true
   },
+  "hover_popover_enabled": true,
+  "auto_signature_help": false,
+  "rounded_selection": true,
+  "current_line_highlight": "all",
+  "disable_ai": false,
+  "outline_panel": {
+    "file_icons": true,
+    "default_width": 300.0,
+    "dock": "left",
+    "button": true
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": false,
+    "indent_guides": {
+      "show": "always"
+    },
+    "scrollbar": {
+      "show": "auto"
+    },
+    "auto_reveal_entries": true,
+    "indent_size": 19.0,
+    "folder_icons": false,
+    "file_icons": true,
+    "entry_spacing": "standard",
+    "hide_gitignore": false,
+    "dock": "left"
+  },
+  "vim_mode": true,
+  "vertical_scroll_margin": 10.0,
+  "agent_ui_font_size": 16.0,
   "diagnostics": {
-    "inline": {
+    "lsp_pull_diagnostics": {
+      "debounce_ms": 0,
       "enabled": true
-    }
+    },
+    "inline": {
+      "enabled": true,
+    },
   },
   "git": {
-    "blame": {
-      "show_avatar": true
-    },
+    "disable_git": false,
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "icon_theme": "Material Icon Theme",
-  "buffer_font_weight": 500.0,
   "context_servers": {
     "mcp-server-context7": {
       "enabled": true,
       "settings": {
-        "context7_api_key": "ctx7sk-1f5f607f-b5bf-4756-9cb8-b0d7d92a5d8d"
-      }
-    }
+        "context7_api_key": "ctx7sk-1f5f607f-b5bf-4756-9cb8-b0d7d92a5d8d",
+      },
+    },
   },
-  "theme": "Fleet Dark",
+  "theme": "VSCode Dark Modern",
   "tab_bar": {
-    "show": true,
-    "show_nav_history_buttons": false
+    "show_nav_history_buttons": false,
   },
-  "vim_mode": true,
   "telemetry": {
     "metrics": false,
-    "diagnostics": false
   },
   "edit_predictions": {
-    "mode": "subtle",
-    "copilot": {
-      "proxy": null,
-      "proxy_no_verify": null
-    },
-    "enabled_in_text_threads": false
+    "mode":"subtle"
   },
-  "agent": {
-    "profiles": {
-      "agent": {
-        "name": "Agent",
-        "tools": {},
-        "enable_all_context_servers": false,
-        "context_servers": {}
-      }
-    },
-    "always_allow_tool_actions": true,
-    "default_profile": "write",
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5"
-    },
-    "dock": "right"
-    // "version": "2"
-  },
+
   "ui_font_size": 15.0,
-  "buffer_font_size": 14,
+  "buffer_font_size": 14.0,
   // "buffer_font_family": "SFMono Nerd Font Mono",
   "buffer_font_family": "RobotoMono Nerd Font Mono",
   // "buffer_font_family": "Ubuntu Mono",
   // "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   // "buffer_font_family": "monospace",
+  "buffer_font_weight": 500,
   "buffer_line_height": {
-    "custom": 1.2999999523162842
+    "custom": 1.2999999523162842,
   },
   "collaboration_panel": {
-    "button": false
+    "button": false,
   },
   "confirm_quit": true,
   "format_on_save": "off",
   "wrap_guides": [80],
-  "tab_size": 2,
+  "tab_size": 4,
   "languages": {
-    "Python": {
-      "tab_size": 4
-    },
-    "C": {
-      "tab_size": 4
-    },
-    "C++": {
-      "tab_size": 4
-    }
+    "JavaScript": { "tab_size": 2 },
+    "TypeScript": { "tab_size": 2 },
+    "TSX": { "tab_size": 2 },
+    "JSON": { "tab_size": 2 },
+    "JSONC": { "tab_size": 2 },
   },
   "terminal": {
     "dock": "bottom",
-    "font_size": 15
+    "font_size": 13.0,
   },
-  "completions": {
-    "lsp_fetch_timeout_ms": 5000
-  }
-  // "theme": {
-  //   "mode": "system",
-  //   "light": "Ayu Dark",
-  //   "dark": "macOS Classic Dark"
-  // }
 }

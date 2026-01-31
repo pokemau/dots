@@ -41,16 +41,16 @@ return {
 
 		completion = {
 			menu = {
-				-- auto_show = true,
+				auto_show = true,
 				draw = {
 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 				},
 				-- border = "single",
         auto_show_delay_ms = 0,
-				auto_show = function(ctx, items)
-					local ft = vim.bo.filetype
-					return vim.tbl_contains({ "typescript", "javascript", "typescriptreact", "javascriptreact", "html" }, ft)
-				end,
+				-- auto_show = function(ctx, items)
+				-- 	local ft = vim.bo.filetype
+				-- 	return vim.tbl_contains({ "typescript", "javascript", "typescriptreact", "javascriptreact", "html" }, ft)
+				-- end,
 			},
 			documentation = {
 				window = {

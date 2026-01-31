@@ -48,3 +48,5 @@ keymap.set("n", "<C-left>", "<C-w><")
 keymap.set("n", "<C-right>", "<C-w>>")
 keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
+
+keymap.set({'n'},"<leader>r", ":checktime<CR>", opts)
