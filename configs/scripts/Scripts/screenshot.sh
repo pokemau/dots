@@ -1,12 +1,13 @@
 #!/usr/bin/env sh
 
+# hyprshot -m region -z --raw | swappy -f - -o - | wl-copy --type image/png
 
 if [ -z "$XDG_PICTURES_DIR" ]; then
 	XDG_PICTURES_DIR="$HOME/Pictures"
 fi
 
 scrDir=$(dirname "$(realpath "$0")")
-swpy_dir="${confDir}/swappy"
+swpy_dir="${XDG_CONFIG_HOME:-$HOME/.config}/swappy"
 save_dir="${2:-$XDG_PICTURES_DIR/Screenshots}"
 save_file=$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')
 temp_screenshot="/tmp/screenshot.png"
@@ -33,15 +34,14 @@ p) # print all outputs
 s) # drag to manually snip an area / click on a window to print it
 	grimblast copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
 sf) # frozen screen, drag to manually snip an area / click on a window to print it
-	grimblast --freeze save area $temp_screenshot && swappy -f $temp_screenshot ;;
-	# grimblast --freeze edit area $temp_screenshot && swappy -f $temp_screenshot ;;
+	grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
 m) # print focused monitor
 	grimblast copysave output $temp_screenshot && swappy -f $temp_screenshot ;;
 *) # invalid option
 	print_error ;;
 esac
 
-rm "$temp_screenshot"
+rm -f "$temp_screenshot"
 
 if [ -f "${save_dir}/${save_file}" ]; then
 	notify-send -a "t1" -i "${save_dir}/${save_file}" "saved in ${save_dir}"

@@ -2,6 +2,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 
 ZSH_THEME="jispwoso"
+# ZSH_THEME="robbyrussell"
 
 source $ZSH/oh-my-zsh.sh
 # source /usr/share/nvm/init-nvm.sh
@@ -10,6 +11,10 @@ DISABLE_AUTO_TITLE="true"
 
 # Fedora
 alias inst='sudo dnf install'
+
+# Arch
+alias yayup='yay -Syu --cleanafter'
+alias togglebat='./Scripts/toggle_batt.sh'
 
 # TOGGLE MONITOR ON SWAY
 # alias tm='~/Scripts/sway_toggle_monitor.sh'
@@ -34,10 +39,11 @@ alias m='make'
 alias p='python'
 alias op='opencode'
 alias gm='gemini'
+alias cl='claude'
 
 
-# BATTERY 
-alias btr='sudo ~/.cargo/bin/batty --value 80'
+# BATTERY
+# alias btr='sudo ~/.cargo/bin/batty --value 80'
 
 export EDITOR='nvim'
 export PASSWORD_STORE=basic
@@ -47,15 +53,13 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Ruby gems
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
-
-# Created by `pipx` on 2025-12-05 02:02:24
 export PATH="$PATH:/home/mau/.local/bin"
-
 export PATH="$HOME/.cargo/bin:$PATH"
-
 export QT_QPA_PLATFORMTHEME=qt6ct
-
-# opencode
 export PATH=/home/mau/.opencode/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

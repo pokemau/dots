@@ -11,19 +11,14 @@ return {
 				options = {
 					diagnostics = "nvim_lsp",
 					indicator = {
-						 style = 'none',
+						style = "none",
 					},
 				},
 
 				highlights = {
-					-- Fill: Empty space in bufferline - use Normal background for dark look
-					-- fill = {
-					-- 	bg = { attribute = "bg", highlight = "Normal" },
-					-- },
-
 					-- INACTIVE BUFFERS (not visible in any window) - most dimmed
 					background = {
-						fg = { attribute = "fg", highlight = "Comment" }, -- Dimmed text
+						fg = { attribute = "fg", highlight = "Comment" },
 						bg = { attribute = "bg", highlight = "Normal" },
 					},
 
@@ -33,9 +28,9 @@ return {
 						bg = { attribute = "bg", highlight = "Normal" },
 					},
 
-					-- SELECTED BUFFER (active/current) - stands out with slightly lighter bg
+					-- SELECTED BUFFER (active/current) - HIGHER CONTRAST TEXT
 					buffer_selected = {
-						fg = { attribute = "fg", highlight = "Normal" },
+						fg = "#ebdbb2", -- Bright Gruvbox white (change to "#ffffff" for pure white)
 						bg = { attribute = "bg", highlight = "ColorColumn" },
 						bold = true,
 						italic = false,
@@ -61,7 +56,7 @@ return {
 						bg = { attribute = "bg", highlight = "Normal" },
 					},
 					indicator_selected = {
-						fg = { attribute = "fg", highlight = "Normal" },
+						fg = "#ebdbb2", -- Bright text
 						bg = { attribute = "bg", highlight = "ColorColumn" },
 					},
 
@@ -75,13 +70,13 @@ return {
 						bg = { attribute = "bg", highlight = "Normal" },
 					},
 					close_button_selected = {
-						fg = { attribute = "fg", highlight = "Normal" },
+						fg = "#ebdbb2", -- Bright text
 						bg = { attribute = "bg", highlight = "ColorColumn" },
 					},
 
-					-- MODIFIED INDICATORS
+					-- MODIFIED INDICATORS (Left as String highlight for color coding)
 					modified = {
-						fg = { attribute = "fg", highlight = "String" }, -- Typically green/yellow
+						fg = { attribute = "fg", highlight = "String" },
 						bg = { attribute = "bg", highlight = "Normal" },
 					},
 					modified_visible = {
@@ -105,12 +100,12 @@ return {
 						italic = true,
 					},
 					duplicate_selected = {
-						fg = { attribute = "fg", highlight = "Normal" },
+						fg = "#ebdbb2", -- Bright text
 						bg = { attribute = "bg", highlight = "ColorColumn" },
 						italic = true,
 					},
 
-					-- DIAGNOSTICS: ERROR
+					-- DIAGNOSTICS: ERROR (Kept color coding)
 					error = {
 						fg = { attribute = "fg", highlight = "DiagnosticError" },
 						bg = { attribute = "bg", highlight = "Normal" },
@@ -138,7 +133,7 @@ return {
 						bold = true,
 					},
 
-					-- DIAGNOSTICS: WARNING
+					-- DIAGNOSTICS: WARNING (Kept color coding)
 					warning = {
 						fg = { attribute = "fg", highlight = "DiagnosticWarn" },
 						bg = { attribute = "bg", highlight = "Normal" },
@@ -166,7 +161,7 @@ return {
 						bold = true,
 					},
 
-					-- DIAGNOSTICS: INFO
+					-- DIAGNOSTICS: INFO (Kept color coding)
 					info = {
 						fg = { attribute = "fg", highlight = "DiagnosticInfo" },
 						bg = { attribute = "bg", highlight = "Normal" },
@@ -194,7 +189,7 @@ return {
 						bold = true,
 					},
 
-					-- DIAGNOSTICS: HINT
+					-- DIAGNOSTICS: HINT (Kept color coding)
 					hint = {
 						fg = { attribute = "fg", highlight = "DiagnosticHint" },
 						bg = { attribute = "bg", highlight = "Normal" },

@@ -15,6 +15,7 @@
 /* Global styles */
 * {
   font-family: "Jetbrains Mono Nerd Font";
+  /* font-family: "Menlo Nerd Font"; */
   font-weight: 700;
   font-size: 12px;
   padding: 0;
@@ -25,15 +26,13 @@
 /* Main waybar */
 #waybar {
   color: @fg;
-  background-color: rgba(29, 32, 33, 0.8);
+  background-color: rgba(29, 32, 33, 0.7);
 }
 
 /* Workspaces */
 #workspaces button {
   color: @fg;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 #workspaces button.empty {
@@ -65,7 +64,7 @@
 /* Module containers */
 #power-profiles-daemon,
 #battery,
-#pulseaudio,
+#custom-volume,
 #cpu,
 #clock,
 #custom-mic_status,
@@ -76,7 +75,7 @@
 }
 
 /* Audio slider */
-#pulseaudio-slider slider {
+#wireplumber-slider slider {
   min-height: 0px;
   min-width: 0px;
   opacity: 0;
@@ -85,7 +84,7 @@
   box-shadow: none;
 }
 
-#pulseaudio-slider trough {
+#wireplumber-slider trough {
   min-height: 8px;
   min-width: 100px;
   border-radius: 4px;
@@ -93,7 +92,7 @@
   border: 1px solid rgba(124, 111, 100, 0.3);
 }
 
-#pulseaudio-slider highlight {
+#wireplumber-slider highlight {
   min-width: 8px;
   min-height: 8px;
   border-radius: 4px;
@@ -170,7 +169,7 @@
   color: #fe8019; /* gruvbox bright orange */
 }
 
-#pulseaudio {
+#custom-volume {
   color: #b8bb26; /* gruvbox bright green */
 }
 

@@ -22,15 +22,14 @@
 .control-center {
   background-color: @bg-main;
   border-radius: 5px;
-  padding: 8px;
   border: 2px solid @notif-border;
+  padding: 6px;
+
 }
 
 .widget-dnd,
 .widget-title,
 .widget-volume,
-.widget-mpris,
-.widget-buttons-grid>flowbox>flowboxchild>button,
 .widget-buttons-grid {
   background-color: @bg-secondary;
   border-radius: 4px;
@@ -38,16 +37,37 @@
   margin: 4px 0;
 }
 
+.widget-mpris {
+  background-color: transparent;
+  padding: 0px;
+  margin: 4px 0px 0px 0px;
+}
+
+.widget-mpris-player {
+  margin: 0px;
+  border-radius: 4px;
+}
+
+.notification-row .notification-background {
+  padding: 6px 0;
+}
+
 .notification {
   background: @bg-main;
   border: 1px solid @notif-border;
   border-radius: 4px;
   padding: 7px;
+  margin: 0;
 }
 
 .notification-group {
   background-color: transparent;
   outline: none;
+}
+
+.widget-notifications {
+  margin: 0px;
+  padding: 0px;
 }
 
 .notification-content {
@@ -59,8 +79,7 @@
   color: @bg-main;
   text-shadow: none;
   padding: 0px;
-  /* border-radius: 5px; */
-  margin-top: 6px;
+  margin-top: 0px;
   margin-right: 0px;
 }
 
@@ -76,12 +95,21 @@
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button {
-  min-width: 54px;
-  min-height: 15px;
+  min-width: 52px;
+  min-height: 20px;
   background-color: @bg-main;
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin: 0px;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: @hover-bg-main;
+  color: @bg-main;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:checked,
+.widget-buttons-grid>flowbox>flowboxchild>button.active {
   background: @hover-bg-main;
   color: @bg-main;
 }
@@ -96,5 +124,10 @@
 }
 
 .widget-volume scale trough highlight {
+  padding: 5px;
   background-color: @hover-bg-main;
+}
+
+.widget-volume label {
+  margin-right: 12px;
 }

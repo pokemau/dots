@@ -29,7 +29,7 @@ cd ~/dots/distro/arch
 #     ttf-ubuntu-mono-nerd imagemagick swaync clipboard-sync
 
 yay -S wl-clipboard xclip lazygit github-cli android-studio dbeaver xorg-xlsclients \
-	kvantum qt5ct qt6ct fastfetch gcc pnpm obs-studio
+	kvantum qt5ct qt6ct fastfetch gcc pnpm obs-studio jq
 
 # FONTS
 yay -S ttf-meslo-nerd ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk \

@@ -42,8 +42,15 @@
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      "ctrl-h": "workspace::ActivatePreviousPane",
-      "ctrl-l": "workspace::ActivateNextPane",
+      "ctrl-space h": "workspace::ActivatePreviousPane",
+      "ctrl-space l": "workspace::ActivateNextPane",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-space h": "workspace::ActivatePreviousPane",
+      "ctrl-space l": "workspace::ActivateNextPane",
     },
   },
   {

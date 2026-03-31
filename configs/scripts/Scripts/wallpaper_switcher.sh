@@ -14,5 +14,5 @@ selected_file=$(list_wallpapers | rofi -dmenu -p "Select Wallpaper" -lines 10 -w
 if [ -n "$selected_file" ]; then
     full_path="$wall_dir/$selected_file"
 
-    swww img "$full_path" --transition-type center
+    awww img "$full_path" --transition-type center
 fi

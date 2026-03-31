@@ -14,7 +14,6 @@
   "timeout-critical": 0,
   "fit-to-screen": true,
   "control-center-width": 400,
-  "control-center-height": 720,
   "notification-window-width": 500,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
@@ -55,19 +54,19 @@
         },
         {
           "label": "󰕾",
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+          "type": "toggle",
+          "update-command": "bash -c 'pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo true || echo false'"
         },
         {
           "label": "󰍬",
-          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+          "type": "toggle",
+          "update-command": "bash -c 'pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo true || echo false'"
         },
         {
           "label": "󰂯",
           "command": "sh -c 'blueman-manager & swaync-client -t'"
-        },
-        {
-          "label": "d",
-          "command": "/home/mau/dots/swaync/.config/swaync/power-profile-switcher.sh"
         }
       ]
     }

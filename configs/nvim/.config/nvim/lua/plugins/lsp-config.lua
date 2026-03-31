@@ -132,8 +132,10 @@ return {
 			tinymist = {},
 			ols = {},
 			svelte = {},
-			qmlls = {},
-			pylsp = {
+			qmlls = {
+				capabilities = capabilities,
+			},
+			ty = {
 				capabilities = capabilities,
 			},
 			zls = {
@@ -145,6 +147,8 @@ return {
 		vim.list_extend(ensure_installed, {
 			"stylua",
 			"emmet-language-server",
+      "ty",
+      "ruff"
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

@@ -26,8 +26,8 @@
     "tray",
     "custom/r_bracket",
     "custom/r_end",
-    "group/volume",
-    //"pulseaudio",
+    // "group/volume",
+    "custom/volume",
     "custom/mic_status",
     "cpu",
     "memory",
@@ -149,21 +149,14 @@
     "spacing": 5
   },
 
-  "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-bluetooth": "  {volume}%",
-    "format-bluetooth-muted": " ",
-    "format-muted": "婢",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol"
+  // Custom volume module with bluetooth detection + real-time PipeWire events
+  "custom/volume": {
+    "exec": "~/.config/waybar/scripts/volume.sh",
+    "return-type": "json",
+    "tooltip": true,
+    "on-click": "pavucontrol",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
   },
 
   "power-profiles-daemon": {
@@ -238,18 +231,34 @@
   },
 
 
-  "pulseaudio/slider": {
-    "min": 0,
-    "max": 100,
-  },
-
-  "group/volume": {
-    "orientation": "inherit",
+  // "pulseaudio/slider": {
+  //   "min": 0,
+  //   "max": 100
+  // },
+  //
+  // "group/volume": {
+  //   "orientation": "inherit",
+  //   "drawer": {
+  //     "transition-duration": 200,
+  //     "children-class": "not-power",
+  //     "transition-left-to-right": false
+  //   },
+  //   "modules": ["pulseaudio", "pulseaudio/slider"]
+  // }
+"group/volume": {
+    "orientation": "horizontal",
     "drawer": {
       "transition-duration": 200,
       "children-class": "not-power",
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
+      "click-to-reveal": true
     },
-    "modules": ["pulseaudio", "pulseaudio/slider"]
+    "modules": ["wireplumber", "wireplumber/slider"]
+  },
+
+  "wireplumber/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
   },
 }
