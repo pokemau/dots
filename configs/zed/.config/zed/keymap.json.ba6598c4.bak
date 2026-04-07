@@ -21,7 +21,6 @@
       "ctrl-e": "workspace::ToggleLeftDock",
       "] g": "editor::GoToDiagnostic",
       "[ g": "editor::GoToPreviousDiagnostic",
-      "ctrl-shift-space": "editor::ShowSignatureHelp",
       "ctrl-k": "editor::ShowSignatureHelp",
     },
   },
@@ -65,9 +64,9 @@
       "space p g": "pane::DeploySearch",
       // "space p f": "file_finder::Toggle",
       "space w": "editor::ToggleFold",
+      "g r": "editor::FindAllReferences",
       "s v": "pane::SplitRight",
       "s s": "pane::SplitDown",
-      "g d": "editor::GoToDefinition",
     },
   },
   {

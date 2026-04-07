@@ -1,5 +1,6 @@
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.mouse = "a"
 vim.opt.showmode = false
@@ -18,8 +19,17 @@ vim.opt.listchars = { tab = "  ", trail = "·", nbsp = "␣" }
 
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
+vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
+vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor"
+
+-- Set Cursor highlight after any colorscheme loads
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		vim.api.nvim_set_hl(0, "Cursor", { reverse = true })
+	end,
+})
 
 -- LSP Signature help highlight
 vim.api.nvim_set_hl(0, "LspSignatureActiveParameter", {

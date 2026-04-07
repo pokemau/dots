@@ -2,16 +2,11 @@
   "show_edit_predictions": false,
   "ui_font_family": "Inter Variable",
   "ui_font_size": 14.0,
-  "buffer_font_size": 14.0,
+  "buffer_font_size": 14.5,
   "agent_ui_font_size": 14.5,
   "buffer_font_family": "Menlo Nerd Font",
+
   // "show_completions_on_input": false,
-  // "buffer_font_family": "DroidSansM Nerd Font Propo",
-  // "buffer_font_family": "SFMono Nerd Font Mono",
-  // "buffer_font_family": "RobotoMono Nerd Font",
-  // "buffer_font_family": "Ubuntu Mono",
-  // "buffer_font_family": "MesloLGS Nerd Font Mono",
-  // "buffer_font_family": "monospace",
   "buffer_font_weight": 500,
   "buffer_line_height": {
     "custom": 1.2999999523162842,
@@ -80,7 +75,6 @@
     "status_bar.background": "#17191a",
     "title_bar.background": "#17191a",
     "toolbar.background": "#17191a",
-    // "tab.active_background": "#17191a",
     "tab.inactive_background": "#17191a",
   },
   "telemetry": {
@@ -103,10 +97,7 @@
   "tab_size": 4,
   "languages": {
     "Python": {
-      "language_servers": [
-        "ty",
-        "ruff",
-      ],
+      "language_servers": ["ty", "ruff"],
     },
     "JavaScript": { "tab_size": 2 },
     "TypeScript": { "tab_size": 2 },

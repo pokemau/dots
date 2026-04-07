@@ -1,12 +1,11 @@
 # FONT
-# font-family = Roboto Mono Nerd Font Mono
-font-family = Menlo Nerd Font
-font-style = medium
+font-family = Roboto Mono Nerd Font Mono
+font-style = semibold
 font-size = 11
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
-# adjust-cell-height = -1
+adjust-cell-height = -3
 # adjust-cell-width = -1
 
 # WINDOW CONFIGURATION
