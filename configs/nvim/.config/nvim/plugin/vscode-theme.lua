@@ -1,3 +1,5 @@
+if vim.g.vscode then return end
+
 vim.pack.add({'https://github.com/Mofiqul/vscode.nvim'})
 
 -- Lua:
@@ -34,4 +36,4 @@ require('vscode').setup({
     }
 })
 -- require('vscode').load()
-vim.cmd.colorscheme("vscode")
+-- vim.cmd.colorscheme("vscode")

@@ -1,5 +1,12 @@
 vim.opt.clipboard = "unnamedplus"
 
+
+vim.opt.autoread = true
+vim.opt.updatetime = 300
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+	command = "silent! checktime",
+})
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.mouse = "a"

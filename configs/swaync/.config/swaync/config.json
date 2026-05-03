@@ -45,6 +45,10 @@
     "buttons-grid": {
       "actions": [
         {
+          "label": "󰤄",
+          "command": "systemctl suspend"
+        },
+        {
           "label": "󰐥",
           "command": "systemctl poweroff"
         },

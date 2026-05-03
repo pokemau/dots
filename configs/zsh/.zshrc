@@ -40,6 +40,7 @@ alias p='python'
 alias op='opencode'
 alias gm='gemini'
 alias cl='claude'
+alias tm='tmuxer'
 
 
 # BATTERY
@@ -58,6 +59,11 @@ export PATH="$PATH:/home/mau/.local/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export QT_QPA_PLATFORMTHEME=qt6ct
 export PATH=/home/mau/.opencode/bin:$PATH
+
+export WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-0}
+
+export VCPKG_ROOT="$HOME/Apps/vcpkg"
+export PATH="$VCPKG_ROOT:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc'; fi

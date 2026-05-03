@@ -16,6 +16,16 @@ workspace "4" {
 }
 workspace "5" {
 }
+workspace "6" {
+}
+workspace "7" {
+}
+workspace "8" {
+}
+workspace "9" {
+}
+workspace "10" {
+}
 
 input {
     keyboard {
@@ -51,6 +61,7 @@ input {
         natural-scroll
         accel-profile "flat"
         accel-speed 1
+        scroll-factor 0.2
         // scroll-method "two-finger"
         // disabled-on-external-mouse
     }
@@ -79,7 +90,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 
@@ -249,7 +260,7 @@ spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XD
 // spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 
-spawn-at-startup "waybar"
+spawn-at-startup "quickshell"
 // dms
 // spawn-at-startup "dms" "run"
 // config-notification {
@@ -301,6 +312,11 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
+window-rule {
+    match app-id=r#"^[Bb]rave-browser$"#
+    open-maximized true
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -339,7 +355,7 @@ binds {
     //    spawn "dms" "ipc" "call" "spotlight" "toggle";
     // }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
 
     // Mod+D { spawn "rofi" "-show" "drun"; }
     Mod+D { spawn "vicinae" "toggle"; }
@@ -351,7 +367,7 @@ binds {
 
 // bind = $mainMod, grave, exec, $srcDir/toggle_mute.sh
 
-    Mod+C { spawn "firefox"; }
+    Mod+C { spawn "brave-browser"; }
     Mod+Shift+D { spawn "discord" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }
     Mod+Shift+Q repeat=false { close-window; }
     Mod+W repeat=false { toggle-overview; }
@@ -508,6 +524,7 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
     Mod+Shift+1 { move-column-to-workspace 1 focus=false; }
     Mod+Shift+2 { move-column-to-workspace 2 focus=false; }
     Mod+Shift+3 { move-column-to-workspace 3 focus=false; }
@@ -517,6 +534,7 @@ binds {
     Mod+Shift+7 { move-column-to-workspace 7 focus=false; }
     Mod+Shift+8 { move-column-to-workspace 8 focus=false; }
     Mod+Shift+9 { move-column-to-workspace 9 focus=false; }
+    Mod+Shift+0 { move-column-to-workspace 10 focus=false; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -588,6 +606,8 @@ binds {
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
+    Mod+Shift+S { spawn "sh" "-c" "~/dots/configs/scripts/Scripts/niri_screenshot.sh s"; }
+
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
     // so they may, for example, forward the key presses as-is to a remote machine.
@@ -604,5 +624,5 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    // Mod+Shift+P { power-off-monitors; }
 }

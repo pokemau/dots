@@ -2,11 +2,9 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-e": "workspace::ToggleLeftDock",
-      // "ctrl-p": "file_finder::Toggle",
-    },
+      "ctrl-e": "workspace::ToggleLeftDock"
+    }
   },
-
   {
     "context": "VimControl && !menu",
     "bindings": {
@@ -22,58 +20,55 @@
       "] g": "editor::GoToDiagnostic",
       "[ g": "editor::GoToPreviousDiagnostic",
       "ctrl-shift-space": "editor::ShowSignatureHelp",
-      "ctrl-k": "editor::ShowSignatureHelp",
-    },
+      "ctrl-k": "editor::ShowSignatureHelp"
+    }
   },
   {
     "context": "ProjectPanel",
     "bindings": {
       "ctrl-e": "workspace::ToggleLeftDock",
-      "space p f": "file_finder::Toggle",
-    },
+      "space p f": "file_finder::Toggle"
+    }
   },
-
   {
     "context": "vim_mode == insert",
     "bindings": {
-      "j k": "vim::NormalBefore",
-    },
+      "j k": "vim::NormalBefore"
+    }
   },
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
       "ctrl-space h": "workspace::ActivatePreviousPane",
       "ctrl-space l": "workspace::ActivateNextPane",
-    },
+      "` h": "workspace::ActivatePreviousPane",
+      "` l": "workspace::ActivateNextPane"
+    }
+  },
+  {
+    "context": "Editor && !showing_signature_help && !showing_completions",
+    "bindings": {
+      "ctrl-k": "editor::ShowSignatureHelp"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "space p g": "pane::DeploySearch",
+      "space w": "editor::ToggleFold",
+      "s v": "pane::SplitRight",
+      "s s": "pane::SplitDown",
+      "g d": "editor::GoToDefinition"
+    }
   },
   {
     "context": "Terminal",
     "bindings": {
       "ctrl-space h": "workspace::ActivatePreviousPane",
       "ctrl-space l": "workspace::ActivateNextPane",
-    },
-  },
-  {
-    "context": "Editor && !showing_signature_help && !showing_completions",
-    "bindings": {
-      "ctrl-k": "editor::ShowSignatureHelp",
-    },
-  },
-  {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "space p g": "pane::DeploySearch",
-      // "space p f": "file_finder::Toggle",
-      "space w": "editor::ToggleFold",
-      "s v": "pane::SplitRight",
-      "s s": "pane::SplitDown",
-      "g d": "editor::GoToDefinition",
-    },
-  },
-  {
-    "context": "Terminal",
-    "bindings": {
-      "ctrl-t": "workspace::NewTerminal",
-    },
-  },
+      "` h": "workspace::ActivatePreviousPane",
+      "` l": "workspace::ActivateNextPane",
+      "ctrl-t": "workspace::NewTerminal"
+    }
+  }
 ]

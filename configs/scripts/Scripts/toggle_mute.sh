@@ -8,7 +8,7 @@ SOURCE=$(pactl get-default-source)
 MUTED=$(pactl get-source-mute "$SOURCE" | grep -o "yes\|no")
 
 if [ "$MUTED" = "yes" ]; then
-    notify-send -t 1000 -i audio-input-microphone-muted "Microphone Muted"
+    notify-send -t 1000 "Microphone Muted"
 else
-    notify-send -t 1000 -i audio-input-microphone "Microphone Unmuted"
+    notify-send -t 1000 "Microphone Unmuted"
 fi
