@@ -2,8 +2,16 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-e": "workspace::ToggleLeftDock"
-    }
+      "ctrl-e": "workspace::ToggleLeftDock",
+      "ctrl-shift-t": "workspace::NewCenterTerminal",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-e": "workspace::ToggleLeftDock",
+      "` z": "workspace::ToggleZoom",
+    },
   },
   {
     "context": "VimControl && !menu",
@@ -20,21 +28,21 @@
       "] g": "editor::GoToDiagnostic",
       "[ g": "editor::GoToPreviousDiagnostic",
       "ctrl-shift-space": "editor::ShowSignatureHelp",
-      "ctrl-k": "editor::ShowSignatureHelp"
-    }
+      "ctrl-k": "editor::ShowSignatureHelp",
+    },
   },
   {
     "context": "ProjectPanel",
     "bindings": {
       "ctrl-e": "workspace::ToggleLeftDock",
-      "space p f": "file_finder::Toggle"
-    }
+      "space p f": "file_finder::Toggle",
+    },
   },
   {
     "context": "vim_mode == insert",
     "bindings": {
-      "j k": "vim::NormalBefore"
-    }
+      "j k": "vim::NormalBefore",
+    },
   },
   {
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
@@ -42,14 +50,14 @@
       "ctrl-space h": "workspace::ActivatePreviousPane",
       "ctrl-space l": "workspace::ActivateNextPane",
       "` h": "workspace::ActivatePreviousPane",
-      "` l": "workspace::ActivateNextPane"
-    }
+      "` l": "workspace::ActivateNextPane",
+    },
   },
   {
     "context": "Editor && !showing_signature_help && !showing_completions",
     "bindings": {
-      "ctrl-k": "editor::ShowSignatureHelp"
-    }
+      "ctrl-k": "editor::ShowSignatureHelp",
+    },
   },
   {
     "context": "Editor && vim_mode == normal",
@@ -58,8 +66,8 @@
       "space w": "editor::ToggleFold",
       "s v": "pane::SplitRight",
       "s s": "pane::SplitDown",
-      "g d": "editor::GoToDefinition"
-    }
+      "g d": "editor::GoToDefinition",
+    },
   },
   {
     "context": "Terminal",
@@ -68,7 +76,15 @@
       "ctrl-space l": "workspace::ActivateNextPane",
       "` h": "workspace::ActivatePreviousPane",
       "` l": "workspace::ActivateNextPane",
-      "ctrl-t": "workspace::NewTerminal"
-    }
-  }
+      "` z": "workspace::ToggleZoom",
+      "ctrl-t": "workspace::NewTerminal",
+    },
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "` h": "workspace::ActivatePaneLeft",
+      "` l": "workspace::ActivatePaneRight",
+    },
+  },
 ]

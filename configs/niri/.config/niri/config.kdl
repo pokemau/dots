@@ -1,11 +1,9 @@
 output "eDP-1" {
-    // position x=0 y=0
-    // off
+    position x=0 y=0
 }
-// output "HDMI-A-1" {
-//     mode "1920x1080@100"
-//     scale 1
-// }
+output "HDMI-A-1" {
+    position x=1920 y=0
+}
 workspace "1" {
 }
 workspace "2" {
@@ -24,8 +22,8 @@ workspace "8" {
 }
 workspace "9" {
 }
-workspace "10" {
-}
+// workspace "10" {
+// }
 
 input {
     keyboard {
@@ -317,6 +315,11 @@ window-rule {
     open-maximized true
 }
 
+window-rule {
+    match app-id=r#"^[Bb]rave-browser$"#
+    open-maximized true
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -359,7 +362,7 @@ binds {
 
     // Mod+D { spawn "rofi" "-show" "drun"; }
     Mod+D { spawn "vicinae" "toggle"; }
-    Mod+V { spawn "vicinae" "deeplink" "vicinae://extensions/vicinae/clipboard/history"; }
+    Mod+V { spawn "vicinae" "vicinae://launch/clipboard/history"; }
     Mod+S { spawn "nautilus"; }
     Mod+Shift+W { spawn "~/Scripts/wallpaper_switcher.sh"; }
 

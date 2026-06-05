@@ -13,6 +13,7 @@ vim.lsp.enable({
 	"clangd",
 	"cssls",
 	"emmet_language_server",
+	"eslint",
 	"glsl_analyzer",
 	"html",
 	"lua_ls",
@@ -28,6 +29,8 @@ vim.lsp.enable({
 	"zls",
 	"gopls",
 })
+
+vim.lsp.document_color.enable(false)
 
 vim.diagnostic.config({ virtual_text = true })
 

@@ -60,7 +60,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export QT_QPA_PLATFORMTHEME=qt6ct
 export PATH=/home/mau/.opencode/bin:$PATH
 
-export WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-wayland-0}
+if [ -n "$XDG_RUNTIME_DIR" ]; then
+  _wl=$(systemctl --user show-environment 2>/dev/null | sed -n 's/^WAYLAND_DISPLAY=//p')
+  [ -z "$_wl" ] && _wl=$(ls -t "$XDG_RUNTIME_DIR"/wayland-[0-9] 2>/dev/null | head -n1 | xargs -r basename)
+  [ -n "$_wl" ] && export WAYLAND_DISPLAY="$_wl"
+  unset _wl
+fi
 
 export VCPKG_ROOT="$HOME/Apps/vcpkg"
 export PATH="$VCPKG_ROOT:$PATH"

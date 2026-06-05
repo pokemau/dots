@@ -1,5 +1,6 @@
 vim.opt.clipboard = "unnamedplus"
 
+vim.g.c_no_curly_error = 1
 
 vim.opt.autoread = true
 vim.opt.updatetime = 300
