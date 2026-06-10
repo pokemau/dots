@@ -24,7 +24,7 @@ Item {
     property bool popupOpen: false
     property int batteryLevel: -1
     property string batteryStatus: ""
-    property string powerProfile: ""
+    property bool hasBattery: false
 
     implicitWidth: triggerLabel.implicitWidth + 16
     implicitHeight: 24
@@ -53,22 +53,21 @@ Item {
         return Theme.colFg
     }
 
-    function profileAccent(profile) {
-        if (profile === "power-saver") return Theme.colCyan
-        if (profile === "balanced") return Theme.colYellow
-        return Theme.colRed
-    }
-
     function refreshBattery() {
         batteryCapProc.running = true
         batteryStatusProc.running = true
     }
 
-    function refreshProfile() {
-        profileGetProc.running = true
+    // ─── data sources ───────────────────────────────────────────────
+    Process {
+        id: batteryDetectProc
+        running: true
+        command: ["sh", "-c", "for d in /sys/class/power_supply/*; do [ \"$(cat $d/type 2>/dev/null)\" = Battery ] && echo yes && exit; done; echo no"]
+        stdout: SplitParser {
+            onRead: data => { root.hasBattery = data.trim() === "yes" }
+        }
     }
 
-    // ─── data sources ───────────────────────────────────────────────
     Process {
         id: batteryCapProc
         command: ["cat", "/sys/class/power_supply/BAT0/capacity"]
@@ -90,27 +89,6 @@ Item {
         }
     }
 
-    Process {
-        id: profileGetProc
-        command: ["powerprofilesctl", "get"]
-        stdout: SplitParser {
-            onRead: data => {
-                root.powerProfile = data.trim()
-            }
-        }
-    }
-
-    Process {
-        id: profileSetProc
-        property string target: ""
-        command: ["powerprofilesctl", "set", target]
-        onRunningChanged: {
-            if (!running && target !== "") {
-                root.powerProfile = target
-            }
-        }
-    }
-
     Timer {
         interval: 30000
         running: true
@@ -120,7 +98,6 @@ Item {
 
     Component.onCompleted: {
         refreshBattery()
-        refreshProfile()
     }
 
     // ─── trigger ────────────────────────────────────────────────────
@@ -155,7 +132,6 @@ Item {
                 if (!root.popupOpen) {
                     batteryPopup.anchor.updateAnchor()
                     refreshBattery()
-                    refreshProfile()
                 }
                 root.popupOpen = !root.popupOpen
             }
@@ -244,156 +220,6 @@ Item {
                                 color: Theme.colMuted
                                 font.pixelSize: 11
                                 font.family: Theme.fontFamily
-                            }
-                        }
-                    }
-                }
-
-                // ── Divider ──────────────────────────────────────────
-                Rectangle {
-                    width: parent.width
-                    height: 1
-                    color: Theme.colMuted
-                }
-
-                // ── Power Profile header ─────────────────────────────
-                Item {
-                    width: parent.width
-                    height: 30
-
-                    Text {
-                        anchors.left: parent.left
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: "Power Profile"
-                        color: Theme.colFg
-                        font.pixelSize: 12
-                        font.family: Theme.fontFamily
-                        font.bold: true
-                    }
-                }
-
-                // ── Profile buttons ──────────────────────────────────
-                Row {
-                    width: parent.width
-                    height: 44
-                    spacing: 6
-
-                    // Power Saver
-                    Rectangle {
-                        width: (parent.width - 12) / 3
-                        height: 44
-                        radius: 6
-                        color: root.powerProfile === "power-saver"
-                            ? Qt.rgba(Theme.colCyan.r, Theme.colCyan.g, Theme.colCyan.b, 0.2)
-                            : Qt.rgba(1, 1, 1, 0.04)
-                        border.width: 1
-                        border.color: root.powerProfile === "power-saver" ? Theme.colCyan : Theme.colMuted
-                        Behavior on color { ColorAnimation { duration: 150 } }
-                        Behavior on border.color { ColorAnimation { duration: 150 } }
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 3
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "󰌪"
-                                color: root.powerProfile === "power-saver" ? Theme.colCyan : Theme.colFg
-                                font.pixelSize: 17; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "Saver"
-                                color: root.powerProfile === "power-saver" ? Theme.colCyan : Theme.colFg
-                                font.pixelSize: 9; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                profileSetProc.target = "power-saver"
-                                profileSetProc.running = true
-                            }
-                        }
-                    }
-
-                    // Balanced
-                    Rectangle {
-                        width: (parent.width - 12) / 3
-                        height: 44
-                        radius: 6
-                        color: root.powerProfile === "balanced"
-                            ? Qt.rgba(Theme.colYellow.r, Theme.colYellow.g, Theme.colYellow.b, 0.2)
-                            : Qt.rgba(1, 1, 1, 0.04)
-                        border.width: 1
-                        border.color: root.powerProfile === "balanced" ? Theme.colYellow : Theme.colMuted
-                        Behavior on color { ColorAnimation { duration: 150 } }
-                        Behavior on border.color { ColorAnimation { duration: 150 } }
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 3
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "󰛲"
-                                color: root.powerProfile === "balanced" ? Theme.colYellow : Theme.colFg
-                                font.pixelSize: 17; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "Balanced"
-                                color: root.powerProfile === "balanced" ? Theme.colYellow : Theme.colFg
-                                font.pixelSize: 9; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                profileSetProc.target = "balanced"
-                                profileSetProc.running = true
-                            }
-                        }
-                    }
-
-                    // Performance
-                    Rectangle {
-                        width: (parent.width - 12) / 3
-                        height: 44
-                        radius: 6
-                        color: root.powerProfile === "performance"
-                            ? Qt.rgba(Theme.colRed.r, Theme.colRed.g, Theme.colRed.b, 0.2)
-                            : Qt.rgba(1, 1, 1, 0.04)
-                        border.width: 1
-                        border.color: root.powerProfile === "performance" ? Theme.colRed : Theme.colMuted
-                        Behavior on color { ColorAnimation { duration: 150 } }
-                        Behavior on border.color { ColorAnimation { duration: 150 } }
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 3
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "󰓅"
-                                color: root.powerProfile === "performance" ? Theme.colRed : Theme.colFg
-                                font.pixelSize: 17; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "Perform"
-                                color: root.powerProfile === "performance" ? Theme.colRed : Theme.colFg
-                                font.pixelSize: 9; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                profileSetProc.target = "performance"
-                                profileSetProc.running = true
                             }
                         }
                     }

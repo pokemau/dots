@@ -20,14 +20,18 @@ Row {
 
             Rectangle {
                 anchors.fill: parent
-                color: ws.isUrgent ? "#e06c75" : (ws.isActive ? Theme.colBgAccent : Theme.colBgHover)
-                opacity: ws.isActive || ws.isUrgent ? 0.9 : (ws.isHovered ? 0.5 : 0)
-                radius: 0
+                anchors.topMargin: 4
+                anchors.bottomMargin: 4
+                anchors.leftMargin: 2
+                anchors.rightMargin: 2
+                color: ws.isUrgent ? Theme.colRed : (ws.isActive ? Theme.colBgAccent : Theme.colBgHover)
+                opacity: ws.isActive || ws.isUrgent ? 1.0 : (ws.isHovered ? 0.5 : 0)
+                radius: 3
             }
 
             Text {
                 text: ws.modelData.name && ws.modelData.name.length > 0 ? ws.modelData.name : ws.modelData.idx
-                color: ws.isUrgent ? "#ffffff" : ((ws.isActive || ws.isHovered) ? Theme.colBg : (ws.hasWindows ? Theme.colFg : Theme.colMuted))
+                color: ws.isUrgent ? "#ffffff" : (ws.isActive ? "#ffffff" : (ws.isHovered ? Theme.colFg : (ws.hasWindows ? Theme.colFg : Theme.colMuted)))
                 font.pixelSize: Theme.fontSize
                 font.family: Theme.fontFamily
                 font.bold: true

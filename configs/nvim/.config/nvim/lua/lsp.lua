@@ -28,6 +28,7 @@ vim.lsp.enable({
 	"vtsls",
 	"zls",
 	"gopls",
+  "qmlls"
 })
 
 vim.lsp.document_color.enable(false)

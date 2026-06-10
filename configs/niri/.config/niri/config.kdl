@@ -251,6 +251,8 @@ spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "wlsunset" "-s" "0:00" "-s" "0:00" "-t" "4500"
 spawn-at-startup "~/Scripts/swww_init.sh"
 
+spawn-at-startup "swaybg" "-i" "/home/mau/wallpapers/forest.jpg" "-m" "fill"
+
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
 spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"

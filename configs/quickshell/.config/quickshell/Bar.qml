@@ -20,9 +20,6 @@ Scope {
                 right: true
             }
 
-            implicitHeight: 25
-            color: "transparent"
-
             margins {
                 top: 0
                 bottom: 0
@@ -30,9 +27,21 @@ Scope {
                 right: 0
             }
 
+            implicitHeight: 25
+            color: "transparent"
+
+
             Rectangle {
                 anchors.fill: parent
                 color: Theme.barBg
+
+                Rectangle {
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: 1
+                    color: Theme.barBorder
+                }
 
                 RowLayout {
                     anchors.fill: parent
@@ -53,7 +62,7 @@ Scope {
 
                     Text {
                         text: SystemMonitor.activeWindow
-                        color: Theme.colPurple
+                        color: Theme.colFg
                         font.pixelSize: Theme.fontSize
                         font.family: Theme.fontFamily
                         font.bold: true
@@ -100,7 +109,7 @@ Scope {
 
                     Text {
                         text: "CPU: " + SystemMonitor.cpuUsage + "%"
-                        color: Theme.colYellow
+                        color: Theme.colMuted
                         font.pixelSize: Theme.fontSize
                         font.family: Theme.fontFamily
                         font.bold: true
@@ -117,7 +126,7 @@ Scope {
 
                     Text {
                         text: "Mem: " + SystemMonitor.memUsage + "%"
-                        color: Theme.colCyan
+                        color: Theme.colMuted
                         font.pixelSize: Theme.fontSize
                         font.family: Theme.fontFamily
                         font.bold: true
@@ -142,10 +151,13 @@ Scope {
                         Layout.alignment: Qt.AlignVCenter
                         Layout.rightMargin: 0
                         color: Theme.colMuted
+                        visible: batteryWidget.hasBattery
                     }
 
                     BatteryWidget {
+                        id: batteryWidget
                         panelWindow: toplevel
+                        visible: hasBattery
                         Layout.alignment: Qt.AlignVCenter
                         Layout.preferredHeight: 25
                         Layout.rightMargin: 0

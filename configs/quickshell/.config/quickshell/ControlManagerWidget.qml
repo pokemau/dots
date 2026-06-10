@@ -26,13 +26,18 @@ Item {
 
     // Popup open state
     property bool popupOpen: false
-    property bool wifiOpen: true
+    property bool wifiOpen: false
     property bool volumeOpen: false
     property bool bluetoothOpen: false
+
+    // Hardware presence
+    property bool hasWifi: false
+    property bool hasBluetooth: false
 
     // WiFi state
     property bool wifiEnabled: false
     property bool wifiConnecting: false
+    property string wifiConnectedName: ""
 
     // Audio state (reactive via Pipewire service)
     readonly property var sinkNode: Pipewire.defaultAudioSink
@@ -54,6 +59,10 @@ Item {
     property bool bluetoothEnabled: false
     property bool btConnecting: false
     property string btConnectingName: ""
+    property string btConnectedName: ""
+
+    // Power profile state
+    property string powerProfile: ""
 
     implicitWidth: triggerLabel.implicitWidth + 20
     implicitHeight: 24
@@ -68,12 +77,43 @@ Item {
 
     function refreshWifi() {
         wifiNetworks.clear()
+        root.wifiConnectedName = ""
         wifiStatusProc.running = true
     }
 
     function refreshBluetooth() {
         btDevices.clear()
+        root.btConnectedName = ""
         btStatusProc.running = true
+    }
+
+    function refreshProfile() {
+        profileGetProc.running = true
+    }
+
+    function profileAccent(profile) {
+        if (profile === "power-saver") return Theme.colGreen
+        if (profile === "balanced") return Theme.colYellow
+        return Theme.colRed
+    }
+
+    // ─── hardware detection ─────────────────────────────────────────
+    Process {
+        id: wifiDetectProc
+        running: true
+        command: ["sh", "-c", "nmcli -t -f TYPE device 2>/dev/null | grep -qx wifi && echo yes || echo no"]
+        stdout: SplitParser {
+            onRead: data => { root.hasWifi = data.trim() === "yes" }
+        }
+    }
+
+    Process {
+        id: btDetectProc
+        running: true
+        command: ["sh", "-c", "bluetoothctl list 2>/dev/null | grep -q Controller && echo yes || echo no"]
+        stdout: SplitParser {
+            onRead: data => { root.hasBluetooth = data.trim() === "yes" }
+        }
     }
 
     // ─── models ─────────────────────────────────────────────────────
@@ -88,7 +128,7 @@ Item {
             onRead: data => {
                 if (!data) return
                 root.wifiEnabled = data.trim().toLowerCase().indexOf("enabled") !== -1
-                if (root.wifiEnabled && root.wifiOpen) wifiScanProc.running = true
+                if (root.wifiEnabled) wifiScanProc.running = true
             }
         }
     }
@@ -108,6 +148,7 @@ Item {
                 if (!ssid) return
                 for (var i = 0; i < wifiNetworks.count; i++)
                     if (wifiNetworks.get(i).ssid === ssid) return
+                if (inUse) root.wifiConnectedName = ssid
                 wifiNetworks.append({ ssid: ssid, signal: signal, security: security, inUse: inUse })
             }
         }
@@ -166,7 +207,7 @@ Item {
             onRead: data => {
                 if (!data) return
                 root.bluetoothEnabled = data.indexOf("yes") !== -1
-                if (root.bluetoothEnabled && root.bluetoothOpen) btPairedProc.running = true
+                if (root.bluetoothEnabled) btPairedProc.running = true
             }
         }
     }
@@ -197,6 +238,7 @@ Item {
                 var mac = p[1]
                 for (var i = 0; i < btDevices.count; i++) {
                     if (btDevices.get(i).mac === mac) {
+                        root.btConnectedName = btDevices.get(i).name
                         btDevices.set(i, { mac: mac, name: btDevices.get(i).name, connected: true })
                         break
                     }
@@ -243,9 +285,28 @@ Item {
         }
     }
 
+    // ─── power profile processes ────────────────────────────────────
+    Process {
+        id: profileGetProc
+        command: ["powerprofilesctl", "get"]
+        stdout: SplitParser {
+            onRead: data => { root.powerProfile = data.trim() }
+        }
+    }
+
+    Process {
+        id: profileSetProc
+        property string target: ""
+        command: ["powerprofilesctl", "set", target]
+        onRunningChanged: {
+            if (!running && target !== "") root.powerProfile = target
+        }
+    }
+
     Component.onCompleted: {
         wifiStatusProc.running = true
         btStatusProc.running = true
+        refreshProfile()
     }
 
     // ─── trigger ────────────────────────────────────────────────────
@@ -277,7 +338,10 @@ Item {
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
             onClicked: {
-                if (!root.popupOpen) controlPopup.anchor.updateAnchor()
+                if (!root.popupOpen) {
+                    controlPopup.anchor.updateAnchor()
+                    refreshProfile()
+                }
                 root.popupOpen = !root.popupOpen
             }
         }
@@ -305,565 +369,287 @@ Item {
         }
     }
 
-    // ─── popup ──────────────────────────────────────────────────────
     PopupWindow {
         id: controlPopup
         visible: root.popupOpen
         anchor.item: triggerPill
         anchor.rect.x: triggerPill.width - controlPopup.implicitWidth
-        anchor.rect.y: triggerPill.height + 6
-        implicitWidth: 300
-        implicitHeight: innerRect.implicitHeight
+        anchor.rect.y: triggerPill.height + 8
+        implicitWidth: 320
+        implicitHeight: card.implicitHeight
         color: "transparent"
 
+        // ── outer translucent card ──
         Rectangle {
-            id: innerRect
+            id: card
             width: parent.width
             height: implicitHeight
-            implicitHeight: mainColumn.implicitHeight + 20
-            radius: 8
+            implicitHeight: contentCol.implicitHeight + 24
+            radius: 18
+            color: Qt.rgba(Theme.colBg.r, Theme.colBg.g, Theme.colBg.b, 0.92)
             border.width: 1
-            border.color: Theme.colMuted
-            color: Theme.colBg
+            border.color: Qt.rgba(1, 1, 1, 0.08)
 
             Column {
-                id: mainColumn
-                anchors { left: parent.left; right: parent.right; top: parent.top; margins: 10 }
-                spacing: 0
+                id: contentCol
+                anchors { left: parent.left; right: parent.right; top: parent.top; margins: 12 }
+                spacing: 10
 
-                // ── Section buttons ───────────────────────────────────
-                Row {
+                // ══ Connectivity module ══════════════════════════════
+                Rectangle {
+                    id: connModule
                     width: parent.width
-                    height: 44
-                    spacing: 6
-
-                    // WiFi button
-                    Rectangle {
-                        width: (parent.width - 12) / 3
-                        height: 44
-                        radius: 6
-                        color: root.wifiOpen ? Qt.rgba(Theme.colCyan.r, Theme.colCyan.g, Theme.colCyan.b, 0.2) : Qt.rgba(1,1,1,0.04)
-                        border.width: 1
-                        border.color: root.wifiOpen ? Theme.colCyan : Theme.colMuted
-                        Behavior on color { ColorAnimation { duration: 150 } }
-                        Behavior on border.color { ColorAnimation { duration: 150 } }
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 3
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: root.wifiEnabled ? "󰤨" : "󰤮"
-                                color: root.wifiOpen ? Theme.colCyan : Theme.colFg
-                                font.pixelSize: 17; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "Wi-Fi"
-                                color: root.wifiOpen ? Theme.colCyan : Theme.colFg
-                                font.pixelSize: 9; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                var next = !root.wifiOpen
-                                root.wifiOpen = false; root.volumeOpen = false; root.bluetoothOpen = false
-                                root.wifiOpen = next
-                                if (root.wifiOpen) refreshWifi()
-                            }
-                        }
-                    }
-
-                    // Volume button
-                    Rectangle {
-                        width: (parent.width - 12) / 3
-                        height: 44
-                        radius: 6
-                        color: root.volumeOpen ? Qt.rgba(Theme.colYellow.r, Theme.colYellow.g, Theme.colYellow.b, 0.2) : Qt.rgba(1,1,1,0.04)
-                        border.width: 1
-                        border.color: root.volumeOpen ? Theme.colYellow : Theme.colMuted
-                        Behavior on color { ColorAnimation { duration: 150 } }
-                        Behavior on border.color { ColorAnimation { duration: 150 } }
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 3
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: root.volumeLevel > 0 ? "󰕾" : "󰖁"
-                                color: root.volumeOpen ? Theme.colYellow : Theme.colFg
-                                font.pixelSize: 17; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "Volume"
-                                color: root.volumeOpen ? Theme.colYellow : Theme.colFg
-                                font.pixelSize: 9; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                var next = !root.volumeOpen
-                                root.wifiOpen = false; root.volumeOpen = false; root.bluetoothOpen = false
-                                root.volumeOpen = next
-                            }
-                        }
-                    }
-
-                    // Bluetooth button
-                    Rectangle {
-                        width: (parent.width - 12) / 3
-                        height: 44
-                        radius: 6
-                        color: root.bluetoothOpen ? Qt.rgba(Theme.colPurple.r, Theme.colPurple.g, Theme.colPurple.b, 0.2) : Qt.rgba(1,1,1,0.04)
-                        border.width: 1
-                        border.color: root.bluetoothOpen ? Theme.colPurple : Theme.colMuted
-                        Behavior on color { ColorAnimation { duration: 150 } }
-                        Behavior on border.color { ColorAnimation { duration: 150 } }
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 3
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "󰂯"
-                                color: root.bluetoothOpen ? Theme.colPurple : Theme.colFg
-                                font.pixelSize: 17; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                            Text {
-                                anchors.horizontalCenter: parent.horizontalCenter
-                                text: "Bluetooth"
-                                color: root.bluetoothOpen ? Theme.colPurple : Theme.colFg
-                                font.pixelSize: 9; font.family: Theme.fontFamily
-                                Behavior on color { ColorAnimation { duration: 150 } }
-                            }
-                        }
-                        MouseArea {
-                            anchors.fill: parent
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                var next = !root.bluetoothOpen
-                                root.wifiOpen = false; root.volumeOpen = false; root.bluetoothOpen = false
-                                root.bluetoothOpen = next
-                                if (root.bluetoothOpen) refreshBluetooth()
-                            }
-                        }
-                    }
-                }
-
-                // ── WiFi section ──────────────────────────────────────
-                Item {
-                    width: parent.width
-                    height: root.wifiOpen ? (root.wifiConnecting ? 291 : 265) : 0
-                    clip: true
-                    Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+                    height: connCol.implicitHeight
+                    radius: 14
+                    color: Theme.colBgActive
+                    visible: root.hasWifi || root.hasBluetooth
 
                     Column {
+                        id: connCol
                         width: parent.width
-                        topPadding: 10
-                        spacing: 6
 
-                        Rectangle { width: parent.width; height: 1; color: Theme.colMuted; opacity: 0.4 }
-
-                        // Header row
+                        // ── Wi-Fi row ──
                         Item {
                             width: parent.width
-                            height: 26
+                            height: 58
+                            visible: root.hasWifi
 
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: "Wi-Fi"
-                                color: Theme.colFg
-                                font.pixelSize: Theme.fontSize - 1
-                                font.family: Theme.fontFamily
-                                font.bold: true
-                            }
-
-                            Row {
-                                anchors { right: parent.right; verticalCenter: parent.verticalCenter }
-                                spacing: 8
+                            // circular toggle button
+                            Rectangle {
+                                id: wifiToggle
+                                width: 38; height: 38; radius: 19
+                                anchors { left: parent.left; leftMargin: 12; verticalCenter: parent.verticalCenter }
+                                color: root.wifiEnabled ? Theme.colBlue : Qt.rgba(1, 1, 1, 0.14)
+                                Behavior on color { ColorAnimation { duration: 150 } }
 
                                 Text {
-                                    text: "󰑐"
-                                    color: Theme.colMuted
+                                    anchors.centerIn: parent
+                                    text: root.wifiEnabled ? "󰤨" : "󰤮"
+                                    color: root.wifiEnabled ? "#ffffff" : Theme.colFg
+                                    font.pixelSize: 18
+                                    font.family: Theme.fontFamily
+                                }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: wifiToggleProc.running = true
+                                }
+                            }
+
+                            Column {
+                                anchors { left: wifiToggle.right; leftMargin: 12; verticalCenter: parent.verticalCenter }
+                                spacing: 1
+                                Text {
+                                    text: "Wi-Fi"
+                                    color: Theme.colFg
                                     font.pixelSize: Theme.fontSize
                                     font.family: Theme.fontFamily
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        cursorShape: Qt.PointingHandCursor
-                                        onClicked: { wifiNetworks.clear(); wifiScanProc.running = true }
-                                    }
+                                    font.bold: true
                                 }
+                                Text {
+                                    text: !root.wifiEnabled ? "Off"
+                                        : (root.wifiConnectedName !== "" ? root.wifiConnectedName : "On")
+                                    color: Theme.colMuted
+                                    font.pixelSize: Theme.fontSize - 3
+                                    font.family: Theme.fontFamily
+                                    width: 180
+                                    elide: Text.ElideRight
+                                }
+                            }
+
+                            Text {
+                                anchors { right: parent.right; rightMargin: 14; verticalCenter: parent.verticalCenter }
+                                text: root.wifiOpen ? "󰅃" : "󰅀"
+                                color: Theme.colMuted
+                                font.pixelSize: Theme.fontSize
+                                font.family: Theme.fontFamily
+                            }
+
+                            MouseArea {
+                                anchors { left: parent.left; right: parent.right; top: parent.top; bottom: parent.bottom; leftMargin: 62 }
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    var next = !root.wifiOpen
+                                    root.bluetoothOpen = false
+                                    root.wifiOpen = next
+                                    if (root.wifiOpen) refreshWifi()
+                                }
+                            }
+                        }
+
+                        // ── Wi-Fi expansion ──
+                        Item {
+                            width: parent.width
+                            visible: root.hasWifi
+                            height: root.wifiOpen ? (root.wifiConnecting ? 282 : 256) : 0
+                            clip: true
+                            Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+
+                            Column {
+                                width: parent.width
 
                                 Rectangle {
-                                    width: 48; height: 20; radius: 4
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    color: root.wifiEnabled ? Qt.rgba(0.54, 0.71, 0.51, 0.2) : Qt.rgba(0.92, 0.41, 0.38, 0.2)
-                                    border.width: 1
-                                    border.color: root.wifiEnabled ? Theme.colCyan : Theme.colRed
+                                    anchors { left: parent.left; right: parent.right; leftMargin: 14; rightMargin: 14 }
+                                    height: 1
+                                    color: Qt.rgba(1, 1, 1, 0.08)
+                                }
+
+                                // sub-header
+                                Item {
+                                    width: parent.width
+                                    height: 30
                                     Text {
-                                        anchors.centerIn: parent
-                                        text: root.wifiEnabled ? "ON" : "OFF"
-                                        color: root.wifiEnabled ? Theme.colCyan : Theme.colRed
+                                        anchors { left: parent.left; leftMargin: 14; verticalCenter: parent.verticalCenter }
+                                        text: "Networks"
+                                        color: Theme.colMuted
                                         font.pixelSize: Theme.fontSize - 3
                                         font.family: Theme.fontFamily
                                         font.bold: true
                                     }
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        cursorShape: Qt.PointingHandCursor
-                                        onClicked: wifiToggleProc.running = true
+                                    Text {
+                                        anchors { right: parent.right; rightMargin: 14; verticalCenter: parent.verticalCenter }
+                                        text: "󰑐"
+                                        color: Theme.colMuted
+                                        font.pixelSize: Theme.fontSize
+                                        font.family: Theme.fontFamily
+                                        MouseArea {
+                                            anchors.fill: parent
+                                            anchors.margins: -6
+                                            cursorShape: Qt.PointingHandCursor
+                                            onClicked: { wifiNetworks.clear(); wifiScanProc.running = true }
+                                        }
                                     }
                                 }
-                            }
-                        }
 
-                        // Network list
-                        ListView {
-                            id: wifiListView
-                            width: parent.width
-                            height: Math.min(contentHeight, 210)
-                            model: wifiNetworks
-                            clip: true
-                            spacing: 3
+                                ListView {
+                                    id: wifiListView
+                                    width: parent.width
+                                    height: Math.min(contentHeight, 206)
+                                    model: wifiNetworks
+                                    clip: true
+                                    spacing: 2
 
-                            Text {
-                                anchors.centerIn: parent
-                                text: wifiNetworks.count === 0 ? (root.wifiEnabled ? "Scanning…" : "Wi-Fi disabled") : ""
-                                color: Theme.colMuted
-                                font.pixelSize: Theme.fontSize - 2
-                                font.family: Theme.fontFamily
-                                visible: text !== ""
-                            }
-
-                            delegate: Rectangle {
-                                width: wifiListView.width
-                                height: 26
-                                radius: 4
-                                color: model.inUse
-                                    ? Qt.rgba(Theme.colCyan.r, Theme.colCyan.g, Theme.colCyan.b, 0.15)
-                                    : (wMouse.containsMouse ? Qt.rgba(1,1,1,0.05) : "transparent")
-                                border.width: model.inUse ? 1 : 0
-                                border.color: Theme.colCyan
-
-                                Row {
-                                    anchors { fill: parent; leftMargin: 6; rightMargin: 6 }
-                                    spacing: 5
                                     Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        text: root.signalIcon(model.signal)
-                                        color: model.inUse ? Theme.colCyan : Theme.colMuted
-                                        font.pixelSize: Theme.fontSize - 1
-                                        font.family: Theme.fontFamily
-                                    }
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        width: parent.width - 52
-                                        text: model.ssid
-                                        color: model.inUse ? Theme.colCyan : Theme.colFg
+                                        anchors.centerIn: parent
+                                        text: wifiNetworks.count === 0 ? (root.wifiEnabled ? "Scanning…" : "Wi-Fi disabled") : ""
+                                        color: Theme.colMuted
                                         font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
-                                        elide: Text.ElideRight
+                                        visible: text !== ""
                                     }
+
+                                    delegate: Rectangle {
+                                        width: wifiListView.width
+                                        height: 32
+                                        readonly property bool sel: model.inUse
+                                        color: sel
+                                            ? Qt.rgba(Theme.colBlue.r, Theme.colBlue.g, Theme.colBlue.b, 0.18)
+                                            : (wMouse.containsMouse ? Qt.rgba(1, 1, 1, 0.06) : "transparent")
+
+                                        Row {
+                                            anchors { fill: parent; leftMargin: 14; rightMargin: 14 }
+                                            spacing: 8
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                text: root.signalIcon(model.signal)
+                                                color: sel ? Theme.colBlue : Theme.colFg
+                                                font.pixelSize: Theme.fontSize
+                                                font.family: Theme.fontFamily
+                                            }
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                width: parent.width - 64
+                                                text: model.ssid
+                                                color: Theme.colFg
+                                                font.pixelSize: Theme.fontSize - 2
+                                                font.family: Theme.fontFamily
+                                                elide: Text.ElideRight
+                                            }
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                text: "󰌾"
+                                                color: Theme.colMuted
+                                                font.pixelSize: Theme.fontSize - 3
+                                                font.family: Theme.fontFamily
+                                                visible: model.security !== "" && model.security !== "--"
+                                            }
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                text: "󰄬"
+                                                color: Theme.colBlue
+                                                font.pixelSize: Theme.fontSize - 1
+                                                font.family: Theme.fontFamily
+                                                visible: model.inUse
+                                            }
+                                        }
+
+                                        MouseArea {
+                                            id: wMouse
+                                            anchors.fill: parent
+                                            hoverEnabled: true
+                                            cursorShape: model.inUse ? Qt.ArrowCursor : Qt.PointingHandCursor
+                                            onClicked: {
+                                                if (!model.inUse && !root.wifiConnecting) {
+                                                    root.wifiConnecting = true
+                                                    wifiConnectProc.targetSsid = model.ssid
+                                                    wifiConnectProc.running = true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Item {
+                                    width: parent.width
+                                    height: root.wifiConnecting ? 26 : 0
+                                    clip: true
+                                    Behavior on height { NumberAnimation { duration: 150 } }
                                     Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        text: "󰌾"
-                                        color: Theme.colMuted
+                                        anchors.centerIn: parent
+                                        text: "Connecting to " + wifiConnectProc.targetSsid + "…"
+                                        color: Theme.colYellow
                                         font.pixelSize: Theme.fontSize - 3
                                         font.family: Theme.fontFamily
-                                        visible: model.security !== "" && model.security !== "--"
-                                    }
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        text: "󰄬"
-                                        color: Theme.colCyan
-                                        font.pixelSize: Theme.fontSize - 2
-                                        font.family: Theme.fontFamily
-                                        visible: model.inUse
-                                    }
-                                }
-
-                                MouseArea {
-                                    id: wMouse
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: model.inUse ? Qt.ArrowCursor : Qt.PointingHandCursor
-                                    onClicked: {
-                                        if (!model.inUse && !root.wifiConnecting) {
-                                            root.wifiConnecting = true
-                                            wifiConnectProc.targetSsid = model.ssid
-                                            wifiConnectProc.running = true
+                                        visible: root.wifiConnecting
+                                        SequentialAnimation on opacity {
+                                            running: root.wifiConnecting
+                                            loops: Animation.Infinite
+                                            NumberAnimation { to: 0.3; duration: 600; easing.type: Easing.InOutSine }
+                                            NumberAnimation { to: 1.0; duration: 600; easing.type: Easing.InOutSine }
                                         }
                                     }
                                 }
                             }
                         }
 
+                        // ── divider between rows ──
+                        Rectangle {
+                            anchors { left: parent.left; leftMargin: 62 }
+                            width: parent.width - 62
+                            height: 1
+                            color: Qt.rgba(1, 1, 1, 0.06)
+                            visible: root.hasWifi && root.hasBluetooth
+                        }
+
+                        // ── Bluetooth row ──
                         Item {
                             width: parent.width
-                            height: root.wifiConnecting ? 20 : 0
-                            clip: true
-                            Behavior on height { NumberAnimation { duration: 150 } }
-
-                            Text {
-                                anchors.centerIn: parent
-                                text: "Connecting to " + wifiConnectProc.targetSsid + "…"
-                                color: Theme.colYellow
-                                font.pixelSize: Theme.fontSize - 3
-                                font.family: Theme.fontFamily
-                                visible: root.wifiConnecting
-                                horizontalAlignment: Text.AlignHCenter
-
-                                SequentialAnimation on opacity {
-                                    running: root.wifiConnecting
-                                    loops: Animation.Infinite
-                                    NumberAnimation { to: 0.3; duration: 600; easing.type: Easing.InOutSine }
-                                    NumberAnimation { to: 1.0; duration: 600; easing.type: Easing.InOutSine }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // ── Volume section ────────────────────────────────────
-                Item {
-                    width: parent.width
-                    height: root.volumeOpen ? 285 : 0
-                    clip: true
-                    Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
-
-                    Column {
-                        width: parent.width
-                        topPadding: 10
-                        spacing: 6
-
-                        Rectangle { width: parent.width; height: 1; color: Theme.colMuted; opacity: 0.4 }
-
-                        // Volume slider
-                        Row {
-                            width: parent.width
-                            height: 28
-                            spacing: 6
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: root.volumeLevel > 0 ? "󰕾" : "󰖁"
-                                color: Theme.colYellow
-                                font.pixelSize: Theme.fontSize
-                                font.family: Theme.fontFamily
-                            }
-                            Slider {
-                                width: parent.width - 58
-                                anchors.verticalCenter: parent.verticalCenter
-                                from: 0; to: 100; value: root.volumeLevel
-                                onMoved: {
-                                    if (root.sinkNode && root.sinkNode.audio)
-                                        root.sinkNode.audio.volume = value / 100
-                                }
-                            }
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: root.volumeLevel + "%"
-                                color: Theme.colYellow
-                                font.pixelSize: Theme.fontSize - 2
-                                font.family: Theme.fontFamily
-                                width: 32
-                                horizontalAlignment: Text.AlignRight
-                            }
-                        }
-
-                        // Output label
-                        Text {
-                            text: "Output"
-                            color: Theme.colMuted
-                            font.pixelSize: Theme.fontSize - 3
-                            font.family: Theme.fontFamily
-                            font.bold: true
-                            leftPadding: 2
-                        }
-
-                        // Output device list
-                        ListView {
-                            id: sinkListView
-                            width: parent.width
-                            height: Math.min(contentHeight, 88)
-                            model: root.sinkList
-                            clip: true
-                            spacing: 3
-
-                            Text {
-                                anchors.centerIn: parent
-                                text: "Loading…"
-                                color: Theme.colMuted
-                                font.pixelSize: Theme.fontSize - 3
-                                font.family: Theme.fontFamily
-                                visible: root.sinkList.length === 0
-                            }
-
-                            delegate: Rectangle {
-                                required property var modelData
-                                width: sinkListView.width
-                                height: 26
-                                radius: 4
-                                readonly property bool isDefault: modelData && root.sinkNode === modelData
-                                color: isDefault
-                                    ? Qt.rgba(Theme.colYellow.r, Theme.colYellow.g, Theme.colYellow.b, 0.15)
-                                    : (sMouse.containsMouse ? Qt.rgba(1,1,1,0.05) : "transparent")
-                                border.width: isDefault ? 1 : 0
-                                border.color: Theme.colYellow
-
-                                Row {
-                                    anchors { fill: parent; leftMargin: 6; rightMargin: 6 }
-                                    spacing: 5
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        text: parent.parent.isDefault ? "󰄬" : " "
-                                        color: Theme.colYellow
-                                        font.pixelSize: Theme.fontSize - 2
-                                        font.family: Theme.fontFamily
-                                    }
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        width: parent.width - 24
-                                        text: modelData ? (modelData.description || modelData.name) : ""
-                                        color: parent.parent.isDefault ? Theme.colYellow : Theme.colFg
-                                        font.pixelSize: Theme.fontSize - 3
-                                        font.family: Theme.fontFamily
-                                        elide: Text.ElideRight
-                                    }
-                                }
-                                MouseArea {
-                                    id: sMouse
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
-                                    onClicked: Pipewire.preferredDefaultAudioSink = modelData
-                                }
-                            }
-                        }
-
-                        // Input label
-                        Text {
-                            text: "Input"
-                            color: Theme.colMuted
-                            font.pixelSize: Theme.fontSize - 3
-                            font.family: Theme.fontFamily
-                            font.bold: true
-                            leftPadding: 2
-                        }
-
-                        // Input device list
-                        ListView {
-                            id: sourceListView
-                            width: parent.width
-                            height: Math.min(contentHeight, 88)
-                            model: root.sourceList
-                            clip: true
-                            spacing: 3
-
-                            Text {
-                                anchors.centerIn: parent
-                                text: "Loading…"
-                                color: Theme.colMuted
-                                font.pixelSize: Theme.fontSize - 3
-                                font.family: Theme.fontFamily
-                                visible: root.sourceList.length === 0
-                            }
-
-                            delegate: Rectangle {
-                                required property var modelData
-                                width: sourceListView.width
-                                height: 26
-                                radius: 4
-                                readonly property bool isDefault: modelData && root.sourceNode === modelData
-                                color: isDefault
-                                    ? Qt.rgba(Theme.colYellow.r, Theme.colYellow.g, Theme.colYellow.b, 0.15)
-                                    : (srcMouse.containsMouse ? Qt.rgba(1,1,1,0.05) : "transparent")
-                                border.width: isDefault ? 1 : 0
-                                border.color: Theme.colYellow
-
-                                Row {
-                                    anchors { fill: parent; leftMargin: 6; rightMargin: 6 }
-                                    spacing: 5
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        text: parent.parent.isDefault ? "󰄬" : " "
-                                        color: Theme.colYellow
-                                        font.pixelSize: Theme.fontSize - 2
-                                        font.family: Theme.fontFamily
-                                    }
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        width: parent.width - 24
-                                        text: modelData ? (modelData.description || modelData.name) : ""
-                                        color: parent.parent.isDefault ? Theme.colYellow : Theme.colFg
-                                        font.pixelSize: Theme.fontSize - 3
-                                        font.family: Theme.fontFamily
-                                        elide: Text.ElideRight
-                                    }
-                                }
-                                MouseArea {
-                                    id: srcMouse
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: Qt.PointingHandCursor
-                                    onClicked: Pipewire.preferredDefaultAudioSource = modelData
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // ── Bluetooth section ─────────────────────────────────
-                Item {
-                    width: parent.width
-                    height: root.bluetoothOpen ? (root.btConnecting ? 211 : 185) : 0
-                    clip: true
-                    Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
-
-                    Column {
-                        width: parent.width
-                        topPadding: 10
-                        spacing: 6
-
-                        Rectangle { width: parent.width; height: 1; color: Theme.colMuted; opacity: 0.4 }
-
-                        // Header row
-                        Item {
-                            width: parent.width
-                            height: 26
-
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: "Bluetooth"
-                                color: Theme.colFg
-                                font.pixelSize: Theme.fontSize - 1
-                                font.family: Theme.fontFamily
-                                font.bold: true
-                            }
+                            height: 58
+                            visible: root.hasBluetooth
 
                             Rectangle {
-                                anchors { right: parent.right; verticalCenter: parent.verticalCenter }
-                                width: 48; height: 20; radius: 4
-                                color: root.bluetoothEnabled
-                                    ? Qt.rgba(Theme.colPurple.r, Theme.colPurple.g, Theme.colPurple.b, 0.2)
-                                    : Qt.rgba(0.92, 0.41, 0.38, 0.2)
-                                border.width: 1
-                                border.color: root.bluetoothEnabled ? Theme.colPurple : Theme.colRed
+                                id: btToggle
+                                width: 38; height: 38; radius: 19
+                                anchors { left: parent.left; leftMargin: 12; verticalCenter: parent.verticalCenter }
+                                color: root.bluetoothEnabled ? Theme.colBlue : Qt.rgba(1, 1, 1, 0.14)
+                                Behavior on color { ColorAnimation { duration: 150 } }
 
                                 Text {
                                     anchors.centerIn: parent
-                                    text: root.bluetoothEnabled ? "ON" : "OFF"
-                                    color: root.bluetoothEnabled ? Theme.colPurple : Theme.colRed
-                                    font.pixelSize: Theme.fontSize - 3
+                                    text: "󰂯"
+                                    color: root.bluetoothEnabled ? "#ffffff" : Theme.colFg
+                                    font.pixelSize: 18
                                     font.family: Theme.fontFamily
-                                    font.bold: true
                                 }
                                 MouseArea {
                                     anchors.fill: parent
@@ -874,97 +660,487 @@ Item {
                                     }
                                 }
                             }
-                        }
 
-                        // Device list
-                        ListView {
-                            id: btListView
-                            width: parent.width
-                            height: 130
-                            model: btDevices
-                            clip: true
-                            spacing: 3
-
-                            Text {
-                                anchors.centerIn: parent
-                                text: btDevices.count === 0
-                                    ? (root.bluetoothEnabled ? "No paired devices" : "Bluetooth disabled")
-                                    : ""
-                                color: Theme.colMuted
-                                font.pixelSize: Theme.fontSize - 2
-                                font.family: Theme.fontFamily
-                                visible: text !== ""
+                            Column {
+                                anchors { left: btToggle.right; leftMargin: 12; verticalCenter: parent.verticalCenter }
+                                spacing: 1
+                                Text {
+                                    text: "Bluetooth"
+                                    color: Theme.colFg
+                                    font.pixelSize: Theme.fontSize
+                                    font.family: Theme.fontFamily
+                                    font.bold: true
+                                }
+                                Text {
+                                    text: !root.bluetoothEnabled ? "Off"
+                                        : (root.btConnectedName !== "" ? root.btConnectedName : "On")
+                                    color: Theme.colMuted
+                                    font.pixelSize: Theme.fontSize - 3
+                                    font.family: Theme.fontFamily
+                                    width: 180
+                                    elide: Text.ElideRight
+                                }
                             }
 
-                            delegate: Rectangle {
-                                width: btListView.width
-                                height: 26
-                                radius: 4
-                                color: model.connected
-                                    ? Qt.rgba(Theme.colPurple.r, Theme.colPurple.g, Theme.colPurple.b, 0.15)
-                                    : (btMouse.containsMouse ? Qt.rgba(1,1,1,0.05) : "transparent")
-                                border.width: model.connected ? 1 : 0
-                                border.color: Theme.colPurple
+                            Text {
+                                anchors { right: parent.right; rightMargin: 14; verticalCenter: parent.verticalCenter }
+                                text: root.bluetoothOpen ? "󰅃" : "󰅀"
+                                color: Theme.colMuted
+                                font.pixelSize: Theme.fontSize
+                                font.family: Theme.fontFamily
+                            }
 
-                                Row {
-                                    anchors { fill: parent; leftMargin: 6; rightMargin: 6 }
-                                    spacing: 6
+                            MouseArea {
+                                anchors { left: parent.left; right: parent.right; top: parent.top; bottom: parent.bottom; leftMargin: 62 }
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    var next = !root.bluetoothOpen
+                                    root.wifiOpen = false
+                                    root.bluetoothOpen = next
+                                    if (root.bluetoothOpen) refreshBluetooth()
+                                }
+                            }
+                        }
+
+                        // ── Bluetooth expansion ──
+                        Item {
+                            width: parent.width
+                            visible: root.hasBluetooth
+                            height: root.bluetoothOpen ? (root.btConnecting ? 198 : 172) : 0
+                            clip: true
+                            Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+
+                            Column {
+                                width: parent.width
+
+                                Rectangle {
+                                    anchors { left: parent.left; right: parent.right; leftMargin: 14; rightMargin: 14 }
+                                    height: 1
+                                    color: Qt.rgba(1, 1, 1, 0.08)
+                                }
+
+                                Item {
+                                    width: parent.width
+                                    height: 30
                                     Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        text: model.connected ? "󰂱" : "󰂯"
-                                        color: model.connected ? Theme.colPurple : Theme.colMuted
-                                        font.pixelSize: Theme.fontSize
+                                        anchors { left: parent.left; leftMargin: 14; verticalCenter: parent.verticalCenter }
+                                        text: "Devices"
+                                        color: Theme.colMuted
+                                        font.pixelSize: Theme.fontSize - 3
                                         font.family: Theme.fontFamily
-                                    }
-                                    Text {
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        width: parent.width - 36
-                                        text: model.name
-                                        color: model.connected ? Theme.colPurple : Theme.colFg
-                                        font.pixelSize: Theme.fontSize - 2
-                                        font.family: Theme.fontFamily
-                                        elide: Text.ElideRight
+                                        font.bold: true
                                     }
                                 }
 
-                                MouseArea {
-                                    id: btMouse
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    cursorShape: root.btConnecting ? Qt.ArrowCursor : Qt.PointingHandCursor
-                                    onClicked: {
-                                        if (!root.btConnecting) {
-                                            root.btConnecting = true
-                                            root.btConnectingName = model.name
-                                            btActionProc.targetMac = model.mac
-                                            btActionProc.shouldConnect = !model.connected
-                                            btActionProc.running = true
+                                ListView {
+                                    id: btListView
+                                    width: parent.width
+                                    height: 124
+                                    model: btDevices
+                                    clip: true
+                                    spacing: 2
+
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: btDevices.count === 0
+                                            ? (root.bluetoothEnabled ? "No paired devices" : "Bluetooth disabled")
+                                            : ""
+                                        color: Theme.colMuted
+                                        font.pixelSize: Theme.fontSize - 2
+                                        font.family: Theme.fontFamily
+                                        visible: text !== ""
+                                    }
+
+                                    delegate: Rectangle {
+                                        width: btListView.width
+                                        height: 32
+                                        color: model.connected
+                                            ? Qt.rgba(Theme.colBlue.r, Theme.colBlue.g, Theme.colBlue.b, 0.18)
+                                            : (btMouse.containsMouse ? Qt.rgba(1, 1, 1, 0.06) : "transparent")
+
+                                        Row {
+                                            anchors { fill: parent; leftMargin: 14; rightMargin: 14 }
+                                            spacing: 8
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                text: model.connected ? "󰂱" : "󰂯"
+                                                color: model.connected ? Theme.colBlue : Theme.colFg
+                                                font.pixelSize: Theme.fontSize
+                                                font.family: Theme.fontFamily
+                                            }
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                width: parent.width - 48
+                                                text: model.name
+                                                color: Theme.colFg
+                                                font.pixelSize: Theme.fontSize - 2
+                                                font.family: Theme.fontFamily
+                                                elide: Text.ElideRight
+                                            }
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                text: "󰄬"
+                                                color: Theme.colBlue
+                                                font.pixelSize: Theme.fontSize - 1
+                                                font.family: Theme.fontFamily
+                                                visible: model.connected
+                                            }
+                                        }
+
+                                        MouseArea {
+                                            id: btMouse
+                                            anchors.fill: parent
+                                            hoverEnabled: true
+                                            cursorShape: root.btConnecting ? Qt.ArrowCursor : Qt.PointingHandCursor
+                                            onClicked: {
+                                                if (!root.btConnecting) {
+                                                    root.btConnecting = true
+                                                    root.btConnectingName = model.name
+                                                    btActionProc.targetMac = model.mac
+                                                    btActionProc.shouldConnect = !model.connected
+                                                    btActionProc.running = true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Item {
+                                    width: parent.width
+                                    height: root.btConnecting ? 26 : 0
+                                    clip: true
+                                    Behavior on height { NumberAnimation { duration: 150 } }
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: "Connecting to " + root.btConnectingName + "…"
+                                        color: Theme.colYellow
+                                        font.pixelSize: Theme.fontSize - 3
+                                        font.family: Theme.fontFamily
+                                        visible: root.btConnecting
+                                        SequentialAnimation on opacity {
+                                            running: root.btConnecting
+                                            loops: Animation.Infinite
+                                            NumberAnimation { to: 0.3; duration: 600; easing.type: Easing.InOutSine }
+                                            NumberAnimation { to: 1.0; duration: 600; easing.type: Easing.InOutSine }
                                         }
                                     }
                                 }
                             }
                         }
+                    }
+                }
 
-                        // Connecting indicator
+                // ══ Sound module ═════════════════════════════════════
+                Rectangle {
+                    id: soundModule
+                    width: parent.width
+                    height: soundCol.implicitHeight
+                    radius: 14
+                    color: Theme.colBgActive
+
+                    Column {
+                        id: soundCol
+                        width: parent.width
+                        topPadding: 12
+                        bottomPadding: 12
+                        spacing: 10
+
+                        // header
                         Item {
                             width: parent.width
-                            height: root.btConnecting ? 20 : 0
-                            clip: true
-                            Behavior on height { NumberAnimation { duration: 150 } }
-
+                            height: 16
                             Text {
-                                anchors.centerIn: parent
-                                text: "Connecting to " + root.btConnectingName + "…"
-                                color: Theme.colPurple
-                                font.pixelSize: Theme.fontSize - 3
+                                anchors { left: parent.left; leftMargin: 14; verticalCenter: parent.verticalCenter }
+                                text: "Sound"
+                                color: Theme.colFg
+                                font.pixelSize: Theme.fontSize - 1
                                 font.family: Theme.fontFamily
-                                visible: root.btConnecting
+                                font.bold: true
+                            }
+                            Text {
+                                anchors { right: parent.right; rightMargin: 14; verticalCenter: parent.verticalCenter }
+                                text: root.volumeOpen ? "󰅃" : "󰅀"
+                                color: Theme.colMuted
+                                font.pixelSize: Theme.fontSize
+                                font.family: Theme.fontFamily
+                                MouseArea {
+                                    anchors.fill: parent
+                                    anchors.margins: -8
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: root.volumeOpen = !root.volumeOpen
+                                }
+                            }
+                        }
 
-                                SequentialAnimation on opacity {
-                                    running: root.btConnecting
-                                    loops: Animation.Infinite
-                                    NumberAnimation { to: 0.3; duration: 600; easing.type: Easing.InOutSine }
-                                    NumberAnimation { to: 1.0; duration: 600; easing.type: Easing.InOutSine }
+                        // capsule slider
+                        Item {
+                            id: volSlider
+                            anchors { left: parent.left; right: parent.right; leftMargin: 14; rightMargin: 14 }
+                            height: 30
+
+                            Rectangle {
+                                id: volTrack
+                                anchors.fill: parent
+                                radius: height / 2
+                                color: Qt.rgba(1, 1, 1, 0.10)
+
+                                Rectangle {
+                                    id: volFill
+                                    height: parent.height
+                                    width: Math.max(parent.height, parent.width * root.volumeLevel / 100)
+                                    radius: parent.radius
+                                    color: "#ffffff"
+                                }
+
+                                Text {
+                                    anchors { left: parent.left; leftMargin: 9; verticalCenter: parent.verticalCenter }
+                                    text: root.volumeLevel > 0 ? "󰕾" : "󰖁"
+                                    color: Theme.colBg
+                                    font.pixelSize: Theme.fontSize - 1
+                                    font.family: Theme.fontFamily
+                                }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                function apply(mx) {
+                                    var v = Math.max(0, Math.min(1, mx / width))
+                                    if (root.sinkNode && root.sinkNode.audio)
+                                        root.sinkNode.audio.volume = v
+                                }
+                                onPressed: apply(mouseX)
+                                onPositionChanged: if (pressed) apply(mouseX)
+                            }
+                        }
+
+                        // ── device expansion ──
+                        Item {
+                            width: parent.width
+                            height: root.volumeOpen ? 244 : 0
+                            clip: true
+                            Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
+
+                            Column {
+                                width: parent.width
+                                spacing: 4
+
+                                Text {
+                                    leftPadding: 14
+                                    topPadding: 4
+                                    text: "Output"
+                                    color: Theme.colMuted
+                                    font.pixelSize: Theme.fontSize - 3
+                                    font.family: Theme.fontFamily
+                                    font.bold: true
+                                }
+
+                                ListView {
+                                    id: sinkListView
+                                    width: parent.width
+                                    height: Math.min(contentHeight, 96)
+                                    model: root.sinkList
+                                    clip: true
+                                    spacing: 2
+
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: "Loading…"
+                                        color: Theme.colMuted
+                                        font.pixelSize: Theme.fontSize - 3
+                                        font.family: Theme.fontFamily
+                                        visible: root.sinkList.length === 0
+                                    }
+
+                                    delegate: Rectangle {
+                                        required property var modelData
+                                        width: sinkListView.width
+                                        height: 30
+                                        readonly property bool isDefault: modelData && root.sinkNode === modelData
+                                        color: isDefault
+                                            ? Qt.rgba(Theme.colBlue.r, Theme.colBlue.g, Theme.colBlue.b, 0.18)
+                                            : (sMouse.containsMouse ? Qt.rgba(1, 1, 1, 0.06) : "transparent")
+
+                                        Row {
+                                            anchors { fill: parent; leftMargin: 14; rightMargin: 14 }
+                                            spacing: 8
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                text: parent.parent.isDefault ? "󰄬" : "󰕾"
+                                                color: parent.parent.isDefault ? Theme.colBlue : Theme.colMuted
+                                                font.pixelSize: Theme.fontSize - 1
+                                                font.family: Theme.fontFamily
+                                            }
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                width: parent.width - 32
+                                                text: modelData ? (modelData.description || modelData.name) : ""
+                                                color: Theme.colFg
+                                                font.pixelSize: Theme.fontSize - 3
+                                                font.family: Theme.fontFamily
+                                                elide: Text.ElideRight
+                                            }
+                                        }
+                                        MouseArea {
+                                            id: sMouse
+                                            anchors.fill: parent
+                                            hoverEnabled: true
+                                            cursorShape: Qt.PointingHandCursor
+                                            onClicked: Pipewire.preferredDefaultAudioSink = modelData
+                                        }
+                                    }
+                                }
+
+                                Text {
+                                    leftPadding: 14
+                                    topPadding: 4
+                                    text: "Input"
+                                    color: Theme.colMuted
+                                    font.pixelSize: Theme.fontSize - 3
+                                    font.family: Theme.fontFamily
+                                    font.bold: true
+                                }
+
+                                ListView {
+                                    id: sourceListView
+                                    width: parent.width
+                                    height: Math.min(contentHeight, 96)
+                                    model: root.sourceList
+                                    clip: true
+                                    spacing: 2
+
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: "Loading…"
+                                        color: Theme.colMuted
+                                        font.pixelSize: Theme.fontSize - 3
+                                        font.family: Theme.fontFamily
+                                        visible: root.sourceList.length === 0
+                                    }
+
+                                    delegate: Rectangle {
+                                        required property var modelData
+                                        width: sourceListView.width
+                                        height: 30
+                                        readonly property bool isDefault: modelData && root.sourceNode === modelData
+                                        color: isDefault
+                                            ? Qt.rgba(Theme.colBlue.r, Theme.colBlue.g, Theme.colBlue.b, 0.18)
+                                            : (srcMouse.containsMouse ? Qt.rgba(1, 1, 1, 0.06) : "transparent")
+
+                                        Row {
+                                            anchors { fill: parent; leftMargin: 14; rightMargin: 14 }
+                                            spacing: 8
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                text: parent.parent.isDefault ? "󰄬" : "󰍬"
+                                                color: parent.parent.isDefault ? Theme.colBlue : Theme.colMuted
+                                                font.pixelSize: Theme.fontSize - 1
+                                                font.family: Theme.fontFamily
+                                            }
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                width: parent.width - 32
+                                                text: modelData ? (modelData.description || modelData.name) : ""
+                                                color: Theme.colFg
+                                                font.pixelSize: Theme.fontSize - 3
+                                                font.family: Theme.fontFamily
+                                                elide: Text.ElideRight
+                                            }
+                                        }
+                                        MouseArea {
+                                            id: srcMouse
+                                            anchors.fill: parent
+                                            hoverEnabled: true
+                                            cursorShape: Qt.PointingHandCursor
+                                            onClicked: Pipewire.preferredDefaultAudioSource = modelData
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // ══ Power Mode module ════════════════════════════════
+                Rectangle {
+                    id: powerModule
+                    width: parent.width
+                    height: powerCol.implicitHeight
+                    radius: 14
+                    color: Theme.colBgActive
+                    visible: root.powerProfile !== ""
+
+                    Column {
+                        id: powerCol
+                        width: parent.width
+                        topPadding: 12
+                        bottomPadding: 12
+                        spacing: 10
+
+                        Text {
+                            leftPadding: 14
+                            text: "Power Mode"
+                            color: Theme.colFg
+                            font.pixelSize: Theme.fontSize - 1
+                            font.family: Theme.fontFamily
+                            font.bold: true
+                        }
+
+                        // segmented control
+                        Rectangle {
+                            anchors { left: parent.left; right: parent.right; leftMargin: 14; rightMargin: 14 }
+                            height: 56
+                            radius: 12
+                            color: Qt.rgba(1, 1, 1, 0.06)
+
+                            Row {
+                                anchors.fill: parent
+                                anchors.margins: 4
+                                spacing: 4
+
+                                Repeater {
+                                    model: [
+                                        { profileId: "power-saver", label: "Saver",    icon: "󰌪" },
+                                        { profileId: "balanced",    label: "Balanced", icon: "󰛲" },
+                                        { profileId: "performance", label: "Perform",  icon: "󰓅" }
+                                    ]
+                                    delegate: Rectangle {
+                                        required property var modelData
+                                        readonly property bool active: root.powerProfile === modelData.profileId
+                                        readonly property color accent: root.profileAccent(modelData.profileId)
+                                        width: (parent.width - 8) / 3
+                                        height: parent.height
+                                        radius: 9
+                                        color: active ? Qt.rgba(accent.r, accent.g, accent.b, 0.22) : "transparent"
+                                        Behavior on color { ColorAnimation { duration: 150 } }
+
+                                        Column {
+                                            anchors.centerIn: parent
+                                            spacing: 3
+                                            Text {
+                                                anchors.horizontalCenter: parent.horizontalCenter
+                                                text: modelData.icon
+                                                color: parent.parent.active ? parent.parent.accent : Theme.colFg
+                                                font.pixelSize: 18
+                                                font.family: Theme.fontFamily
+                                            }
+                                            Text {
+                                                anchors.horizontalCenter: parent.horizontalCenter
+                                                text: modelData.label
+                                                color: parent.parent.active ? parent.parent.accent : Theme.colMuted
+                                                font.pixelSize: Theme.fontSize - 4
+                                                font.family: Theme.fontFamily
+                                            }
+                                        }
+                                        MouseArea {
+                                            anchors.fill: parent
+                                            cursorShape: Qt.PointingHandCursor
+                                            onClicked: {
+                                                profileSetProc.target = modelData.profileId
+                                                profileSetProc.running = true
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
