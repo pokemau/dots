@@ -1,8 +1,9 @@
-output "eDP-1" {
-    position x=0 y=0
-}
+// output "eDP-1" {
+//     position x=0 y=0
+// }
 output "HDMI-A-1" {
-    position x=1920 y=0
+    mode "1920x1080@100"
+    position x=0 y=0
 }
 workspace "1" {
 }
@@ -250,6 +251,8 @@ spawn-at-startup "blueman-applet"
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "wlsunset" "-s" "0:00" "-s" "0:00" "-t" "4500"
 spawn-at-startup "~/Scripts/swww_init.sh"
+
+spawn-at-startup "vicinae" "server"
 
 spawn-at-startup "swaybg" "-i" "/home/mau/wallpapers/forest.jpg" "-m" "fill"
 
