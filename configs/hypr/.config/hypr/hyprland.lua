@@ -1,44 +1,26 @@
 -- https://wiki.hypr.land/Configuring/Start/
 
--- You can (and should!!) split this configuration into multiple files
--- Create your files separately and then require them like this:
 require("keybinds")
 require("theme")
-
 
 ------------------
 ---- MONITORS ----
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- hl.monitor({
+--     output   = "HDMI-A-1",
+--     mode     = "1920x1080@144",
+--     position = "0x0",
+--     scale    = "1",
+-- })
 hl.monitor({
-    output   = "",
-    mode     = "preferred",
-    position = "auto",
+    output   = "eDP-1",
+    mode     = "1920x1200@60",
+    position = "0x0",
     scale    = "1",
+    -- disabled = true
 })
-
--------------------
----- AUTOSTART ----
--------------------
-
--- See https://wiki.hypr.land/Configuring/Basics/Autostart/
-
-hl.on("hyprland.start", function ()
-  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("nm-applet")
-  hl.exec_cmd("blueman-applet")
-  hl.exec_cmd("swaync")
-  hl.exec_cmd("quickshell")
-  hl.exec_cmd("wlsunset -s 0:00 -s 0:00 -t 4500")
-  hl.exec_cmd("hyprpaper")
-  hl.exec_cmd("vicinae server")
-  hl.exec_cmd("hyprctl setcursor Posy_Cursor 24")
-  hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'")
-  hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
-end)
-
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -48,6 +30,45 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+
+hl.env("GDK_BACKEND", "wayland,x11,*")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
+hl.env("SDL_VIDEODRIVER", "wayland")
+hl.env("CLUTTER_BACKEND", "wayland")
+hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
+hl.env("XDG_SESSION_TYPE", "wayland")
+hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
+hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
+hl.env("GTK_THEME", "WhiteSur-Dark")
+hl.env("XCURSOR_THEME", "Posy's Cursor Black")
+
+-------------------
+---- AUTOSTART ----
+-------------------
+
+-- See https://wiki.hypr.land/Configuring/Basics/Autostart/
+
+hl.on("hyprland.start", function ()
+  hl.exec_cmd("systemctl --user start hyprpolkitagent")
+  hl.exec_cmd("nm-applet")
+  hl.exec_cmd("blueman-applet")
+  hl.exec_cmd("swaync")
+  hl.exec_cmd("quickshell")
+  hl.exec_cmd("wlsunset -s 0:00 -s 0:00 -t 4500")
+  hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("vicinae server")
+  hl.exec_cmd("hyprctl setcursor Posy_Cursor 24")
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+  hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal")
+
+  -- hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'")
+  -- hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
+end)
+
 
 
 -----------------------
@@ -133,17 +154,14 @@ hl.device({
 
 -- Example window rules that are useful
 
-local suppressMaximizeRule = hl.window_rule({
-    -- Ignore maximize requests from all apps. You'll probably like this.
+hl.window_rule({
     name  = "suppress-maximize-events",
     match = { class = ".*" },
 
     suppress_event = "maximize",
 })
--- suppressMaximizeRule:set_enabled(false)
 
 hl.window_rule({
-    -- Fix some dragging issues with XWayland
     name  = "fix-xwayland-drags",
     match = {
         class      = "^$",

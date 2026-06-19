@@ -33,7 +33,6 @@ alias gb='git branch'
 # DEV
 alias t='tmux -2'
 alias v='nvim'
-alias z='zeditor'
 alias bm='rm -f compile_commands.json && bear -- make'
 alias m='make'
 alias p='python'
@@ -41,6 +40,7 @@ alias op='opencode'
 alias gm='gemini'
 alias cl='claude'
 alias tm='tmuxer'
+# alias z='zoxide'
 
 
 # BATTERY
@@ -74,3 +74,5 @@ export PATH="$VCPKG_ROOT:$PATH"
 if [ -f '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mau/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+eval "$(zoxide init zsh)"
