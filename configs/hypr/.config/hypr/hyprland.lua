@@ -15,11 +15,11 @@ require("theme")
 --     scale    = "1",
 -- })
 hl.monitor({
-    output   = "eDP-1",
-    mode     = "1920x1200@60",
-    position = "0x0",
-    scale    = "1",
-    -- disabled = true
+	output = "eDP-1",
+	mode = "1920x1200@60",
+	position = "0x0",
+	scale = "1",
+	-- disabled = true
 })
 
 -------------------------------
@@ -51,25 +51,23 @@ hl.env("XCURSOR_THEME", "Posy's Cursor Black")
 
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
-hl.on("hyprland.start", function ()
-  hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("nm-applet")
-  hl.exec_cmd("blueman-applet")
-  hl.exec_cmd("swaync")
-  hl.exec_cmd("quickshell")
-  hl.exec_cmd("wlsunset -s 0:00 -s 0:00 -t 4500")
-  hl.exec_cmd("hyprpaper")
-  hl.exec_cmd("vicinae server")
-  hl.exec_cmd("hyprctl setcursor Posy_Cursor 24")
-  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal")
+hl.on("hyprland.start", function()
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd("nm-applet")
+	hl.exec_cmd("blueman-applet")
+	hl.exec_cmd("swaync")
+	hl.exec_cmd("quickshell")
+	hl.exec_cmd("wlsunset -s 0:00 -s 0:00 -t 4500")
+	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("vicinae server")
+	hl.exec_cmd("hyprctl setcursor Posy_Cursor 24")
+	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+	hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal")
 
-  -- hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'")
-  -- hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
+	-- hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'")
+	-- hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
 end)
-
-
 
 -----------------------
 ----- PERMISSIONS -----
@@ -89,61 +87,55 @@ end)
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
 -- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
-
-
 ----------------
 ----  MISC  ----
 ----------------
 
 hl.config({
-    misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
-    },
+	misc = {
+		force_default_wallpaper = -1, -- Set to 0 or 1 to disable the anime mascot wallpapers
+		disable_hyprland_logo = false, -- If true disables the random hyprland logo / anime girl background. :(
+	},
 })
-
 
 ---------------
 ---- INPUT ----
 ---------------
 
 hl.config({
-    input = {
-        kb_layout  = "us",
-        kb_variant = "",
-        kb_model   = "",
-        kb_options = "",
-        kb_rules   = "",
+	input = {
+		kb_layout = "us",
+		kb_variant = "",
+		kb_model = "",
+		kb_options = "",
+		kb_rules = "",
 
-        repeat_delay = 180,
+		repeat_delay = 180,
 
-        follow_mouse = 1,
+		follow_mouse = 1,
 
-        sensitivity = 1, -- -1.0 - 1.0, 0 means no modification.
+		sensitivity = 0.6, -- -1.0 - 1.0, 0 means no modification.
 
-        touchpad = {
-            natural_scroll = true,
-        },
+		touchpad = {
+			natural_scroll = true,
+		},
 
-        accel_profile = "flat",
-    },
+		accel_profile = "flat",
+	},
 })
 
 hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "workspace"
+	fingers = 3,
+	direction = "horizontal",
+	action = "workspace",
 })
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
 hl.device({
-    name        = "epic-mouse-v1",
-    sensitivity = -0.5,
+	name = "epic-mouse-v1",
+	sensitivity = -0.5,
 })
-
-
-
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
@@ -155,24 +147,24 @@ hl.device({
 -- Example window rules that are useful
 
 hl.window_rule({
-    name  = "suppress-maximize-events",
-    match = { class = ".*" },
+	name = "suppress-maximize-events",
+	match = { class = ".*" },
 
-    suppress_event = "maximize",
+	suppress_event = "maximize",
 })
 
 hl.window_rule({
-    name  = "fix-xwayland-drags",
-    match = {
-        class      = "^$",
-        title      = "^$",
-        xwayland   = true,
-        float      = true,
-        fullscreen = false,
-        pin        = false,
-    },
+	name = "fix-xwayland-drags",
+	match = {
+		class = "^$",
+		title = "^$",
+		xwayland = true,
+		float = true,
+		fullscreen = false,
+		pin = false,
+	},
 
-    no_focus = true,
+	no_focus = true,
 })
 
 -- Layer rules also return a handle.
@@ -185,9 +177,31 @@ hl.window_rule({
 
 -- Hyprland-run windowrule
 hl.window_rule({
-    name  = "move-hyprland-run",
-    match = { class = "hyprland-run" },
+	name = "move-hyprland-run",
+	match = { class = "hyprland-run" },
 
-    move  = "20 monitor_h-120",
-    float = true,
+	move = "20 monitor_h-120",
+	float = true,
+})
+
+hl.window_rule({
+	name = "xwayland-video-bridge-fixes",
+	match = { class = "xwaylandvideobridge" },
+
+	no_initial_focus = true,
+	no_focus = true,
+	no_anim = true,
+	no_blur = true,
+	max_size = { 1, 1 },
+	opacity = 0.0,
+})
+
+hl.config({
+	general = {
+		layout = "scrolling",
+	},
+	scrolling = {
+		direction = "right",
+		follow_min_visible = "0.6",
+	},
 })
