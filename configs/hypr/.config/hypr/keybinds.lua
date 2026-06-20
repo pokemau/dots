@@ -16,18 +16,21 @@ hl.bind(mainMod .. " + W", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized" }))
 hl.bind(mainMod .. " + SHIFT + D", hl.dsp.exec_cmd("discord --enable-features=UseOzonePlatform --ozone-platform=wayland"))
 
-hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("vicinae vicinae://launch/clipboard/history"))
-
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("~/Scripts/hyprland_monitor_toggle.sh"))
+hl.bind(mainMod .. " + grave", hl.dsp.exec_cmd("~/Scripts/toggle_mute.sh"))
 
+-- GROUP
+hl.bind("ALT + TAB", hl.dsp.group.next())
+hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
+
+-- WINDOWS
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({direction="right"}))
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({direction="left"}))
-
 hl.bind(mainMod .. " + Q",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + E",  hl.dsp.focus({ direction = "right" }))
 
-hl.bind(mainMod .. " + grave", hl.dsp.exec_cmd("~/Scripts/toggle_mute.sh"))
+
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))

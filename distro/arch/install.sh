@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # install yay
-mkdir -p ~/Apps/git
-cd ~/Apps/git
+mkdir -p ~/Apps
+cd ~/Apps
 git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si
 cd ~/dots/distro/arch
