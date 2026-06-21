@@ -9,6 +9,15 @@ vim.pack.add({
 
 require("mason").setup({})
 
+require("mason-tool-installer").setup({
+  ensure_installed = {
+    "lua-language-server",
+    "clangd",
+    "zls",
+    "qmlls"
+  }
+})
+
 vim.lsp.enable({
 	"clangd",
 	"cssls",

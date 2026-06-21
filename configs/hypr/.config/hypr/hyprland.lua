@@ -2,26 +2,7 @@
 
 require("keybinds")
 require("theme")
-
-------------------
----- MONITORS ----
-------------------
-
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
--- hl.monitor({
---     output   = "HDMI-A-1",
---     mode     = "1920x1080@144",
---     position = "0x0",
---     scale    = "1",
--- })
-hl.monitor({
-	output = "eDP-1",
-	mode = "1920x1200@60",
-	position = "0x0",
-	scale = "1",
-	-- disabled = true
-})
-
+require("monitors")
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
@@ -32,7 +13,6 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
 hl.env("GDK_BACKEND", "wayland,x11,*")
-hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("SDL_VIDEODRIVER", "wayland")
 hl.env("CLUTTER_BACKEND", "wayland")
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
@@ -42,7 +22,7 @@ hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
-hl.env("GTK_THEME", "WhiteSur-Dark")
+hl.env("GTK_THEME", "WhiteSur-Dark-solid-alt")
 hl.env("XCURSOR_THEME", "Posy's Cursor Black")
 
 -------------------
