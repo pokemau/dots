@@ -3,7 +3,6 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland._FocusGrab
 import QtQuick
-import QtQuick.Layouts
 
 Item {
     id: root

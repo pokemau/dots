@@ -23,6 +23,6 @@ Singleton {
     property color barBg: Qt.rgba(colBg.r, colBg.g, colBg.b, barAlpha)
     property color barBorder: Qt.rgba(1, 1, 1, 0.08)
 
-    property string fontFamily: "RobotoMono Nerd Font"
-    property int fontSize: 13
+    property string fontFamily: "JetBrains Mono Nerd Font"
+    property int fontSize: 12
 }

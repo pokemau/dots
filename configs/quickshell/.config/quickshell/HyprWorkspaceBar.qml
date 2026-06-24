@@ -1,8 +1,10 @@
 import Quickshell.Hyprland
 import QtQuick
 
+
 Row {
     spacing: 0
+
 
     Repeater {
         model: 10
@@ -48,10 +50,10 @@ Row {
 
                 onContainsMouseChanged: ws.isHovered = containsMouse
                 onWheel: event => {
-                    if (event.angleDelta.y < 0)
-                        Hyprland.dispatch(`hl.dsp.focus({ workspace = 'e+1' })`);
-                    else if (event.angleDelta.y > 0)
+                    if (event.angleDelta.y > 0)
                         Hyprland.dispatch(`hl.dsp.focus({ workspace = 'e-1' })`);
+                    else if (event.angleDelta.y < 0)
+                        Hyprland.dispatch(`hl.dsp.focus({ workspace = 'e+1' })`);
                 }
             }
         }

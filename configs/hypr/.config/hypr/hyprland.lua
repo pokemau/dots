@@ -22,8 +22,11 @@ hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
-hl.env("GTK_THEME", "WhiteSur-Dark-solid-alt")
+-- hl.env("GTK_THEME", "WhiteSur-Dark-solid-alt")
+hl.env("GTK_THEME", "Graphite-Dark")
 hl.env("XCURSOR_THEME", "Posy's Cursor Black")
+
+hl.env("GRIMBLAST_EDITOR", "swappy -f")
 
 -------------------
 ---- AUTOSTART ----
@@ -32,6 +35,7 @@ hl.env("XCURSOR_THEME", "Posy's Cursor Black")
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
 hl.on("hyprland.start", function()
+	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 	hl.exec_cmd("nm-applet")
 	hl.exec_cmd("blueman-applet")
@@ -41,12 +45,13 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("vicinae server")
 	hl.exec_cmd("hyprctl setcursor Posy_Cursor 24")
-	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-	hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal")
+	-- hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+	-- hl.exec_cmd("systemctl --user restart xdg-desktop-portal-hyprland xdg-desktop-portal")
+
+	hl.exec_cmd("xwaylandvideobridge")
 
 	-- hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'")
-	-- hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
+	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
 end)
 
 -----------------------
@@ -178,7 +183,7 @@ hl.window_rule({
 
 hl.config({
 	general = {
-		layout = "scrolling",
+		layout = "dwindle",
 	},
 	scrolling = {
 		direction = "right",

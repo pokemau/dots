@@ -1,6 +1,4 @@
 import Quickshell
-import Quickshell.Wayland
-import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
 import QtQuick
 import QtQuick.Layouts
@@ -30,11 +28,11 @@ Scope {
             implicitHeight: 25
             color: "transparent"
 
-
             Rectangle {
                 anchors.fill: parent
                 color: Theme.barBg
 
+                // bottom border
                 Rectangle {
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
@@ -76,6 +74,7 @@ Scope {
                         model: SystemTray.items
 
                         Image {
+                            id: trayIcon
                             required property SystemTrayItem modelData
 
                             source: modelData.icon
@@ -87,13 +86,25 @@ Scope {
                             Layout.leftMargin: 2
                             Layout.rightMargin: 2
 
+                            QsMenuAnchor {
+                                id: menuAnchor
+                                menu: modelData.menu
+                                anchor.item: trayIcon
+                            }
+
                             TapHandler {
                                 onTapped: modelData.activate()
                             }
 
                             TapHandler {
                                 acceptedButtons: Qt.RightButton
-                                onTapped: modelData.display(toplevel, parent.x, parent.y)
+                                onTapped: {
+                                    if (modelData.hasMenu) {
+                                        menuAnchor.open();
+                                    } else {
+                                        modelData.display(toplevel, trayIcon.x, trayIcon.y);
+                                    }
+                                }
                             }
                         }
                     }
@@ -157,7 +168,7 @@ Scope {
                     BatteryWidget {
                         id: batteryWidget
                         panelWindow: toplevel
-                        visible: hasBattery
+                        visible: batteryWidget.hasBattery
                         Layout.alignment: Qt.AlignVCenter
                         Layout.preferredHeight: 25
                         Layout.rightMargin: 0
@@ -171,7 +182,7 @@ Scope {
                         color: Theme.colMuted
                     }
 
-                    ControlManagerWidget {
+                    ControlCenter {
                         panelWindow: toplevel
                         Layout.alignment: Qt.AlignVCenter
                         Layout.preferredHeight: 25
