@@ -13,6 +13,7 @@ yay -S stow discord spotify-launcher power-profiles-daemon flatpak wlsunset naut
     xdg-desktop-portal-hyprland hyprpolkitagent hyprpaper grimblast-git qt5ct qt6ct \
     gnome-calculator baobab swaync obs-studio adw-gtk-theme qbittorrent pulseaudio\
     tela-circle-icon-theme-standard kvantum kvantum-qt5 fzf pipewire-pulse swappy \
+    wget
 
 
 flatpak install flathub org.videolan.VLC
@@ -20,8 +21,10 @@ flatpak install flathub org.videolan.VLC
 ###########
 ## FONTS ##
 ###########
+# Menlo
+# https://github.com/indirect/menlo-nerd-font
 yay -S ttf-roboto-mono-nerd noto-fonts noto-fonts-cjk noto-fonts-emoji \
-    ttf-jetbrains-mono-nerd
+    ttf-jetbrains-mono-nerd inter-font
 
 #########
 ## DEV ##
