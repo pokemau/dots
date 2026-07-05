@@ -24,13 +24,17 @@ hl.bind(mainMod .. " + grave", hl.dsp.exec_cmd("~/Scripts/toggle_mute.sh"))
 -- GROUP
 hl.bind("ALT + TAB", hl.dsp.group.next())
 hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
+hl.bind(mainMod .. " + H", hl.dsp.group.prev())
+hl.bind(mainMod .. " + L", hl.dsp.group.next())
 
 -- WINDOWS
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
 hl.bind(mainMod .. " + Q", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + E", hl.dsp.focus({ direction = "right" }))
 
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.group.move_window({ forward = true }))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.group.move_window({ forward = false }))
 
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
