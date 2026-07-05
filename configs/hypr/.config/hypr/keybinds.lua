@@ -45,7 +45,7 @@ hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
-  local key = i % 10   -- 10 maps to key 0
+  local key = i % 10 -- 10 maps to key 0
   hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
   hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
@@ -81,4 +81,5 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tru
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
 -- Screenshot
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("grimblast -n -f copysave area /tmp/scrot.png && swappy -f /tmp/scrot.png"))
+hl.bind(mainMod .. " + SHIFT + S",
+  hl.dsp.exec_cmd("grimblast -n -f copysave area /tmp/scrot.png && swappy -f /tmp/scrot.png"))
