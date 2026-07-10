@@ -16,6 +16,8 @@ alias inst='sudo dnf install'
 alias yayup='yay -Syu --cleanafter'
 alias togglebat='./Scripts/toggle_batt.sh'
 
+alias shn='shutdown now'
+
 # TOGGLE MONITOR ON SWAY
 # alias tm='~/Scripts/sway_toggle_monitor.sh'
 

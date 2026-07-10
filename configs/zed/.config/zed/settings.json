@@ -1,9 +1,9 @@
 {
   "ui_font_family": "Inter Variable",
   "ui_font_size": 14,
-  "buffer_font_size": 15,
+  "buffer_font_size": 14,
   "agent_ui_font_size": 14.5,
-  "buffer_font_family": "Menlo Nerd Font",
+  "buffer_font_family": "Menlo Nerd Font Mono",
   // "buffer_font_family": "Adwaita Mono",
   // "buffer_font_family": "Bitstream Vera Sans Mono",
   "buffer_font_weight": 500,
@@ -57,7 +57,11 @@
       "enabled": true,
     },
   },
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": {
+    "mode": "light",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
   "context_servers": {
     "mcp-server-playwright": {
       "enabled": true,
@@ -71,7 +75,11 @@
       },
     },
   },
-  "theme": "VSCode Dark Modern",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "VSCode Dark Modern"
+  },
   "experimental.theme_overrides": {
     "background": "#17191a",
     "editor.background": "#17191a",
