@@ -2,14 +2,15 @@
 live_config_reload = true
 
 [font]
-size = 12
+size = 11
 # offset.x = -1
-offset.y = -1
+# offset.y = -1
 
 [font.normal]
 family = "Roboto Mono Nerd Font Mono"
-style = "semibold"
-# style = "bold"
+# family = "Menlo Nerd Font Mono"
+# style = "semibold"
+style = "medium"
 
 [window]
 # opacity = 0.95
