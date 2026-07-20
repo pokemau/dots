@@ -1,4 +1,4 @@
-vim.pack.add({'https://github.com/stevearc/conform.nvim'})
+vim.pack.add({ 'https://github.com/stevearc/conform.nvim' })
 
 require("conform").setup({
   formatters_by_ft = {
@@ -11,6 +11,12 @@ require("conform").setup({
 })
 
 vim.keymap.set("", "<leader>f", function()
+  local ft = vim.bo.filetype
+  -- disable formatting on C, CPP
+  -- if vim.tbl_contains({ "c", "cpp", }, ft) then
+  --   return
+  -- end
+
   require("conform").format({ async = true, lsp_format = "fallback" })
 end, { desc = "[F]ormat buffer" })
 

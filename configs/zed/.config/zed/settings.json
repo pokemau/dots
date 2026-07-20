@@ -76,7 +76,7 @@
     },
   },
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "One Light",
     "dark": "VSCode Dark Modern"
   },

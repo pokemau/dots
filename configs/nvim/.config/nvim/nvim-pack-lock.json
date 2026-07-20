@@ -93,6 +93,10 @@
     "vscode.nvim": {
       "rev": "aa1102a7e15195c9cca22730b09224a7f7745ba8",
       "src": "https://github.com/Mofiqul/vscode.nvim"
+    },
+    "whitespace.nvim": {
+      "rev": "70cd14a1a2fad87da0e18e90b0dc4a461d2113c1",
+      "src": "https://github.com/johnfrankmorgan/whitespace.nvim"
     }
   }
 }

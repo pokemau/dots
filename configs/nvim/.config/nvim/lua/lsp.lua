@@ -68,7 +68,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
     map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
-    vim.keymap.set({ "n", "i" }, "<C-p>", vim.lsp.buf.signature_help, {})
+    -- vim.keymap.set({ "n", "i" }, "<C-p>", vim.lsp.buf.signature_help, {})
+    -- vim.keymap.set({ "n", "i" }, "<C-space>", vim.lsp.buf.signature_help, {})
 
     map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
