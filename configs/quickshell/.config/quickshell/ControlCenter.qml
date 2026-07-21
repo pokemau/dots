@@ -450,7 +450,7 @@ Item {
                                     text: !root.wifiEnabled ? "Off"
                                         : (root.wifiConnectedName !== "" ? root.wifiConnectedName : "On")
                                     color: Theme.colMuted
-                                    font.pixelSize: Theme.fontSize - 3
+                                    font.pixelSize: Theme.fontSize - 2
                                     font.family: Theme.fontFamily
                                     width: 180
                                     elide: Text.ElideRight
@@ -502,7 +502,7 @@ Item {
                                         anchors { left: parent.left; leftMargin: 14; verticalCenter: parent.verticalCenter }
                                         text: "Networks"
                                         color: Theme.colMuted
-                                        font.pixelSize: Theme.fontSize - 3
+                                        font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         font.bold: true
                                     }
@@ -569,7 +569,7 @@ Item {
                                                 anchors.verticalCenter: parent.verticalCenter
                                                 text: "󰌾"
                                                 color: Theme.colMuted
-                                                font.pixelSize: Theme.fontSize - 3
+                                                font.pixelSize: Theme.fontSize - 2
                                                 font.family: Theme.fontFamily
                                                 visible: model.security !== "" && model.security !== "--"
                                             }
@@ -608,7 +608,7 @@ Item {
                                         anchors.centerIn: parent
                                         text: "Connecting to " + wifiConnectProc.targetSsid + "…"
                                         color: Theme.colYellow
-                                        font.pixelSize: Theme.fontSize - 3
+                                        font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         visible: root.wifiConnecting
                                         SequentialAnimation on opacity {
@@ -675,7 +675,7 @@ Item {
                                     text: !root.bluetoothEnabled ? "Off"
                                         : (root.btConnectedName !== "" ? root.btConnectedName : "On")
                                     color: Theme.colMuted
-                                    font.pixelSize: Theme.fontSize - 3
+                                    font.pixelSize: Theme.fontSize - 2
                                     font.family: Theme.fontFamily
                                     width: 180
                                     elide: Text.ElideRight
@@ -726,7 +726,7 @@ Item {
                                         anchors { left: parent.left; leftMargin: 14; verticalCenter: parent.verticalCenter }
                                         text: "Devices"
                                         color: Theme.colMuted
-                                        font.pixelSize: Theme.fontSize - 3
+                                        font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         font.bold: true
                                     }
@@ -814,7 +814,7 @@ Item {
                                         anchors.centerIn: parent
                                         text: "Connecting to " + root.btConnectingName + "…"
                                         color: Theme.colYellow
-                                        font.pixelSize: Theme.fontSize - 3
+                                        font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         visible: root.btConnecting
                                         SequentialAnimation on opacity {
@@ -930,7 +930,7 @@ Item {
                                     topPadding: 4
                                     text: "Output"
                                     color: Theme.colMuted
-                                    font.pixelSize: Theme.fontSize - 3
+                                    font.pixelSize: Theme.fontSize - 2
                                     font.family: Theme.fontFamily
                                     font.bold: true
                                 }
@@ -947,7 +947,7 @@ Item {
                                         anchors.centerIn: parent
                                         text: "Loading…"
                                         color: Theme.colMuted
-                                        font.pixelSize: Theme.fontSize - 3
+                                        font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         visible: root.sinkList.length === 0
                                     }
@@ -976,7 +976,7 @@ Item {
                                                 width: parent.width - 32
                                                 text: modelData ? (modelData.description || modelData.name) : ""
                                                 color: Theme.colFg
-                                                font.pixelSize: Theme.fontSize - 3
+                                                font.pixelSize: Theme.fontSize - 2
                                                 font.family: Theme.fontFamily
                                                 elide: Text.ElideRight
                                             }
@@ -996,7 +996,7 @@ Item {
                                     topPadding: 4
                                     text: "Input"
                                     color: Theme.colMuted
-                                    font.pixelSize: Theme.fontSize - 3
+                                    font.pixelSize: Theme.fontSize - 2
                                     font.family: Theme.fontFamily
                                     font.bold: true
                                 }
@@ -1013,7 +1013,7 @@ Item {
                                         anchors.centerIn: parent
                                         text: "Loading…"
                                         color: Theme.colMuted
-                                        font.pixelSize: Theme.fontSize - 3
+                                        font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         visible: root.sourceList.length === 0
                                     }
@@ -1042,7 +1042,7 @@ Item {
                                                 width: parent.width - 32
                                                 text: modelData ? (modelData.description || modelData.name) : ""
                                                 color: Theme.colFg
-                                                font.pixelSize: Theme.fontSize - 3
+                                                font.pixelSize: Theme.fontSize - 2
                                                 font.family: Theme.fontFamily
                                                 elide: Text.ElideRight
                                             }

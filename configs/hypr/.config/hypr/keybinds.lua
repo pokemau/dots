@@ -3,7 +3,7 @@
 ---------------------
 
 local mainMod     = "SUPER"
-local terminal    = "kitty"
+local terminal    = "ghostty"
 local fileManager = "nautilus"
 local menu        = "vicinae toggle"
 
