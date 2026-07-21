@@ -3,7 +3,7 @@
 ---------------------
 
 local mainMod     = "SUPER"
-local terminal    = "ghostty"
+local terminal    = "ghostty +new-window"
 local fileManager = "nautilus"
 local menu        = "vicinae toggle"
 
