@@ -37,6 +37,7 @@ keybind = shift+enter=text:\n
 
 # RANDO STUFF
 gtk-single-instance = false
+quit-after-last-window-closed = false
 
 
 # GRUVBOX MATERIAL DARK COLORS
