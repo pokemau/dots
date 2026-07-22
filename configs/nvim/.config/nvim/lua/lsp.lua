@@ -17,7 +17,9 @@ require("mason-tool-installer").setup({
     "zls",
     "qmlls",
     "ruff",
-    "ty",
+    "gopls",
+    -- "pyrefly",
+    -- "ty", -- still in beta
   }
 })
 
@@ -36,17 +38,33 @@ local servers = {
   "svelte",
   "tailwindcss",
   "tinymist",
-  "ty",
+  "pyrefly",
+  -- "ty", -- still in beta
   "vtsls",
   "zls",
   "gopls",
 }
 
+-- local capabilities = require('blink.cmp').get_lsp_capabilities()
+-- for _, server in ipairs(servers) do
+--   vim.lsp.config(server, {
+--     capabilities = capabilities,
+--   })
+-- end
+--
+-- vim.lsp.enable(servers)
 local capabilities = require('blink.cmp').get_lsp_capabilities()
+
 for _, server in ipairs(servers) do
-  vim.lsp.config(server, {
+  local opts = {
     capabilities = capabilities,
-  })
+  }
+
+  if server == "pyrefly" then
+    opts.cmd = { "pyrefly", "lsp" }
+  end
+
+  vim.lsp.config(server, opts)
 end
 
 vim.lsp.enable(servers)
