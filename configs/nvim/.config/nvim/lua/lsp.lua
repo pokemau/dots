@@ -19,7 +19,7 @@ require("mason-tool-installer").setup({
     "ruff",
     "gopls",
     -- "pyrefly",
-    -- "ty", -- still in beta
+    "ty", -- still in beta
   }
 })
 
@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
     map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 
-    -- vim.keymap.set({ "n", "i" }, "<C-p>", vim.lsp.buf.signature_help, {})
+    vim.keymap.set({ "n", "i" }, "<C-k>", vim.lsp.buf.signature_help, {})
     -- vim.keymap.set({ "n", "i" }, "<C-space>", vim.lsp.buf.signature_help, {})
 
     map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
