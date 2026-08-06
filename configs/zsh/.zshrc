@@ -71,3 +71,16 @@ export VCPKG_ROOT="$HOME/Apps/vcpkg"
 export PATH="$VCPKG_ROOT:$PATH"
 
 eval "$(zoxide init zsh)"
+
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin
+
+# Set JAVA_HOME (adjust if you use java-17-openjdk or java-21-openjdk)
+export JAVA_HOME=/usr/lib/jvm/default
+export CAPACITOR_ANDROID_STUDIO_PATH=/opt/android-studio/bin/studio
+
+# Added by Antigravity CLI installer
+export PATH="/home/mau/.local/bin:$PATH"
+
+export PATH="$HOME/.dotnet/tools:$PATH"

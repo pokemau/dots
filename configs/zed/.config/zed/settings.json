@@ -1,4 +1,7 @@
 {
+  "git_panel": {
+    "dock": "left"
+  },
   "ui_font_family": "Inter Variable",
   "ui_font_size": 14,
   "buffer_font_size": 14,
@@ -17,6 +20,7 @@
     },
   },
   "agent": {
+    "sidebar_side": "right",
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-5-mini",

@@ -56,12 +56,12 @@ hl.config({
       height = 16,
       font_size = 15,
       font_weight_active = "bold",
-      text_color = "rgba(e8e8e0ff)",
-      text_color_inactive = "rgba(888880ff)",
+      text_color = "rgba(fdfdfdff)",
+      text_color_inactive = "rgba(b0b0b0ff)",
       gradients = true,
       col = {
-        active = "rgba(7a8a7add)",
-        inactive = "rgba(3a3a3acc)"
+        active = "rgba(434343ff)",
+        inactive = "rgba(242424ff)"
       }
     }
   }

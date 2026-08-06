@@ -1,7 +1,5 @@
 # FONT
-font-family = Roboto Mono Nerd Font Mono
-# font-family = Bitstream Vera Sans Mono
-# font-family = Liberation Mono
+font-family = Roboto Mono
 font-style = medium
 # font-style = bold
 font-size = 11.5
@@ -40,33 +38,8 @@ gtk-single-instance = false
 quit-after-last-window-closed = false
 
 
-# GRUVBOX MATERIAL DARK COLORS
+# # GRUVBOX DARK HARD
 background = #17191a
-# foreground = #d4be98
-# selection-background = #504945
-# selection-foreground = #d4be98
-# cursor-color = #d4be98
-# cursor-text = #17191a
-# cursor-invert-fg-bg = true
-# palette = 0=#32302f
-# palette = 1=#ea6962
-# palette = 2=#a9b665
-# palette = 3=#d8a657
-# palette = 4=#7daea3
-# palette = 5=#d3869b
-# palette = 6=#89b482
-# palette = 7=#d4be98
-# palette = 8=#928374
-# palette = 9=#ea6962
-# palette = 10=#a9b665
-# palette = 11=#d8a657
-# palette = 12=#7daea3
-# palette = 13=#d3869b
-# palette = 14=#89b482
-# palette = 15=#d4be98
-
-
-# GRUVBOX DARK HARD COLORS
 foreground = #ebdbb2
 selection-background = #665c54
 selection-foreground = #ebdbb2
