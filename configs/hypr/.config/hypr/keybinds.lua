@@ -21,6 +21,9 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("vicinae vicinae://launch/clipboard/h
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("~/Scripts/hyprland_monitor_toggle.sh"))
 hl.bind(mainMod .. " + grave", hl.dsp.exec_cmd("~/Scripts/toggle_mute.sh"))
 
+-- SUSPEND: lock screen, then sleep. Wake on any key/mouse press.
+hl.bind(mainMod .. " + SHIFT + ESCAPE", hl.dsp.exec_cmd("~/Scripts/suspend.sh"), { locked = true })
+
 -- GROUP
 hl.bind("ALT + TAB", hl.dsp.group.next())
 hl.bind(mainMod .. " + G", hl.dsp.group.toggle())
