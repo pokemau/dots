@@ -16,7 +16,7 @@ hl.config({
     },
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-    resize_on_border = false,
+    resize_on_border = true,
 
     -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
     allow_tearing    = false,
@@ -25,12 +25,12 @@ hl.config({
   },
 
   decoration = {
-    rounding         = 0,
+    rounding         = 4,
     -- rounding_power = 2,
 
     -- Change transparency of focused and unfocused windows
     active_opacity   = 1.0,
-    inactive_opacity = 1.0,
+    inactive_opacity = 0.9,
 
     shadow           = {
       enabled      = false,
@@ -40,9 +40,9 @@ hl.config({
     },
 
     blur             = {
-      enabled  = false,
+      enabled  = true,
       size     = 3,
-      passes   = 1,
+      passes   = 3,
       vibrancy = 0.1696,
     },
   },

@@ -64,6 +64,28 @@ Item {
     // Power profile state
     property string powerProfile: ""
 
+    // ─── Wayland resize glitch fix ──────────────────────────────────
+    property real targetPopupHeight: card.implicitHeight
+    property real currentPopupHeight: 0
+
+    onTargetPopupHeightChanged: {
+        // If expanding, instantly grow the Wayland window to fit the animation
+        if (currentPopupHeight === 0 || targetPopupHeight > currentPopupHeight) {
+            currentPopupHeight = targetPopupHeight
+            shrinkDelay.stop()
+        } else {
+            // If shrinking, delay the window resize until the frame-by-frame animation finishes
+            // (220ms matches the duration of the height behavior animations below)
+            shrinkDelay.restart()
+        }
+    }
+
+    Timer {
+        id: shrinkDelay
+        interval: 220 
+        onTriggered: root.currentPopupHeight = root.targetPopupHeight
+    }
+
     implicitWidth: triggerLabel.implicitWidth + 20
     implicitHeight: 24
 
@@ -218,7 +240,6 @@ Item {
         stdout: SplitParser {
             onRead: data => {
                 if (!data) return
-                // "Device AA:BB:CC:DD:EE:FF Name"
                 var p = data.trim().split(" ")
                 if (p.length < 3) return
                 btDevices.append({ mac: p[1], name: p.slice(2).join(" "), connected: false })
@@ -371,24 +392,30 @@ Item {
 
     PopupWindow {
         id: controlPopup
-        visible: root.popupOpen
+        visible: root.popupOpen || card.opacity > 0.01 
         anchor.item: triggerPill
         anchor.rect.x: triggerPill.width - controlPopup.implicitWidth
         anchor.rect.y: triggerPill.height + 8
         implicitWidth: 320
-        implicitHeight: card.implicitHeight
+        implicitHeight: root.currentPopupHeight 
         color: "transparent"
 
         // ── outer translucent card ──
         Rectangle {
             id: card
+            anchors.top: parent.top 
             width: parent.width
-            height: implicitHeight
             implicitHeight: contentCol.implicitHeight + 24
             radius: 18
             color: Qt.rgba(Theme.colBg.r, Theme.colBg.g, Theme.colBg.b, 0.92)
             border.width: 1
             border.color: Qt.rgba(1, 1, 1, 0.08)
+
+            scale: root.popupOpen ? 1.0 : 0.94
+            opacity: root.popupOpen ? 1.0 : 0.0
+            transformOrigin: Item.TopRight
+            Behavior on scale { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
+            Behavior on opacity { NumberAnimation { duration: 150 } }
 
             Column {
                 id: contentCol
@@ -481,11 +508,12 @@ Item {
                         Item {
                             width: parent.width
                             visible: root.hasWifi
-                            height: root.wifiOpen ? (root.wifiConnecting ? 282 : 256) : 0
+                            height: root.wifiOpen ? wifiExpandCol.implicitHeight : 0
                             clip: true
                             Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
 
                             Column {
+                                id: wifiExpandCol
                                 width: parent.width
 
                                 Rectangle {
@@ -524,7 +552,7 @@ Item {
                                 ListView {
                                     id: wifiListView
                                     width: parent.width
-                                    height: Math.min(contentHeight, 206)
+                                    height: Math.max(32, Math.min(contentHeight, 206))
                                     model: wifiNetworks
                                     clip: true
                                     spacing: 2
@@ -603,7 +631,7 @@ Item {
                                     width: parent.width
                                     height: root.wifiConnecting ? 26 : 0
                                     clip: true
-                                    Behavior on height { NumberAnimation { duration: 150 } }
+
                                     Text {
                                         anchors.centerIn: parent
                                         text: "Connecting to " + wifiConnectProc.targetSsid + "…"
@@ -611,6 +639,7 @@ Item {
                                         font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         visible: root.wifiConnecting
+
                                         SequentialAnimation on opacity {
                                             running: root.wifiConnecting
                                             loops: Animation.Infinite
@@ -706,11 +735,12 @@ Item {
                         Item {
                             width: parent.width
                             visible: root.hasBluetooth
-                            height: root.bluetoothOpen ? (root.btConnecting ? 198 : 172) : 0
+                            height: root.bluetoothOpen ? btExpandCol.implicitHeight : 0
                             clip: true
                             Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
 
                             Column {
+                                id: btExpandCol
                                 width: parent.width
 
                                 Rectangle {
@@ -735,7 +765,7 @@ Item {
                                 ListView {
                                     id: btListView
                                     width: parent.width
-                                    height: 124
+                                    height: Math.max(32, Math.min(contentHeight, 124))
                                     model: btDevices
                                     clip: true
                                     spacing: 2
@@ -809,7 +839,7 @@ Item {
                                     width: parent.width
                                     height: root.btConnecting ? 26 : 0
                                     clip: true
-                                    Behavior on height { NumberAnimation { duration: 150 } }
+
                                     Text {
                                         anchors.centerIn: parent
                                         text: "Connecting to " + root.btConnectingName + "…"
@@ -817,6 +847,7 @@ Item {
                                         font.pixelSize: Theme.fontSize - 2
                                         font.family: Theme.fontFamily
                                         visible: root.btConnecting
+
                                         SequentialAnimation on opacity {
                                             running: root.btConnecting
                                             loops: Animation.Infinite
@@ -917,11 +948,12 @@ Item {
                         // ── device expansion ──
                         Item {
                             width: parent.width
-                            height: root.volumeOpen ? 244 : 0
+                            height: root.volumeOpen ? volExpandCol.implicitHeight : 0
                             clip: true
                             Behavior on height { NumberAnimation { duration: 220; easing.type: Easing.OutCubic } }
 
                             Column {
+                                id: volExpandCol
                                 width: parent.width
                                 spacing: 4
 
@@ -938,7 +970,7 @@ Item {
                                 ListView {
                                     id: sinkListView
                                     width: parent.width
-                                    height: Math.min(contentHeight, 96)
+                                    height: Math.max(32, Math.min(contentHeight, 96))
                                     model: root.sinkList
                                     clip: true
                                     spacing: 2
@@ -1004,7 +1036,7 @@ Item {
                                 ListView {
                                     id: sourceListView
                                     width: parent.width
-                                    height: Math.min(contentHeight, 96)
+                                    height: Math.max(32, Math.min(contentHeight, 96))
                                     model: root.sourceList
                                     clip: true
                                     spacing: 2
