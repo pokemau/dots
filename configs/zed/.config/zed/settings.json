@@ -1,4 +1,5 @@
 {
+  "cli_default_open_behavior": "new_window",
   "git_panel": {
     "dock": "left"
   },
@@ -125,6 +126,7 @@
     "JSONC": { "tab_size": 2 },
   },
   "terminal": {
+    "flexible": true,
     "dock": "bottom",
     "font_size": 13.0,
   },

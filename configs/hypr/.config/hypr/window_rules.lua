@@ -77,6 +77,15 @@ hl.window_rule({
 })
 
 
+-- file picker
+hl.window_rule({
+  match = {
+    class = "^(xdg-desktop-portal-gtk)$",
+  },
+  float = true
+})
+
+
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
 hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })

@@ -35,6 +35,7 @@ alias gb='git branch'
 # DEV
 alias t='tmux -2'
 alias v='nvim'
+alias zd='zeditor'
 alias bm='rm -f compile_commands.json && bear -- make'
 alias m='make'
 alias p='python'

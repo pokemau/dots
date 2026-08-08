@@ -5,7 +5,7 @@
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
   general = {
-    gaps_in          = 2,
+    gaps_in          = 1,
     gaps_out         = 0,
 
     border_size      = 2,
@@ -15,7 +15,6 @@ hl.config({
       inactive_border = "rgba(595959aa)",
     },
 
-    -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = true,
 
     -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
@@ -25,22 +24,22 @@ hl.config({
   },
 
   decoration = {
-    rounding         = 4,
+    -- rounding         = 4,
     -- rounding_power = 2,
 
     -- Change transparency of focused and unfocused windows
     active_opacity   = 1.0,
-    inactive_opacity = 0.9,
+    inactive_opacity = 1.0,
 
-    shadow           = {
+    shadow = {
       enabled      = false,
       range        = 4,
       render_power = 3,
       color        = 0xee1a1a1a,
     },
 
-    blur             = {
-      enabled  = true,
+    blur = {
+      enabled  = false,
       size     = 3,
       passes   = 3,
       vibrancy = 0.1696,
@@ -53,15 +52,17 @@ hl.config({
 
   group = {
     groupbar = {
-      height = 16,
-      font_size = 15,
-      font_weight_active = "bold",
-      text_color = "rgba(fdfdfdff)",
-      text_color_inactive = "rgba(b0b0b0ff)",
-      gradients = true,
+      height                = 16,
+      font_size             = 15,
+      font_weight_active    = "bold",
+      text_color            = "rgba(fdfdfdff)",
+      text_color_inactive   = "rgba(b0b0b0ff)",
+      gradients             = true,
+
+
       col = {
-        active = "rgba(434343ff)",
-        inactive = "rgba(242424ff)"
+        active    = "rgba(434343ff)",
+        inactive  = "rgba(242424ff)"
       }
     }
   }
@@ -99,7 +100,7 @@ hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
   dwindle = {
-    preserve_split = true, -- You probably want this
+    preserve_split = true,
   },
 
   master = {
