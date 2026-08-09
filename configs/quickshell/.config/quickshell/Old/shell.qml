@@ -1,6 +1,8 @@
 //@ pragma UseQApplication
 import Quickshell
+import "New" as New
 
 ShellRoot {
-    Bar {}
+    Bar{}
+    New.Notifications {}
 }
