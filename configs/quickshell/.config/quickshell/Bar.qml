@@ -24,22 +24,15 @@ PanelWindow {
             bottom: parent.bottom
             right: parent.right
         }
-
     }
 
     RowLayout {
-        // BarSystemTray {}
-        // Separator {}
-        // ControlCenter {}
-
         anchors.fill: parent
         spacing: 0
 
-        Workspaces {
-        }
+        Workspaces {}
 
-        Separator {
-        }
+        Separator {}
 
         // window title
         Text {
@@ -53,6 +46,10 @@ PanelWindow {
             elide: Text.ElideRight
             maximumLineCount: 1
         }
+
+        BarSystemTray {}
+
+        Separator {}
 
         // cpu
         Text {
@@ -83,10 +80,11 @@ PanelWindow {
         }
 
         Clock {
+            Layout.rightMargin: 5
         }
 
         Separator {
-            Layout.rightMargin: 0
+            Layout.rightMargin: 10
             visible: batteryWidget.hasBattery
         }
 
@@ -100,11 +98,9 @@ PanelWindow {
             Layout.rightMargin: 0
         }
 
-        Separator {
-            Layout.leftMargin: 5
-            Layout.rightMargin: 0
-        }
-
+        // Separator {
+        //     Layout.leftMargin: 5
+        //     Layout.rightMargin: 0
+        // }
     }
-
 }

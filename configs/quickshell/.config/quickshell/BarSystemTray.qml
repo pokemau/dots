@@ -10,6 +10,16 @@ Repeater {
         id: trayIcon
         required property SystemTrayItem modelData
 
+        // // debug print system tray item
+        // Component.onCompleted: console.log("TRAY:", JSON.stringify({
+        //     id: modelData.id,
+        //     title: modelData.title,
+        //     tooltip: modelData.tooltipTitle,
+        //     category: modelData.category,
+        //     status: modelData.status,
+        //     icon: modelData.icon
+        // }))
+
         source: modelData.icon
         sourceSize.width: 16
         sourceSize.height: 16
@@ -18,6 +28,9 @@ Repeater {
         Layout.alignment: Qt.AlignVCenter
         Layout.leftMargin: 2
         Layout.rightMargin: 2
+
+        // hide discord
+        visible: !(["discord", "com.discordapp.Discord"].some(title => modelData.tooltipTitle.toLowerCase() === title.toLowerCase()))
 
         QsMenuAnchor {
             id: menuAnchor
