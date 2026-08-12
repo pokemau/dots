@@ -116,12 +116,14 @@ Scope {
     }
 
     NotificationServer {
-        id: notifServer
+        id: server
 
         actionsSupported: true
         bodySupported: true
         imageSupported: true
         onNotification: n => {
+            console.log(n.summary);
+
             history.insert(0, {
                 summary: n.summary || "",
                 body: n.body || "",
@@ -134,7 +136,6 @@ Scope {
     }
 
     PanelWindow {
-        visible: root.centerOpen && column.implicitHeight > 1
         implicitWidth: 380
         implicitHeight: Math.max(1, column.implicitHeight)
         color: "transparent"
@@ -157,98 +158,121 @@ Scope {
             spacing: 10
 
             Repeater {
-                model: notifServer.trackedNotifications
+                model: server.trackedNotifications
                 delegate: Rectangle {
-                    id: delegateRoot
-                    width: column.width
-                    implicitHeight: delegateContent.implicitHeight + 20
-                    radius: 8
+
+                    implicitWidth: 50
+                    implicitHeight: 50
                     color: "#2b2b2b"
-                    border.width: 1
-                    border.color: "#444444"
 
-                    required property var appName
-                    required property var time
-                    required property var summary
-                    required property var body
-                    required property int index
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        implicitHeight: 50
+                        spacing: 4
 
-                    RowLayout {
-                        id: delegateContent
-
-                        // FIX 1: Prevent binding loop by anchoring to sides/center instead of fill: parent
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.margins: 10
-                        spacing: 10
-
-                        ColumnLayout {
+                        Text {
                             Layout.fillWidth: true
-                            spacing: 4
-
-                            // App Name & Timestamp Header
-                            RowLayout {
-                                Layout.fillWidth: true
-
-                                Text {
-                                    Layout.fillWidth: true
-                                    text: delegateRoot.appName !== "" ? delegateRoot.appName : "Unknown"
-                                    color: "orange"
-                                    font.pixelSize: 12
-                                    elide: Text.ElideRight
-                                }
-
-                                Text {
-                                    text: delegateRoot.time
-                                    color: "gray"
-                                    font.pixelSize: 12
-                                }
-                            }
-
-                            // Summary (Title)
-                            Text {
-                                Layout.fillWidth: true
-                                text: delegateRoot.summary
-                                // FIX 2: Change from black to white
-                                color: "white"
-                                font.bold: true
-                                elide: Text.ElideRight
-                            }
-
-                            // Body (Content)
-                            Text {
-                                Layout.fillWidth: true
-                                text: delegateRoot.body
-                                visible: text !== ""
-                                // FIX 3: Change from black to light gray
-                                color: "#cccccc"
-                                wrapMode: Text.WordWrap
-                                maximumLineCount: 3
-                                elide: Text.ElideRight
-                            }
+                            text: "hello"
+                            font.pixelSize: 12
+                            elide: Text.ElideRight
                         }
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: history.remove(delegateRoot.index)
                     }
                 }
             }
+
+            // Repeater {
+            //     model: notifServer.trackedNotifications
+            //     delegate: Rectangle {
+            //         id: delegateRoot
+            //         width: column.width
+            //         implicitHeight: delegateContent.implicitHeight + 20
+            //         radius: 8
+            //         color: "#2b2b2b"
+            //         border.width: 1
+            //         border.color: "#444444"
+
+            //         required property var appName
+            //         required property var time
+            //         required property var summary
+            //         required property var body
+            //         required property int index
+
+            //         RowLayout {
+            //             id: delegateContent
+
+            //             // FIX 1: Prevent binding loop by anchoring to sides/center instead of fill: parent
+            //             anchors.left: parent.left
+            //             anchors.right: parent.right
+            //             anchors.verticalCenter: parent.verticalCenter
+            //             anchors.margins: 10
+            //             spacing: 10
+
+            //             ColumnLayout {
+            //                 Layout.fillWidth: true
+            //                 spacing: 4
+
+            //                 // App Name & Timestamp Header
+            //                 RowLayout {
+            //                     Layout.fillWidth: true
+
+            //                     Text {
+            //                         Layout.fillWidth: true
+            //                         text: delegateRoot.appName !== "" ? delegateRoot.appName : "Unknown"
+            //                         color: "orange"
+            //                         font.pixelSize: 12
+            //                         elide: Text.ElideRight
+            //                     }
+
+            //                     Text {
+            //                         text: delegateRoot.time
+            //                         color: "gray"
+            //                         font.pixelSize: 12
+            //                     }
+            //                 }
+
+            //                 // Summary (Title)
+            //                 Text {
+            //                     Layout.fillWidth: true
+            //                     text: delegateRoot.summary
+            //                     // FIX 2: Change from black to white
+            //                     color: "white"
+            //                     font.bold: true
+            //                     elide: Text.ElideRight
+            //                 }
+
+            //                 // Body (Content)
+            //                 Text {
+            //                     Layout.fillWidth: true
+            //                     text: delegateRoot.body
+            //                     visible: text !== ""
+            //                     // FIX 3: Change from black to light gray
+            //                     color: "#cccccc"
+            //                     wrapMode: Text.WordWrap
+            //                     maximumLineCount: 3
+            //                     elide: Text.ElideRight
+            //                 }
+            //             }
+            //         }
+
+            //         MouseArea {
+            //             anchors.fill: parent
+            //             onClicked: history.remove(delegateRoot.index)
+            //         }
+            //     }
+            // }
         }
     }
 
-    IpcHandler {
-        target: "notifications"
-        function toggle(): void {
-            root.centerOpen = !root.centerOpen;
-        }
-        function show(): void {
-            root.centerOpen = true;
-        }
-        function hide(): void {
-            root.centerOpen = false;
-        }
-    }
+    // IpcHandler {
+    //     target: "notifications"
+    //     function toggle(): void {
+    //         root.centerOpen = !root.centerOpen;
+    //     }
+    //     function show(): void {
+    //         root.centerOpen = true;
+    //     }
+    //     function hide(): void {
+    //         root.centerOpen = false;
+    //     }
+    // }
 }

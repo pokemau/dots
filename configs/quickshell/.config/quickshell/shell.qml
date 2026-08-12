@@ -2,10 +2,5 @@
 import Quickshell
 
 ShellRoot {
-    Bar {
-    }
-
-    Notifications {
-    }
-
+    Bar {}
 }

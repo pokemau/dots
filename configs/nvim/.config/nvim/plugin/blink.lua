@@ -35,6 +35,13 @@ require('blink.cmp').setup({
   completion = {
     menu = {
 
+      auto_show = function()
+        local ft = vim.bo.filetype
+
+        -- do not show cmp for c/cpp files
+        return ! vim.tbl_contains({ "c", "c++", "cpp" }, ft)
+      end,
+
       draw = {
         columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
       },

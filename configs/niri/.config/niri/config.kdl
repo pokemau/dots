@@ -94,7 +94,14 @@ input {
 
 
 layout {
-    gaps 2
+    gaps 4
+
+    // struts {
+    //     left 2
+    //     right 2
+    //     top 2
+    //     bottom 2
+    // }
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -112,6 +119,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 1.0
 
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
@@ -232,17 +240,6 @@ layout {
         color "#0007"
     }
 
-    // Struts shrink the area occupied by windows, similarly to layer-shell panels.
-    // You can think of them as a kind of outer gaps. They are set in logical pixels.
-    // Left and right struts will cause the next window to the side to always be visible.
-    // Top and bottom struts will simply add outer gaps in addition to the area occupied by
-    // layer-shell panels and regular gaps.
-    struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
-    }
 }
 
 
@@ -254,7 +251,7 @@ spawn-at-startup "~/Scripts/swww_init.sh"
 
 spawn-at-startup "vicinae" "server"
 
-spawn-at-startup "swaybg" "-i" "/home/mau/wallpapers/forest.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-i" "/home/mau/wallpapers/yellow.jpg" "-m" "fill"
 
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
@@ -272,7 +269,6 @@ spawn-at-startup "quickshell"
 
 
 hotkey-overlay {
-    // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
     skip-at-startup
 }
 
@@ -339,8 +335,8 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    geometry-corner-radius 12
+window-rule {
+    geometry-corner-radius 8
     clip-to-geometry true
 }
 
@@ -375,7 +371,7 @@ binds {
 
 // bind = $mainMod, grave, exec, $srcDir/toggle_mute.sh
 
-    Mod+C { spawn "brave-browser"; }
+    Mod+C { spawn "firefox"; }
     Mod+Shift+D { spawn "discord" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }
     Mod+Shift+Q repeat=false { close-window; }
     Mod+W repeat=false { toggle-overview; }

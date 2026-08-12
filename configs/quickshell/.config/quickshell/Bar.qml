@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 
 PanelWindow {
-    id: topLevel
+    id: bar
 
     implicitHeight: 25
     color: Theme.barBg
@@ -30,7 +30,10 @@ PanelWindow {
         anchors.fill: parent
         spacing: 0
 
-        Workspaces {}
+        WorkspaceBar {
+            Layout.fillHeight: true
+        }
+        // Workspaces {}
 
         Separator {}
 
@@ -91,7 +94,7 @@ PanelWindow {
         Battery {
             id: batteryWidget
 
-            panelWindow: topLevel
+            panelWindow: bar
             visible: batteryWidget.hasBattery
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredHeight: 25
