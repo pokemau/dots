@@ -1,7 +1,9 @@
-// output "eDP-1" {
-//     position x=0 y=0
-// }
+output "eDP-1" {
+  // off
+    position x=0 y=0
+}
 output "HDMI-A-1" {
+  // off
     mode "1920x1080@100"
     position x=0 y=0
 }
@@ -94,7 +96,7 @@ input {
 
 
 layout {
-    gaps 4
+    gaps 5
 
     // struts {
     //     left 2
@@ -144,100 +146,42 @@ layout {
     // Alternatively, you can override it with a window rule called
     // `draw-border-with-background`.
 
-    // You can change how the focus ring looks.
     focus-ring {
-        // Uncomment this line to disable the focus ring.
         // off
-
-        // How many logical pixels the ring extends out from the windows.
         width 2
-
-        // Colors can be set in a variety of ways:
-        // - CSS named colors: "red"
-        // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
-        // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
-
-        // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
-
-        // Color of the ring on inactive monitors.
-        //
-        // The focus ring only draws around the active window, so the only place
-        // where you can see its inactive-color is on other monitors.
+        // active-color "#007AFF" // macOS system blue
+        active-color "#999999"
+        // active-color "#00000033"
+        // active-color "#A6C8FF"
         inactive-color "#505050"
-
-        // You can also use gradients. They take precedence over solid colors.
-        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
-        // The angle is the same as in linear-gradient, and is optional,
-        // defaulting to 180 (top-to-bottom gradient).
-        // You can use any CSS linear-gradient tool on the web to set these up.
-        // Changing the color space is also supported, check the wiki for more info.
-        //
-        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
-
-        // You can also color the gradient relative to the entire view
-        // of the workspace, rather than relative to just the window itself.
-        // To do that, set relative-to="workspace-view".
-        //
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
-    // You can also add a border. It's similar to the focus ring, but always visible.
     border {
-        // The settings are the same as for the focus ring.
-        // If you enable the border, you probably want to disable the focus ring.
         off
 
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
-
-        // Color of the border around windows that request your attention.
+        width 1
+        active-color "#777777"
+        inactive-color "#0000001a"
         urgent-color "#9b0000"
-
-        // Gradients can use a few different interpolation color spaces.
-        // For example, this is a pastel rainbow gradient via in="oklch longer hue".
-        //
-        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
-
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
-    // You can enable drop shadows for windows.
     shadow {
-        // Uncomment the next line to enable shadows.
-        // on
+        on
 
-        // By default, the shadow draws only around its window, and not behind it.
-        // Uncomment this setting to make the shadow draw behind its window.
-        //
-        // Note that niri has no way of knowing about the CSD window corner
-        // radius. It has to assume that windows have square corners, leading to
-        // shadow artifacts inside the CSD rounded corners. This setting fixes
-        // those artifacts.
-        //
-        // However, instead you may want to set prefer-no-csd and/or
-        // geometry-corner-radius. Then, niri will know the corner radius and
-        // draw the shadow correctly, without having to draw it behind the
-        // window. These will also remove client-side shadows if the window
-        // draws any.
-        //
-        // draw-behind-window true
+        draw-behind-window true
 
-        // You can change how shadows look. The values below are in logical
-        // pixels and match the CSS box-shadow properties.
 
         // Softness controls the shadow blur radius.
-        softness 30
+        softness 50
 
         // Spread expands the shadow.
-        spread 5
+        spread 2
 
         // Offset moves the shadow relative to the window.
-        offset x=0 y=5
+        offset x=0 y=20
 
         // You can also change the shadow color and opacity.
-        color "#0007"
+        color "#00000077"
     }
 
 }
@@ -247,26 +191,20 @@ spawn-at-startup "mako"
 spawn-at-startup "blueman-applet"
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "wlsunset" "-s" "0:00" "-s" "0:00" "-t" "4500"
-spawn-at-startup "~/Scripts/swww_init.sh"
-
+spawn-at-startup "awww-daemon"
+spawn-at-startup "awww" "img" "/home/mau/wallpapers/yellow.jpg"
 spawn-at-startup "vicinae" "server"
 
-spawn-at-startup "swaybg" "-i" "/home/mau/wallpapers/yellow.jpg" "-m" "fill"
+// spawn-at-startup "swaybg" "-i" "/home/mau/wallpapers/yellow.jpg" "-m" "fill"
 
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
 spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 
 // spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+// spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 
 spawn-at-startup "quickshell"
-// dms
-// spawn-at-startup "dms" "run"
-// config-notification {
-//     disable-failed
-// }
-
 
 hotkey-overlay {
     skip-at-startup
@@ -285,11 +223,26 @@ environment {
 
 
 animations {
-    // Uncomment to turn off all animations.
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    slowdown 0.9
+    slowdown 1
+
+    window-open {
+        spring damping-ratio=0.8 stiffness=1000 epsilon=0.0001
+    }
+    window-close {
+        spring damping-ratio=0.9 stiffness=1000 epsilon=0.0001
+    }
+    window-movement {
+        spring damping-ratio=0.9 stiffness=800 epsilon=0.0001
+    }
+    window-resize {
+        spring damping-ratio=0.9 stiffness=800 epsilon=0.0001
+    }
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
+    }
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -336,28 +289,12 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 8
+    geometry-corner-radius 12
     clip-to-geometry true
 }
 
 binds {
-    // Keys consist of modifiers separated by + signs, followed by an XKB key name
-    // in the end. To find an XKB name for a particular key, you may use a program
-    // like wev.
-    //
-    // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
-    // when running as a winit window.
-    //
-    // Most actions that you can bind here can also be invoked programmatically with
-    // `niri msg action do-something`.
-
-    // Mod-Shift-/, which is usually the same as Mod-?,
-    // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
-
-    // Mod+D hotkey-overlay-title="Application Launcher" {
-    //    spawn "dms" "ipc" "call" "spotlight" "toggle";
-    // }
 
     Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "ghostty" "+new-window"; }
 
@@ -368,8 +305,6 @@ binds {
     Mod+Shift+W { spawn "~/Scripts/wallpaper_switcher.sh"; }
 
     Mod+Grave { spawn "~/Scripts/toggle_mute.sh"; }
-
-// bind = $mainMod, grave, exec, $srcDir/toggle_mute.sh
 
     Mod+C { spawn "firefox"; }
     Mod+Shift+D { spawn "discord" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }

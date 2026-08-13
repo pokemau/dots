@@ -101,9 +101,16 @@ PanelWindow {
             Layout.rightMargin: 0
         }
 
-        // Separator {
-        //     Layout.leftMargin: 5
-        //     Layout.rightMargin: 0
-        // }
+        Separator {
+            Layout.leftMargin: 5
+            Layout.rightMargin: 0
+        }
+
+        ControlCenter {
+            panelWindow: bar
+            Layout.alignment: Qt.AlignVCenter
+            Layout.preferredHeight: 25
+            Layout.rightMargin: 0
+        }
     }
 }
