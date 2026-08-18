@@ -77,6 +77,18 @@ vim.diagnostic.config({ virtual_text = true })
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
   callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    local buf_name = vim.api.nvim_buf_get_name(event.buf) or ""
+    local ft = vim.bo[event.buf].filetype
+
+    -- disable lsp for leetcode
+    if ft == "python" and type(buf_name) == "string" and buf_name:match("leetcode") then
+      if client then
+        vim.lsp.buf_detach_client(event.buf, client.id)
+      end
+      return
+    end
+
     local map = function(keys, func, desc, mode)
       mode = mode or "n"
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })

@@ -13,7 +13,7 @@ DISABLE_AUTO_TITLE="true"
 alias inst='sudo dnf install'
 
 # Arch
-alias yayup='yay -Syu --cleanafter'
+alias yayup='yay -Syu'
 alias togglebat='./Scripts/toggle_batt.sh'
 
 alias shn='shutdown now'

@@ -30,10 +30,12 @@ PanelWindow {
         anchors.fill: parent
         spacing: 0
 
-        WorkspaceBar {
+        // WorkspaceBar {
+        //     Layout.fillHeight: true
+        // }
+        Workspaces {
             Layout.fillHeight: true
         }
-        // Workspaces {}
 
         Separator {}
 

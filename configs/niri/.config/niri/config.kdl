@@ -1,5 +1,5 @@
 output "eDP-1" {
-  // off
+  off
     position x=0 y=0
 }
 output "HDMI-A-1" {
@@ -70,7 +70,7 @@ input {
     mouse {
         // off
         // natural-scroll
-        // accel-speed 0.2
+        accel-speed 0.5
         accel-profile "flat"
         // scroll-method "no-scroll"
     }
@@ -98,12 +98,12 @@ input {
 layout {
     gaps 5
 
-    // struts {
-    //     left 2
-    //     right 2
-    //     top 2
-    //     bottom 2
-    // }
+    struts {
+        left    -3
+        right   -3
+        top     -3
+        bottom  -3
+    }
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -147,20 +147,16 @@ layout {
     // `draw-border-with-background`.
 
     focus-ring {
-        // off
-        width 2
-        // active-color "#007AFF" // macOS system blue
-        active-color "#999999"
-        // active-color "#00000033"
-        // active-color "#A6C8FF"
-        inactive-color "#505050"
+        // // off
+        width 1
+        active-color "#000000"
+        // inactive-color "#505050"
     }
 
     border {
-        off
-
+        // off
         width 1
-        active-color "#777777"
+        active-color "#666666"
         inactive-color "#0000001a"
         urgent-color "#9b0000"
     }
@@ -169,18 +165,9 @@ layout {
         on
 
         draw-behind-window true
-
-
-        // Softness controls the shadow blur radius.
-        softness 50
-
-        // Spread expands the shadow.
-        spread 2
-
-        // Offset moves the shadow relative to the window.
-        offset x=0 y=20
-
-        // You can also change the shadow color and opacity.
+        softness 20
+        spread 25
+        offset x=0 y=15
         color "#00000077"
     }
 
@@ -192,19 +179,19 @@ spawn-at-startup "blueman-applet"
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "wlsunset" "-s" "0:00" "-s" "0:00" "-t" "4500"
 spawn-at-startup "awww-daemon"
-spawn-at-startup "awww" "img" "/home/mau/wallpapers/yellow.jpg"
+spawn-at-startup "awww" "img" "/home/mau/wallpapers/clouds.jpg"
 spawn-at-startup "vicinae" "server"
 
-// spawn-at-startup "swaybg" "-i" "/home/mau/wallpapers/yellow.jpg" "-m" "fill"
-
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
-spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
-spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+// spawn-at-startup "sh" "-c" "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+// spawn-at-startup "dbus-update-activation-environment" "--systemd" "--all"
+// spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "sh" "-c" "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
 
 // spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 // spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 
-spawn-at-startup "quickshell"
+spawn-at-startup "sh" "-c" "sleep 1 && quickshell"
 
 hotkey-overlay {
     skip-at-startup
@@ -214,7 +201,7 @@ prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 environment {
-    QT_QPA_PLATFORMTHEME "qt5ct"
+    // QT_QPA_PLATFORMTHEME "qt5ct"
     QT_QPA_PLATFORMTHEME "qt6ct"
     QT_QPA_PLATFORM "wayland;xcb"
     GRIMBLAST_HIDE_CURSOR "1"
@@ -289,7 +276,7 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 10
     clip-to-geometry true
 }
 
@@ -305,6 +292,8 @@ binds {
     Mod+Shift+W { spawn "~/Scripts/wallpaper_switcher.sh"; }
 
     Mod+Grave { spawn "~/Scripts/toggle_mute.sh"; }
+
+    Ctrl+Alt+W { spawn-sh "pkill -x quickshell || quickshell"; }
 
     Mod+C { spawn "firefox"; }
     Mod+Shift+D { spawn "discord" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }

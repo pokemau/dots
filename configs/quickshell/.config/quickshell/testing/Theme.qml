@@ -6,8 +6,7 @@ import QtQuick
 Singleton {
     id: root
 
-    // property string fontFamily: "JetBrains Mono Nerd Font"
-    property string fontFamily: "Menlo Nerd Font"
+    property string fontFamily: "Roboto Mono Nerd Font Medium"
     property int fontSize: 12
 
     property color colBg: "#16181c"
@@ -26,4 +25,5 @@ Singleton {
     property real barAlpha: 0.6
     property color barBg: Qt.rgba(colBg.r, colBg.g, colBg.b, barAlpha)
     property color barBorder: Qt.rgba(1, 1, 1, 0.08)
+    property int barHeight: 25
 }

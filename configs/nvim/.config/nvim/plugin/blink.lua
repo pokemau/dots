@@ -37,9 +37,19 @@ require('blink.cmp').setup({
 
       auto_show = function()
         local ft = vim.bo.filetype
+        local buf_name = vim.api.nvim_buf_get_name(0) or ""
 
         -- do not show cmp for c/cpp files
-        return ! vim.tbl_contains({ "c", "c++", "cpp" }, ft)
+        if vim.tbl_contains({ "c", "c++", "cpp" }, ft) then
+          return false
+        end
+
+        -- do not show for leetcode nvim
+        if ft == "python" and type(buf_name) == "string" and buf_name:match("leetcode") then
+          return false
+        end
+
+        return true
       end,
 
       draw = {
