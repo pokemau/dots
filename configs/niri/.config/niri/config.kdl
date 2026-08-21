@@ -1,5 +1,5 @@
 output "eDP-1" {
-  off
+  // off
     position x=0 y=0
 }
 output "HDMI-A-1" {
@@ -165,9 +165,9 @@ layout {
         on
 
         draw-behind-window true
-        softness 20
-        spread 25
-        offset x=0 y=15
+        softness 30
+        spread 15
+        offset x=0 y=10
         color "#00000077"
     }
 

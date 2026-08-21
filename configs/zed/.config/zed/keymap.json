@@ -62,7 +62,8 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "space p g": "pane::DeploySearch",
+      // "space p g": "pane::DeploySearch",
+      "space p g": "text_finder::Toggle",
       "space w": "editor::ToggleFold",
       "s v": "pane::SplitRight",
       "s s": "pane::SplitDown",

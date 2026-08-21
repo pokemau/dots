@@ -1,11 +1,12 @@
 {
+  "mouse_wheel_zoom": true,
   "cli_default_open_behavior": "new_window",
   "git_panel": {
     "dock": "left"
   },
   "ui_font_family": "Inter Variable",
-  "ui_font_size": 14,
-  "buffer_font_size": 14,
+  "ui_font_size": 15,
+  "buffer_font_size": 15,
   "agent_ui_font_size": 14.5,
   "buffer_font_family": "Menlo Nerd Font Mono",
   // "buffer_font_family": "RobotoMono Nerd Font Mono",
